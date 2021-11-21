@@ -128,7 +128,21 @@ public class Controller {
         }
         return password;
     }
+    public boolean updatePassword(String password, int ID) {
+        conn.connect();
+        String query = "UPDATE person SET Password='" + password + "'"
 
+                + "WHERE Id_Person='" + ID + "'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            stmt.executeUpdate(query);
+            return (true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }
+    }
+    
     public String getSelectedJabatan(int ID) {
         String jabatan = "";
         conn.connect();
