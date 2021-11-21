@@ -27,4 +27,8 @@ public class PesanGagal {
     public void pesanGagalPembayaran(){
         JOptionPane.showMessageDialog(null, "Pembayaran Anda Tidak Berhasil!", "Maaf!", JOptionPane.ERROR_MESSAGE);
     }
+    
+    public void pesanGagalUpdate(){
+        JOptionPane.showMessageDialog(null, "update gagal");
+    }
 }

@@ -22,4 +22,8 @@ public class PesanBerhasil {
     public void pesanBerhasilPembayaran(){
         JOptionPane.showMessageDialog(null, "Pembayaran Anda Berhasil!", "Selamat!", JOptionPane.INFORMATION_MESSAGE);
     }
+    
+    public void pesanBerhasilUpdate(){
+        JOptionPane.showMessageDialog(null, "update berhasil");
+    }
 }
