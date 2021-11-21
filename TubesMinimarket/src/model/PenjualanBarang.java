@@ -9,7 +9,7 @@ package model;
  *
  * @author HP
  */
-    public class PenjualanBarang {
+public class PenjualanBarang {
     private String nomorFaktur;
     private double totalPenjualan;
     private String jenisPembayaran;
