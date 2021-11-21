@@ -21,10 +21,11 @@ import javax.swing.JTextField;
  * @author Nicholas Russel
  */
 public class UpdateDataKasir {
-    private JFrame f,f2,konfirmasiUpdate,updateLagi;
+
+    private JFrame f, f2, konfirmasiUpdate, updateLagi;
     private JLabel title, id, name, mno, alamat, gaji;
     private JTextField tid, tname, tmno, tgaji;
-    private JButton sub, reset, cancel,insert;
+    private JButton sub, reset, cancel, insert;
     private JTextArea talamat;
 
     public UpdateDataKasir() {
@@ -110,114 +111,115 @@ public class UpdateDataKasir {
         sub.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String ID=tid.getText();
+                String ID = tid.getText();
                 String stringGaji = tgaji.getText();
                 String cekNama = tname.getText();
                 String cekmno = tmno.getText();
                 String cekAlamat = talamat.getText();
-                if (ID.trim().isEmpty()||stringGaji.trim().isEmpty()||cekNama.trim().isEmpty() || cekmno.trim().isEmpty()
+                if (ID.trim().isEmpty() || stringGaji.trim().isEmpty() || cekNama.trim().isEmpty() || cekmno.trim().isEmpty()
                         || cekAlamat.trim().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Isi data harus lengkap!");
-                }
-                int cekID = Integer.parseInt(ID);
-                int cekGaji = Integer.parseInt(stringGaji);
-                f.setVisible(false);
-                f2 = new JFrame();
-                f2.setTitle("Check Again");
-                f2.setSize(400, 400);
-                f2.setResizable(false);
-                f2.setLocationRelativeTo(null);
-                f2.setLayout(null);
-                
-                title = new JLabel("Confirmation Detail");
-                title.setFont(new Font("Arial", Font.PLAIN, 20));
-                title.setSize(300, 20);
-                title.setLocation(50, 10);
-                f2.add(title);
+                } else {
+                    int cekID = Integer.parseInt(ID);
+                    int cekGaji = Integer.parseInt(stringGaji);
+                    f.setVisible(false);
+                    f2 = new JFrame();
+                    f2.setTitle("Check Again");
+                    f2.setSize(400, 400);
+                    f2.setResizable(false);
+                    f2.setLocationRelativeTo(null);
+                    f2.setLayout(null);
 
-                id = new JLabel("ID : " + cekID);
-                id.setFont(new Font("Arial", Font.PLAIN, 15));
-                id.setSize(300, 20);
-                id.setLocation(50, 50);
-                f2.add(id);
+                    title = new JLabel("Confirmation Detail");
+                    title.setFont(new Font("Arial", Font.PLAIN, 20));
+                    title.setSize(300, 20);
+                    title.setLocation(50, 10);
+                    f2.add(title);
 
-                name = new JLabel("Nama : " + cekNama);
-                name.setFont(new Font("Arial", Font.PLAIN, 15));
-                name.setSize(300, 20);
-                name.setLocation(50, 100);
-                f2.add(name);
+                    id = new JLabel("ID : " + cekID);
+                    id.setFont(new Font("Arial", Font.PLAIN, 15));
+                    id.setSize(300, 20);
+                    id.setLocation(50, 50);
+                    f2.add(id);
 
-                mno = new JLabel("Nomor Telepon : " + cekmno);
-                mno.setFont(new Font("Arial", Font.PLAIN, 15));
-                mno.setSize(300, 20);
-                mno.setLocation(50, 150);
-                f2.add(mno);
+                    name = new JLabel("Nama : " + cekNama);
+                    name.setFont(new Font("Arial", Font.PLAIN, 15));
+                    name.setSize(300, 20);
+                    name.setLocation(50, 100);
+                    f2.add(name);
 
-                alamat = new JLabel("Alamat : " + cekAlamat);
-                alamat.setFont(new Font("Arial", Font.PLAIN, 15));
-                alamat.setSize(300, 20);
-                alamat.setLocation(50, 200);
-                f2.add(alamat);
+                    mno = new JLabel("Nomor Telepon : " + cekmno);
+                    mno.setFont(new Font("Arial", Font.PLAIN, 15));
+                    mno.setSize(300, 20);
+                    mno.setLocation(50, 150);
+                    f2.add(mno);
 
-                gaji = new JLabel("Gaji : " + cekGaji);
-                gaji.setFont(new Font("Arial", Font.PLAIN, 15));
-                gaji.setSize(300, 20);
-                gaji.setLocation(50, 250);
-                f2.add(gaji);
-                
-                cancel = new JButton("Cancel");
-                cancel.setFont(new Font("Arial", Font.PLAIN, 15));
-                cancel.setSize(100, 20);
-                cancel.setLocation(50, 300);
-                cancel.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        f2.setVisible(false);
-                        f.setVisible(true);
-                    }
-                });
-                f2.add(cancel);
-                
-                insert = new JButton("Insert");
-                insert.setFont(new Font("Arial", Font.PLAIN, 15));
-                insert.setSize(100, 20);
-                insert.setLocation(160, 300);
-                insert.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
+                    alamat = new JLabel("Alamat : " + cekAlamat);
+                    alamat.setFont(new Font("Arial", Font.PLAIN, 15));
+                    alamat.setSize(300, 20);
+                    alamat.setLocation(50, 200);
+                    f2.add(alamat);
 
-                        f.setVisible(false);
-                        konfirmasiUpdate = new JFrame("Confirmation");
-                        updateLagi = new JFrame("Another Update?");
-                        Controller c = new Controller();
+                    gaji = new JLabel("Gaji : " + cekGaji);
+                    gaji.setFont(new Font("Arial", Font.PLAIN, 15));
+                    gaji.setSize(300, 20);
+                    gaji.setLocation(50, 250);
+                    f2.add(gaji);
+                    
+                    insert = new JButton("Insert");
+                    insert.setFont(new Font("Arial", Font.PLAIN, 15));
+                    insert.setSize(100, 20);
+                    insert.setLocation(50, 300);
+                    insert.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
 
+                            f.setVisible(false);
+                            konfirmasiUpdate = new JFrame("Confirmation");
+                            updateLagi = new JFrame("Another Update?");
+                            Controller c = new Controller();
 
-                        if (JOptionPane.showConfirmDialog(konfirmasiUpdate, "confirm if you Want to Update", "Minimarket",
-                                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                            f2.setVisible(false);
-                            boolean status = c.updateKasir(cekID,cekNama,cekAlamat,cekmno,cekGaji);
-                            if (status) {
-                                JOptionPane.showMessageDialog(null, "update berhasil");
-                                if (JOptionPane.showConfirmDialog(updateLagi, "Update lagi?", "Minimarket",
-                                        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                                    f.setVisible(true);
+                            if (JOptionPane.showConfirmDialog(konfirmasiUpdate, "confirm if you Want to Update", "Minimarket",
+                                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                                f2.setVisible(false);
+                                boolean status = c.updateKasir(cekID, cekNama, cekAlamat, cekmno, cekGaji);
+                                if (status) {
+                                    JOptionPane.showMessageDialog(null, "update berhasil");
+                                    if (JOptionPane.showConfirmDialog(updateLagi, "Update lagi?", "Minimarket",
+                                            JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                                        f.setVisible(true);
+                                    } else {
+                                        new MainMenuAdmin();
+                                    }
                                 } else {
+                                    JOptionPane.showMessageDialog(null, "update gagal");
                                     new MainMenuAdmin();
                                 }
                             } else {
-                                JOptionPane.showMessageDialog(null, "update gagal");
+                                f2.setVisible(false);
+                                JOptionPane.showMessageDialog(null, "update batal");
                                 new MainMenuAdmin();
                             }
-                        } else {
-                            f2.setVisible(false);
-                            JOptionPane.showMessageDialog(null, "update batal");
-                            new MainMenuAdmin();
                         }
-                    }
-                });
-                f2.add(insert);
-                
-                f2.setVisible(true);
+                    });
+                    f2.add(insert);
+                    
+                    cancel = new JButton("Cancel");
+                    cancel.setFont(new Font("Arial", Font.PLAIN, 15));
+                    cancel.setSize(100, 20);
+                    cancel.setLocation(160, 300);
+                    cancel.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            f2.setVisible(false);
+                            f.setVisible(true);
+                        }
+                    });
+                    f2.add(cancel);
+                    
+                    f2.setVisible(true);
+                }
+
             }
         });
         f.add(sub);
