@@ -97,23 +97,15 @@ public class Controller {
     }
 
     public int getKehadiranKasir(int ID, String tanggal1, String tanggal2) {
-//        ArrayList<Kehadiran> kehadirans = new ArrayList<>();
-        Kehadiran hadir = new Kehadiran();
         int count=0;
         conn.connect();
-        String query = "SELECT COUNT(Status)AS StatusCount FROM kehadiran WHERE Id_Person = '" + ID+ "'AND Status = '" + 1 + "'AND Tanggal_Masuk between Date'" + tanggal1 + "'AND Date'" + tanggal2 + "'" ;
-        //"SELECT COUNT(Status)AS StatusCount FROM kehadiran WHERE Id_Person = '" + ID + "' AND Status = '" + 1 + "' AND Tanggal_Masuk between CAST('" + tanggal1 + "' AS DATE) and CAST('" + tanggal2 + "' AS DATE)"
-        //AND Tanggal_Masuk between Date'" + tanggal1 + "'AND Date'" + tanggal2 + "'"
+        String query = "SELECT COUNT(Status)AS StatusCount FROM kehadiran WHERE Id_Person = '" + ID+
+                "'AND Status = '" + 1 + "'AND Tanggal_Masuk between Date'" + tanggal1 + "'AND Date'" + tanggal2 + "'" ;
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-
-//                hadir.setTanggal(rs.getDate("Tanggal_Masuk"));
-//                hadir.setId_person(rs.getInt("Id_Person"));
                 count=rs.getInt("StatusCount");
-//                kehadirans.add(hadir);
-
             }
         } catch (SQLException e) {
             e.printStackTrace();
