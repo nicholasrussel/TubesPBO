@@ -23,7 +23,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import model.Kasir;
+import model.Person;
 import model.UserManager;
 
 /**
@@ -31,17 +31,14 @@ import model.UserManager;
  * @author Nicholas Russel
  */
 public class MainMenuKasir extends JFrame {
-
-    // Components of the Form
+    
     private Container c;
     private JLabel title,muncul;
     private JButton absen,logout;
-    private Kasir kasir;
+    private Person orang;
 
-    // constructor, to initialize the components
-    // with default values.
     public MainMenuKasir() {
-        kasir = UserManager.getInstance().getKasir();
+        orang = UserManager.getInstance().getKasir();
         setTitle("Menu Kasir");
         setBounds(300, 90, 900, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -57,35 +54,11 @@ public class MainMenuKasir extends JFrame {
         title.setLocation(300, 30);
         c.add(title);
         
-        muncul = new JLabel(kasir.getName());
+        muncul = new JLabel(orang.getName());
         muncul.setFont(new Font("Arial", Font.PLAIN, 15));
         muncul.setSize(300, 30);
         muncul.setLocation(300, 100);
         c.add(muncul);
-        
-        absen = new JButton("absen");
-        absen.setFont(new Font("Arial", Font.PLAIN, 15));
-        absen.setSize(100, 20);
-        absen.setLocation(100, 200);
-        absen.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFrame Frame = new JFrame("Absen");
-                LocalDateTime now = LocalDateTime.now();
-                System.out.println("Before Formatting: " + now);
-                DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy--MM--dd");
-                String formatDateTime = now.format(format);
-                System.out.println("After Formatting: " + formatDateTime);
-//                boolean status = Controller.insertAbsenKehadiran();
-//                if (status) {
-//                    JOptionPane.showMessageDialog(null, "Absen berhasil");
-//                } else {
-//                    JOptionPane.showMessageDialog(null, "Absen gagal");
-//                }
-
-            }
-        });
-        c.add(absen);
         
         logout = new JButton("Log Out");
         logout.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -99,7 +72,7 @@ public class MainMenuKasir extends JFrame {
 
                 if (JOptionPane.showConfirmDialog(Frame, "Are you sure want to Log Out?", "Minimarket",
                         JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                    kasir=null;
+                    orang=null;
                     new Login();
                 } else {
                     setVisible(true);
@@ -109,8 +82,4 @@ public class MainMenuKasir extends JFrame {
         c.add(logout);
         setVisible(true);
     }
-
-    // method actionPerformed()
-    // to get the action performed
-    // by the user and act accordingly
 }
