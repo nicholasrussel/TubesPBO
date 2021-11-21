@@ -18,6 +18,8 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import controller.Controller;
+import model.DetailPenjualan;
+import model.PenjualanBarang;
 
 /**
  *
@@ -26,45 +28,43 @@ import controller.Controller;
 public class FormPenjualanBarangUtama implements ActionListener {
 
     JFrame frame;
-    JLabel lbIdBarang, lbNamaBarang, lbHargaBarang, lbKuantitas, lbTotal, lbDiskonBarang;
+    JLabel lbIdBarang, lbNamaBarang, lbHargaBarang, lbKuantitas, lbTotal, lbDiskonBarang,lbNomorFaktur;
     JButton BaddBarang, BCancel, BConfirm;
-    
+
     JTextArea area;
-    JTextField TfIdBarang,TfNamaBarang,TfHargaBarang,TfKuantitas,TfDiskonBarang,TfTotal;
-    JTable JT;
-    JScrollPane sp;
+    JTextField TfIdBarang, TfNamaBarang, TfHargaBarang, TfKuantitas, TfDiskonBarang, TfTotal,TfNomorFaktur;
+    ArrayList <DetailPenjualan> detailJual = new ArrayList<>();
+    ArrayList <PenjualanBarang> penjualan = new ArrayList<>();
     Controller conn = new Controller();
     
-   
     public int lebar = 20;
-   public Barang barang;
-
-   
+    public Barang barang;
+    public DetailPenjualan detailJualBarang = new DetailPenjualan ();
+    public PenjualanBarang jualBarang = new PenjualanBarang();
     public FormPenjualanBarangUtama() {
         frame = new JFrame();
-
 
         lbIdBarang = new JLabel("ID Barang");
         lbIdBarang.setBounds(5, 5, 100, 15);
         frame.add(lbIdBarang);
-        
-        lbNamaBarang =  new JLabel("Nama Barang");
-        lbNamaBarang.setBounds(100, 5, 100,15);
+
+        lbNamaBarang = new JLabel("Nama Barang");
+        lbNamaBarang.setBounds(100, 5, 100, 15);
         frame.add(lbNamaBarang);
-        
+
         lbDiskonBarang = new JLabel("Diskon");
         lbDiskonBarang.setBounds(240, 5, 100, 15);
         frame.add(lbDiskonBarang);
-        lbHargaBarang =  new JLabel("Harga Barang");
+        lbHargaBarang = new JLabel("Harga Barang");
         lbHargaBarang.setBounds(320, 5, 100, 15);
         frame.add(lbHargaBarang);
-        
-        lbKuantitas =  new JLabel("Kuantitas");
-        lbKuantitas.setBounds(450,5,100,15);
+
+        lbKuantitas = new JLabel("Kuantitas");
+        lbKuantitas.setBounds(450, 5, 100, 15);
         frame.add(lbKuantitas);
-        
-        lbTotal =  new JLabel("Total");
-        lbTotal.setBounds(550,5,100,15);
+
+        lbTotal = new JLabel("Total");
+        lbTotal.setBounds(550, 5, 100, 15);
         frame.add(lbTotal);
 //        
         BaddBarang = new JButton("Add Barang");
@@ -74,35 +74,41 @@ public class FormPenjualanBarangUtama implements ActionListener {
 
         BCancel = new JButton("Cancel");
         BCancel.setBounds(690, 60, 180, 50);
+        BCancel.addActionListener(this);
         frame.add(BCancel);
 
         BConfirm = new JButton("Confirm");
         BConfirm.setBounds(690, 115, 180, 50);
+        BConfirm.addActionListener(this);
         frame.add(BConfirm);
-        
+
         lbIdBarang = new JLabel("ID Barang : ");
-        lbIdBarang.setBounds(690,170,180,20);
+        lbIdBarang.setBounds(690, 170, 180, 20);
         frame.add(lbIdBarang);
-        
+
         TfIdBarang = new JTextField();
         TfIdBarang.setBounds(690, 200, 180, 20);
         frame.add(TfIdBarang);
-        
+
         lbKuantitas = new JLabel("Kuantitas : ");
-        lbKuantitas.setBounds(690,225,180,20);
+        lbKuantitas.setBounds(690, 225, 180, 20);
         frame.add(lbKuantitas);
-        
+
         TfKuantitas = new JTextField();
-        TfKuantitas.setBounds(690,250,180,20);
+        TfKuantitas.setBounds(690, 250, 180, 20);
         frame.add(TfKuantitas);
         
-       
-        
-        
+        lbNomorFaktur = new JLabel("Nomor Faktur : ");
+        lbNomorFaktur.setBounds(690, 275, 180, 20);
+        frame.add(lbNomorFaktur);
+
+        TfNomorFaktur = new JTextField();
+        TfNomorFaktur.setBounds(690, 300, 180, 20);
+        frame.add(TfNomorFaktur);
+
+
         area = new JTextArea("");
         area.setBounds(0, lebar, 680, 20);
-        
-        
 
         frame.setSize(900, 500);
         frame.setLayout(null);//using no layout managers  
@@ -116,20 +122,26 @@ public class FormPenjualanBarangUtama implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+
         if (e.getSource() == BaddBarang) {
             barang = new Barang();
             barang = conn.getBarang(TfIdBarang.getText());
-            
-            area.setText("  "+TfIdBarang.getText() +"   "+barang.getNamaBarang()+"    "+barang.getPersenDiskon()+"  "+barang.getHargaBarang()+"     "+TfKuantitas.getText()+"       "+(barang.getHargaBarang()* Integer.parseInt(TfKuantitas.getText()) - ((barang.getHargaBarang()* Integer.parseInt(TfKuantitas.getText())) * barang.getPersenDiskon())));
+            detailJualBarang.setKodeBarang(TfIdBarang.getText());
+            detailJualBarang.setKuantitas(Integer.parseInt(TfKuantitas.getText()));
+            detailJualBarang.setTanggalJual("2021-11-10");
+            detailJualBarang.setNomorFaktur(TfNomorFaktur.getText());
+            detailJual.add(detailJualBarang);
+            area.setText("  " + TfIdBarang.getText() + "   " + barang.getNamaBarang() + "    " + barang.getPersenDiskon() + "  " + barang.getHargaBarang() + "     " + TfKuantitas.getText() + "       " + (barang.getHargaBarang() * Integer.parseInt(TfKuantitas.getText()) - ((barang.getHargaBarang() * Integer.parseInt(TfKuantitas.getText())) * barang.getPersenDiskon())));
             frame.add(area);
             area = new JTextArea();
             lebar += 22;
             area.setBounds(0, lebar, 680, 20);
-            
-            
-            
 
+        } else if (e.getSource() == BCancel) {
+//            mainKasir.setVisible(false);
+
+        }   else {
+            
         }
     }
 }
