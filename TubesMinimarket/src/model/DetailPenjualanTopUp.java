@@ -9,7 +9,7 @@ import java.sql.Date;
 
 
 public class DetailPenjualanTopUp {
-    private static String Id_TopUp;
+    private String Id_TopUp;
     private String Nomor_FakturTopUp;
     private Date Tanggal_JualTopUp;
     private String Nomor_teleponPelanggan;

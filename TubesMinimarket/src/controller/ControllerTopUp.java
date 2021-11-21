@@ -104,7 +104,7 @@ public class ControllerTopUp {
         return (jenisPembayaran);
     }
 
-    public static ArrayList<TopUp> getIdTopUpHargaTopUp(){
+    public  ArrayList<TopUp> getIdTopUpHargaTopUp(){
         ArrayList<TopUp> topUp = new ArrayList<>();
         conn.connect();
         String query = "SELECT * FROM topup";
@@ -114,6 +114,7 @@ public class ControllerTopUp {
             while (rs.next()) {
                 TopUp tu = new TopUp();
                 tu.setId_TopUp(rs.getString("Id_TopUp"));
+                tu.setPajak_TopUp(rs.getFloat("Pajak_TopUp"));
                 tu.setHarga_TopUp(rs.getDouble("Harga_TopUp"));
                 tu.setType_TopUp(rs.getString("Type_TopUp"));
                 //penjualanTU.setTotal_PenjualanTopUp(rs.getInt("Total_Penjualan Top Up"));
@@ -127,7 +128,7 @@ public class ControllerTopUp {
         }
         return (topUp);
     }
-    public static String getJenisTopUp(String cekIdTopUp){
+    public String getJenisTopUp(String cekIdTopUp){
         String cekJenisTopUp = null;
         char g = 'G';
         char p = 'P';
@@ -162,7 +163,8 @@ public class ControllerTopUp {
         }
     }
     public static double  Harga(String cek_IdTopUp){
-    ArrayList<TopUp> topUp = getIdTopUpHargaTopUp();
+        ControllerTopUp c = new ControllerTopUp();
+        ArrayList<TopUp> topUp = c.getIdTopUpHargaTopUp();
             String []idTu = new String[topUp.size()];
             Double []hargaTu = new Double[topUp.size()];
             for (int i = 0; i < topUp.size(); i++) {
@@ -177,6 +179,11 @@ public class ControllerTopUp {
                 } 
             }
             return penjualanTopUp;
+    }
+    public static double  getKembalian(double harga,double uangPembeli){
+        double kembalian = 0;
+        kembalian = uangPembeli-harga;
+            return kembalian;
     }
     
     public int IdJenisPembayaran(String cekJenisPembayaran){
@@ -211,8 +218,52 @@ public class ControllerTopUp {
             return (false);
         }
         
+    }
+    public boolean insertDataTopUp(String Id_TopUp,float pajak_TopUp,double harga_TopUp,String type_TopUp){
+    conn.connect();
+        String query = "INSERT INTO topup (Id_TopUp,Pajak_TopUp,Harga_TopUp,Type_TopUp)"
+                + "VALUES (?,?,?,?)";
+        try {
+            PreparedStatement stmt = conn.con.prepareStatement(query);
+            stmt.setString(1, Id_TopUp);
+            stmt.setFloat(2, pajak_TopUp);
+            stmt.setDouble(3, harga_TopUp);
+            stmt.setString(4, type_TopUp);
+            stmt.executeUpdate();
+            return (true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }
     } 
-
+    
+    public boolean updateDataTopUp(String Id_TopUp,double harga_TopUp){
+    conn.connect();
+        String query = "UPDATE  topup SET Harga_TopUp='"+harga_TopUp+"'"
+                + "WHERE Id_TopUp='"+Id_TopUp+"'";
+                ;
+        try {
+            Statement stmt = conn.con.createStatement();
+            stmt.executeUpdate(query);
+            return (true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }
+    }
+    
+    public boolean deleteDataTopUp(String Id_TopUp,float pajak_TopUp,double harga_TopUp,String type_TopUp){
+    conn.connect();
+        String query = "DELETE  FROM topup where Id_TopUp='"+Id_TopUp+"'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            stmt.executeUpdate(query);
+            return (true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }
+    }
 
 //    public Kehadiran cekSudahAbsen(int ID, Date absen) {
 //        Kehadiran hadir = new Kehadiran();

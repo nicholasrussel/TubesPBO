@@ -53,19 +53,7 @@ public class MenuDetailPenjualanTopUp {
         f.add(textId_TopUp);
         textId_TopUp.setSize(200, 30);
         textId_TopUp.setLocation(100,60);
-        
-//        Id_TopUp = new JLabel("ID TopUp");
-//        Id_TopUp.setFont(new Font("Arial", Font.PLAIN, 15));
-//        Id_TopUp.setSize(200, 30);
-//        Id_TopUp.setLocation(100, 50);
-//        f.add(Id_TopUp);
-        
-//        textId_TopUp = new JTextField();
-//        textId_TopUp.setFont(new Font("Arial", Font.PLAIN, 15));
-//        textId_TopUp.setSize(200, 30);
-//        textId_TopUp.setLocation(100, 80);
-//        f.add(textId_TopUp);
-        
+             
         Nomor_FakturTopUp = new JLabel("Nomor Faktur TopUp");
         Nomor_FakturTopUp.setFont(new Font("Arial", Font.PLAIN, 15));
         Nomor_FakturTopUp.setSize(200, 30);
@@ -77,18 +65,6 @@ public class MenuDetailPenjualanTopUp {
         textNomor_FakturTopUp.setSize(200, 30);
         textNomor_FakturTopUp.setLocation(100, 120);
         f.add(textNomor_FakturTopUp);
-        
-//        Tanggal_JualTopUp = new JLabel("Tanggal Jual TopUp");
-//        Tanggal_JualTopUp.setFont(new Font("Arial", Font.PLAIN, 15));
-//        Tanggal_JualTopUp.setSize(200, 30);
-//        Tanggal_JualTopUp.setLocation(100, 180);
-//        f.add(Tanggal_JualTopUp);
-//        
-//        textTanggal_JualTopUp = new JTextField();
-//        textTanggal_JualTopUp.setFont(new Font("Arial", Font.PLAIN, 15));
-//        textTanggal_JualTopUp.setSize(200, 30);
-//        textTanggal_JualTopUp.setLocation(100, 210);
-//        f.add(textTanggal_JualTopUp);
         
         nomor_TeleponPelanggan = new JLabel("Nomor Telepon Pelanggan");
         nomor_TeleponPelanggan.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -123,6 +99,7 @@ public class MenuDetailPenjualanTopUp {
             @Override
             public void actionPerformed(ActionEvent e) {
                 f.setVisible(false);
+                ControllerTopUp c = new ControllerTopUp();
                 JLabel title,Id_TopUp,Nomor_FakturTopUp,Tanggal_JualTopUp,nomor_TeleponPelanggan,Harga,jenisPembayaran,jenisTopUp;
                 String cekIdTopUp = textId_TopUp.getSelectedItem().toString();
                 String cekNomorFakturTopUp = textNomor_FakturTopUp.getText();
@@ -132,7 +109,8 @@ public class MenuDetailPenjualanTopUp {
                 Date cekTanggalJualTopUp = sqlDate;
                 String cekNomorTeleponPelanggan = textNomor_TeleponPelanggan.getText();
                 String cekJenisPembayaran = textJenisPembayaran.getSelectedItem().toString();
-                String cekJenisTopUp = ControllerTopUp.getJenisTopUp(cekIdTopUp);
+                
+                String cekJenisTopUp = c.getJenisTopUp(cekIdTopUp);
                 
                 
                 JFrame f2 = new JFrame();
@@ -197,37 +175,46 @@ public class MenuDetailPenjualanTopUp {
                 insert.setLocation(240, 270);
                 insert.addActionListener(new ActionListener() {
                     @Override
-                   public void actionPerformed(ActionEvent e) {
+                    public void actionPerformed(ActionEvent e) {
 
-                        f.setVisible(false);
-                        JFrame konfirmasiUpdate = new JFrame("Confirmation");
-                        JFrame updateLagi = new JFrame("Another Update?");
-                        ControllerTopUp c = new ControllerTopUp();
-                        LocalDate now = LocalDate.now();
-                        java.sql.Date sqlDate = java.sql.Date.valueOf(now);
+                    f2.setVisible(false);
+                    //mengecek jika bayar secara tunai dan ATM
+                    if(cekJenisPembayaran.equals("Tunai")){
+                         new BayarTunai(cekIdTopUp,cekNomorFakturTopUp,harga,cekNomorTeleponPelanggan,cekJenisPembayaran);
+                    }else if(cekJenisPembayaran.equals("ATM")){
+                         new BayarATM(cekIdTopUp,cekNomorFakturTopUp,harga,cekNomorTeleponPelanggan,cekJenisPembayaran);
+                    }
                         
-                        if (JOptionPane.showConfirmDialog(konfirmasiUpdate, "confirm if you Want to Update", "Minimarket",
-                                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                            f2.setVisible(false);
-                            boolean statusDetail = c.insertDataDetailPenjualanTopUp(cekIdTopUp,cekNomorFakturTopUp,sqlDate,cekNomorTeleponPelanggan);
-                            boolean statusPenjualan = c.insertDataPenjualanTopUp(cekIdTopUp, cekNomorFakturTopUp, cekJenisPembayaran);
-                            if (statusDetail && statusPenjualan) {
-                                JOptionPane.showMessageDialog(null, "update berhasil");
-                                if (JOptionPane.showConfirmDialog(updateLagi, "Update lagi?", "Minimarket",
-                                        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                                    f.setVisible(true);
-                                } else {
-                                    //new MainMenuAdmin();
-                                }
-                            } else {
-                                JOptionPane.showMessageDialog(null, "update gagal");
-                                //new MainMenuAdmin();
-                            }
-                        } else {
-                            f2.setVisible(false);
-                            JOptionPane.showMessageDialog(null, "update batal");
-                            //new MainMenuAdmin();
-                        }
+                        
+//                        JFrame konfirmasiUpdate = new JFrame("Confirmation");
+//                        JFrame updateLagi = new JFrame("Another Update?");
+//                        ControllerTopUp c = new ControllerTopUp();
+//                        LocalDate now = LocalDate.now();
+//                        java.sql.Date sqlDate = java.sql.Date.valueOf(now);
+//                        
+//                        if (JOptionPane.showConfirmDialog(konfirmasiUpdate, "confirm if you Want to Update", "Minimarket",
+//                                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+//                            f2.setVisible(false);
+//                            boolean statusDetail = c.insertDataDetailPenjualanTopUp(cekIdTopUp,cekNomorFakturTopUp,sqlDate,cekNomorTeleponPelanggan);
+//                            boolean statusPenjualan = c.insertDataPenjualanTopUp(cekIdTopUp, cekNomorFakturTopUp, cekJenisPembayaran);
+//                            if (statusDetail && statusPenjualan) {
+//                                JOptionPane.showMessageDialog(null, "update berhasil");
+//                                if (JOptionPane.showConfirmDialog(updateLagi, "Insert Lagi ?", "Minimarket",
+//                                        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+//                                    f.setVisible(true);
+//                                } else {
+//                                    //new MainMenuAdmin();
+//                                    f.setVisible(true);
+//                                }
+//                            } else {
+//                                JOptionPane.showMessageDialog(null, "update gagal");
+//                                //new MainMenuAdmin();
+//                            }
+//                        } else {
+//                            f2.setVisible(false);
+//                            JOptionPane.showMessageDialog(null, "update batal");
+//                            //new MainMenuAdmin();
+//                        }
                     }
                 });
                 f2.add(insert);
@@ -262,26 +249,6 @@ public class MenuDetailPenjualanTopUp {
             public void actionPerformed(ActionEvent e) {
                 f.setVisible(false);
                 new LihatDetailPenjualanTopUp();
-//                JFrame f3 = new JFrame();
-//                f3.setSize(800, 800);
-//                f3.setResizable(false);
-//                f3.setLayout(null);  
-//                f3.setLocationRelativeTo(null);
-//                
-//                JLabel title = new JLabel("Lihat Semua Detail Penjualan TopUp");
-//                title.setFont(new Font("Arial", Font.PLAIN, 20));
-//                title.setSize(400, 20);
-//                title.setLocation(200, 30);
-//                f3.add(title);
-//                
-//                ArrayList<DetailPenjualanTopUp>topUp = new ArrayList();
-//                topUp = ControllerTopUp.GetAllDetailPenjualanTopUp();
-//                
-//                JLabel Id_TopUp,Nomor_FakturTopUp,Tanggal_JualTopUp,nomor_TeleponPelanggan;
-//                for (int i = 0; i < topUp.size(); i++) {
-//                    Id_TopUp = new JLabel("Id Top Up : "+topUp.get(i).getId_TopUp());
-//                }
-//
             }
         });    
         

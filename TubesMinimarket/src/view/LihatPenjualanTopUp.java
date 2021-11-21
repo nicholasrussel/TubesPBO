@@ -73,8 +73,8 @@ public class LihatPenjualanTopUp extends JFrame{
         };
 //        model.addColumn("ID TopUP");
         model.addColumn("Nomor FakturTopUp");
-        model.addColumn("TotalPenjualanTopUp");
         model.addColumn("Jenis Pembayaran ");
+        model.addColumn("TotalPenjualanTopUp");
         table = new JTable(model);
         
         //Looping Data to Table
