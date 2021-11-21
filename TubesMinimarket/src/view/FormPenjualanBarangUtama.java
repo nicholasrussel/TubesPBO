@@ -5,7 +5,7 @@
  */
 package view;
 
-import Model.Barang;
+import model.Barang;
 import com.sun.prism.paint.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,7 +37,7 @@ public class FormPenjualanBarangUtama implements ActionListener {
     
    
     public int lebar = 20;
-   
+   public Barang barang;
 
    
     public FormPenjualanBarangUtama() {
@@ -118,9 +118,10 @@ public class FormPenjualanBarangUtama implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         
         if (e.getSource() == BaddBarang) {
-            Barang barang = new Barang();
+            barang = new Barang();
             barang = conn.getBarang(TfIdBarang.getText());
-            area.setText("  "+TfIdBarang.getText() +" "+TfKuantitas.getText());
+            
+            area.setText("  "+TfIdBarang.getText() +"   "+barang.getNamaBarang()+"    "+barang.getPersenDiskon()+"  "+barang.getHargaBarang()+"     "+TfKuantitas.getText()+"       "+(barang.getHargaBarang()* Integer.parseInt(TfKuantitas.getText()) - ((barang.getHargaBarang()* Integer.parseInt(TfKuantitas.getText())) * barang.getPersenDiskon())));
             frame.add(area);
             area = new JTextArea();
             lebar += 22;
