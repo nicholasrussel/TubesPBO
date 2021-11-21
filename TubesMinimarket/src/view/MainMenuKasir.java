@@ -109,7 +109,9 @@ public class MainMenuKasir extends JFrame {
         c.add(logout);
         setVisible(true);
     }
-
+    public static void main(String[] args) {
+        new MainMenuKasir();
+    }
     // method actionPerformed()
     // to get the action performed
     // by the user and act accordingly
