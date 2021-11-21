@@ -110,12 +110,17 @@ public class UpdateDataKasir {
         sub.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int cekID = Integer.parseInt(tid.getText());
-                int cekGaji = Integer.parseInt(tgaji.getText());
+                String ID=tid.getText();
+                String stringGaji = tgaji.getText();
                 String cekNama = tname.getText();
                 String cekmno = tmno.getText();
                 String cekAlamat = talamat.getText();
-                
+                if (ID.trim().isEmpty()||stringGaji.trim().isEmpty()||cekNama.trim().isEmpty() || cekmno.trim().isEmpty()
+                        || cekAlamat.trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Isi data harus lengkap!");
+                }
+                int cekID = Integer.parseInt(ID);
+                int cekGaji = Integer.parseInt(stringGaji);
                 f.setVisible(false);
                 f2 = new JFrame();
                 f2.setTitle("Check Again");
