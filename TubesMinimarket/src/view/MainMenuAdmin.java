@@ -48,7 +48,7 @@ public class MainMenuAdmin extends JFrame{
 
         c = getContentPane();
         c.setLayout(null);
-
+                
         title = new JLabel("Selamat Datang di Menu Admin");
         title.setFont(new Font("Arial", Font.PLAIN, 20));
         title.setSize(400, 30);
@@ -119,6 +119,7 @@ public class MainMenuAdmin extends JFrame{
 
                 if (JOptionPane.showConfirmDialog(Frame, "Are you sure want to Log Out?", "Minimarket",
                         JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    new pesan.PesanTerimakasih().pesanTerimaKasihLogOut();
                     new Login();
                 } else {
                     setVisible(true);

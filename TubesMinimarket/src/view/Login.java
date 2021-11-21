@@ -98,10 +98,10 @@ public class Login extends JFrame implements ActionListener {
                         int statusHadir = 1;
                         int statusGaji = 0;
                         boolean absensi = c.insertAbsenKehadiran(sqlDate, userID, statusHadir,statusGaji);
-                        JOptionPane.showMessageDialog(rootPane, "Absen Berhasil!");
+                        new pesan.PesanBerhasil().pesanBerhasilAbsen();
 
                     } else {
-                        JOptionPane.showMessageDialog(rootPane, "Sudah Absen!");
+                        new pesan.PesanGagal().pesanSudahAbsen();
                     }
 
                     new MainMenuKasir();
@@ -112,11 +112,11 @@ public class Login extends JFrame implements ActionListener {
                 }
 
             } else {
-                JOptionPane.showMessageDialog(rootPane, "Password Salah");
+                new pesan.PesanGagal().pesanGagalLoginPassword();
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "Maaf, Username / Password salah!");
+            new pesan.PesanGagal().pesanGagalLoginUsernamePassword();
 
         }
     }

@@ -13,17 +13,25 @@ import javax.swing.JOptionPane;
  */
 public class PesanBerhasil {
     public void pesanBerhasilDatabase(){
-        JOptionPane.showMessageDialog(null, "Data Anda berhasil ditambahkan dalam database!", "Pesan Berhasil", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Selamat, data Anda berhasil ditambahkan dalam database!", "Pesan Berhasil", JOptionPane.INFORMATION_MESSAGE);
     }
     public void pesanBerhasilDeleteDatabase(){
-        JOptionPane.showMessageDialog(null, "Data Anda berhasil dihapus dalam database!", "Pesan Berhasil", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Selamat, data Anda berhasil dihapus dalam database!", "Pesan Berhasil", JOptionPane.INFORMATION_MESSAGE);
     }
     
     public void pesanBerhasilPembayaran(){
-        JOptionPane.showMessageDialog(null, "Pembayaran Anda Berhasil!", "Selamat!", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Selamat, pembayaran Anda Berhasil!", "Pesan berhasil", JOptionPane.INFORMATION_MESSAGE);
     }
     
     public void pesanBerhasilUpdate(){
-        JOptionPane.showMessageDialog(null, "update berhasil");
+        JOptionPane.showMessageDialog(null, "Selamat, update berhasil", "Pesan berhasil", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    public void pesanBerhasilAbsen(){
+        JOptionPane.showMessageDialog(null, "Selamat, absen Berhasil!", "Pesan berhasil", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    public void pesanBerhasilLogin(){
+        JOptionPane.showMessageDialog(null, "Selamat, login Berhasil!", "Pesan berhasil", JOptionPane.INFORMATION_MESSAGE);
     }
 }

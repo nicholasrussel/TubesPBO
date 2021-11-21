@@ -17,7 +17,7 @@ public class PesanGagal {
     }
     
     public void pesanMenuTidakDitemukan(){
-        JOptionPane.showMessageDialog(null, "Maaf, menu tidak ada!", "Pesan Error" ,JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Maaf, menu tidak ada!", "Pesan Gagal" ,JOptionPane.ERROR_MESSAGE);
     }
     
     public void pesanGagalHapusDatabase(){
@@ -25,10 +25,22 @@ public class PesanGagal {
     }
     
     public void pesanGagalPembayaran(){
-        JOptionPane.showMessageDialog(null, "Pembayaran Anda Tidak Berhasil!", "Maaf!", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Maaf, pembayaran Anda tidak berhasil!", "Pesan Gagal", JOptionPane.ERROR_MESSAGE);
     }
     
     public void pesanGagalUpdate(){
-        JOptionPane.showMessageDialog(null, "update gagal");
+        JOptionPane.showMessageDialog(null, "Maaf, update gagal!", "Pesan Gagal", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    public void pesanSudahAbsen(){
+        JOptionPane.showMessageDialog(null, "Maaf, anda sudah absen!", "Pesan Gagal", JOptionPane.WARNING_MESSAGE);
+    }
+    
+    public void pesanGagalLoginPassword(){
+        JOptionPane.showMessageDialog(null, "Maaf, password Salah!", "Pesan Gagal", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    public void pesanGagalLoginUsernamePassword(){
+        JOptionPane.showMessageDialog(null, "Maaf, Username / Password salah!", "Pesan Gagal", JOptionPane.ERROR_MESSAGE);
     }
 }
