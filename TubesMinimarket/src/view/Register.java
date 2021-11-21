@@ -27,7 +27,6 @@ public class Register {
     private Properties p;
     private JDatePanelImpl datePanel;
     private JDatePickerImpl datePicker;
-    private int cekGaji;
 
     public Register() {
         f = new JFrame();
@@ -137,7 +136,7 @@ public class Register {
         gaji.setLocation(100, 400);
         f.add(gaji);
 
-        tgaji = new JTextField();
+        tgaji = new JTextField(0);
         tgaji.setFont(new Font("Arial", Font.PLAIN, 15));
         tgaji.setSize(200, 20);
         tgaji.setLocation(200, 400);
@@ -178,13 +177,7 @@ public class Register {
                 JLabel nama, mno, jabatan, tempatTanggalLahir, alamat, gender, password, gaji, warning;
                 JPasswordField pass;
                 JButton insert;
-//                String salary =tgaji.getText();
-//                if(salary.equals(null)){
-//                    JOptionPane.showMessageDialog(null, "Isi data harus lengkap!");
-//                } else {
-//                    cekGaji = Integer.parseInt(salary);
-//                }
-                
+                String salary = tgaji.getText();
                 String cekNama = tname.getText();
                 String cekmno = tmno.getText();
                 String cekJabatan = tjabatan.getText().toLowerCase();
@@ -197,6 +190,7 @@ public class Register {
                 String tahun = String.valueOf(datePicker.getModel().getYear());
                 String TTL = cekTempatLahir + "," + hari + "-" + bulan + "-" + tahun;
                 EnumJabatan j;
+                
                 if (cekJabatan.equals("kasir")) {
                     j = EnumJabatan.KASIR;
                 } else {
@@ -208,10 +202,11 @@ public class Register {
                 } else if (female.isSelected()) {
                     cekGender = female.getText();
                 }
-                if (cekNama.equals(null) || cekmno.equals(null) || cekJabatan.equals(null)
-                        || cekAlamat.equals(null) || cekPassword.equals(null) || TTL.equals(null)) {
+                if (salary.trim().isEmpty()||cekNama.trim().isEmpty() || cekmno.trim().isEmpty() || cekJabatan.trim().isEmpty()
+                        || cekAlamat.trim().isEmpty() || cekPassword.trim().isEmpty() || TTL.trim().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Isi data harus lengkap!");
                 } else {
+                    int cekGaji = Integer.parseInt(salary);
                     f.setVisible(false);
                     f2 = new JFrame();
                     f2.setTitle("Check Again");
