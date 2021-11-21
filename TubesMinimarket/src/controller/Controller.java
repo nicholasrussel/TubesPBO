@@ -211,7 +211,7 @@ public class Controller {
             stmt.setDate(1, absen);
             stmt.setInt(2, ID);
             stmt.setInt(3, status);
-            stmt.setInt(4, status);
+            stmt.setInt(4, statusGaji);
             Kehadiran h = cekSudahAbsen(ID, absen);
             stmt.executeUpdate();
             return (true);
