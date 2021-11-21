@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package pesan;
 
 import javax.swing.JOptionPane;
 
@@ -11,8 +11,8 @@ import javax.swing.JOptionPane;
  *
  * @author HP
  */
-public class PesanTerimakasihJOption {
-     public void PesanTerimaKasihMenu(){
+public class PesanTerimakasih {
+    public void pesanTerimaKasihMenu(){
         JOptionPane.showMessageDialog(null, "Terima kasih!\n Semoga Hari Anda Menyenangkan!");
     }
 }

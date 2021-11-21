@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package pesan;
 
 import javax.swing.JOptionPane;
 
@@ -11,15 +11,15 @@ import javax.swing.JOptionPane;
  *
  * @author HP
  */
-public class PesanBerhasilJOption {
-    public void PesanBerhasilDatabase(){
+public class PesanBerhasil {
+    public void pesanBerhasilDatabase(){
         JOptionPane.showMessageDialog(null, "Data Anda berhasil ditambahkan dalam database!", "Pesan Berhasil", JOptionPane.INFORMATION_MESSAGE);
     }
-    public void PesanBerhasilDeleteDatabase(){
+    public void pesanBerhasilDeleteDatabase(){
         JOptionPane.showMessageDialog(null, "Data Anda berhasil dihapus dalam database!", "Pesan Berhasil", JOptionPane.INFORMATION_MESSAGE);
     }
     
-    public void PesanBerhasilPembayaran(){
+    public void pesanBerhasilPembayaran(){
         JOptionPane.showMessageDialog(null, "Pembayaran Anda Berhasil!", "Selamat!", JOptionPane.INFORMATION_MESSAGE);
     }
 }

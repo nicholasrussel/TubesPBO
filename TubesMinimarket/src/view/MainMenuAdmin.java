@@ -36,6 +36,7 @@ public class MainMenuAdmin extends JFrame{
     private JLabel title;
     private JButton registerKasir,updateKasir,deleteKasir,logout,bayarGaji;
     private Admin admin;
+    
     public MainMenuAdmin() {
         admin = UserManager.getInstance().getAdmin();
         
