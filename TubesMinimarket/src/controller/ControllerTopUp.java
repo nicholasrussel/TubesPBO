@@ -19,14 +19,13 @@ import model.*;
  */
 public class ControllerTopUp {
     
-    static DatabaseHandler conn = new DatabaseHandler();
 
     public ArrayList<DetailPenjualanTopUp> getAllDetailPenjualanTopUp(){
         ArrayList<DetailPenjualanTopUp> detailPenjualanTopUp = new ArrayList<>();
-        conn.connect();
+        controller.Controller.conn.connect();
         String query = "SELECT * FROM detil_penjualantopup";
         try {
-            Statement stmt = conn.con.createStatement();
+            Statement stmt = controller.Controller.conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 DetailPenjualanTopUp  detailPenjualanTU = new DetailPenjualanTopUp();
@@ -43,11 +42,11 @@ public class ControllerTopUp {
     }
 
     public DetailPenjualanTopUp getDetailPenjualanTopUp(String Id_TopUp) {
-        conn.connect();
+        controller.Controller.conn.connect();
         String query = "SELECT * FROM detil_penjualantopup WHERE Id_TopUp='" + Id_TopUp + "'";
         DetailPenjualanTopUp detailPenjualanTU = new DetailPenjualanTopUp();
         try {
-            Statement stmt = conn.con.createStatement();
+            Statement stmt = controller.Controller.conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
 
@@ -64,10 +63,10 @@ public class ControllerTopUp {
     
     public ArrayList<PenjualanTopUp> getAllPenjualanTopUp() {
         ArrayList<PenjualanTopUp> penjualanTopUp = new ArrayList<>();
-        conn.connect();
+        controller.Controller.conn.connect();
         String query = "SELECT * FROM penjualantopup";
         try {
-            Statement stmt = conn.con.createStatement();
+            Statement stmt = controller.Controller.conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 PenjualanTopUp penjualanTU = new PenjualanTopUp();
@@ -84,10 +83,10 @@ public class ControllerTopUp {
     }
     public ArrayList<JenisPembayaran> getAllNamaJenisPembayaran(){
         ArrayList<JenisPembayaran> jenisPembayaran = new ArrayList();
-        conn.connect();
+        controller.Controller.conn.connect();
         String query = "SELECT * FROM jenispembayaran";
         try {
-            Statement stmt = conn.con.createStatement();
+            Statement stmt = controller.Controller.conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 JenisPembayaran jenisP = new JenisPembayaran();
@@ -106,10 +105,10 @@ public class ControllerTopUp {
 
     public  ArrayList<TopUp> getIdTopUpHargaTopUp(){
         ArrayList<TopUp> topUp = new ArrayList<>();
-        conn.connect();
+        controller.Controller.conn.connect();
         String query = "SELECT * FROM topup";
         try {
-            Statement stmt = conn.con.createStatement();
+            Statement stmt = controller.Controller.conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 TopUp tu = new TopUp();
@@ -145,11 +144,11 @@ public class ControllerTopUp {
     }
     
     public boolean insertDataDetailPenjualanTopUp(String id_TopUp,String nomor_FakturTopUp,Date tanggal_JualTopUp,String nomor_TeleponPelanggan){
-        conn.connect();
+        controller.Controller.conn.connect();
         String query = "INSERT INTO detil_penjualantopup (Id_TopUp,Nomor_FakturTopUp,Tanggal_JualTopUp,nomor_TeleponPelanggan)"
                 + "VALUES (?,?,?,?)";
         try {
-            PreparedStatement stmt = conn.con.prepareStatement(query);
+            PreparedStatement stmt = controller.Controller.conn.con.prepareStatement(query);
             stmt.setString(1, id_TopUp);
             stmt.setString(2, nomor_FakturTopUp);
             stmt.setDate(3, tanggal_JualTopUp);
@@ -203,11 +202,11 @@ public class ControllerTopUp {
     }
 
     public boolean insertDataPenjualanTopUp(String Id_TopUp,String Nomor_FakturTopUp,String cekJenisPembayaran){
-    conn.connect();
+    controller.Controller.conn.connect();
         String query = "INSERT INTO penjualantopup (Nomor_FakturTopUp,IdJenisPembayaran,Total_PenjualanTopUp)"
                 + "VALUES (?,?,?)";
         try {
-            PreparedStatement stmt = conn.con.prepareStatement(query);
+            PreparedStatement stmt = controller.Controller.conn.con.prepareStatement(query);
             stmt.setString(1, Nomor_FakturTopUp);
             stmt.setInt(2, IdJenisPembayaran(cekJenisPembayaran));
             stmt.setDouble(3, Harga(Id_TopUp));
@@ -220,11 +219,11 @@ public class ControllerTopUp {
         
     }
     public boolean insertDataTopUp(String Id_TopUp,float pajak_TopUp,double harga_TopUp,String type_TopUp){
-    conn.connect();
+    controller.Controller.conn.connect();
         String query = "INSERT INTO topup (Id_TopUp,Pajak_TopUp,Harga_TopUp,Type_TopUp)"
                 + "VALUES (?,?,?,?)";
         try {
-            PreparedStatement stmt = conn.con.prepareStatement(query);
+            PreparedStatement stmt = controller.Controller.conn.con.prepareStatement(query);
             stmt.setString(1, Id_TopUp);
             stmt.setFloat(2, pajak_TopUp);
             stmt.setDouble(3, harga_TopUp);
@@ -238,12 +237,12 @@ public class ControllerTopUp {
     } 
     
     public boolean updateDataTopUp(String Id_TopUp,double harga_TopUp){
-    conn.connect();
+    controller.Controller.conn.connect();
         String query = "UPDATE  topup SET Harga_TopUp='"+harga_TopUp+"'"
                 + "WHERE Id_TopUp='"+Id_TopUp+"'";
                 ;
         try {
-            Statement stmt = conn.con.createStatement();
+            Statement stmt = controller.Controller.conn.con.createStatement();
             stmt.executeUpdate(query);
             return (true);
         } catch (SQLException e) {
@@ -253,10 +252,10 @@ public class ControllerTopUp {
     }
     
     public boolean deleteDataTopUp(String Id_TopUp,float pajak_TopUp,double harga_TopUp,String type_TopUp){
-    conn.connect();
+    controller.Controller.conn.connect();
         String query = "DELETE  FROM topup where Id_TopUp='"+Id_TopUp+"'";
         try {
-            Statement stmt = conn.con.createStatement();
+            Statement stmt = controller.Controller.conn.con.createStatement();
             stmt.executeUpdate(query);
             return (true);
         } catch (SQLException e) {

@@ -22,7 +22,7 @@ import model.*;
  */
 public class Controller {
 
-    static DatabaseHandler conn = new DatabaseHandler();
+    static public DatabaseHandler conn = new DatabaseHandler();
 
     public ArrayList<Kasir> getAllKasirs() {
         ArrayList<Kasir> cashier = new ArrayList<>();

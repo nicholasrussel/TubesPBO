@@ -15,9 +15,9 @@ import model.*;
 public class Main {
     
     public static void main(String[] args) {
-//   new view.Login();
- //new view.BayarGaji();
-new view.MainMenuAdmin();
+//       new view.Login();
+//new view.BayarGaji();
+        new view.MainMenuAdmin();
 //new view.UpdateDataKasir();
 //new view.LihatKehadiran();
 //       new Main();
