@@ -205,6 +205,8 @@ public class Register {
                 if (salary.trim().isEmpty()||cekNama.trim().isEmpty() || cekmno.trim().isEmpty() || cekJabatan.trim().isEmpty()
                         || cekAlamat.trim().isEmpty() || cekPassword.trim().isEmpty() || TTL.trim().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Isi data harus lengkap!");
+                }else if(cekPassword.length()<8){
+                    JOptionPane.showMessageDialog(null, "Password kurang dari 8 karakter!");
                 } else {
                     int cekGaji = Integer.parseInt(salary);
                     f.setVisible(false);
