@@ -9,14 +9,11 @@ import controller.Controller;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
-import model.EnumJabatan;
-import model.Kehadiran;
 import model.Person;
 import model.UserManager;
 
