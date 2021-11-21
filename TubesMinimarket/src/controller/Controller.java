@@ -309,7 +309,7 @@ public class Controller {
     
     public Barang getBarang(String idBarang){
         conn.connect();
-        String query = "SELECT * FROM barang WHERE idBarang='" + idBarang + "'";
+        String query = "SELECT * FROM barang WHERE Kode_Barang='" + idBarang + "'";
         Barang barang = new Barang();
         try {
             Statement stmt = conn.con.createStatement();
