@@ -77,14 +77,13 @@ public class Login extends JFrame implements ActionListener {
         conn.connect();
         Controller c = new Controller();
         int userID = Integer.parseInt(tID.getText());
-        String password = c.getMD5(String.valueOf(tpass.getPassword()));
-
-        String olahPassword = password.substring(0, 30);
-
+        String olahInputPassword = c.getMD5(String.valueOf(tpass.getPassword())).substring(0, 20);
+        String olahDBPassword= c.getSelectedPassword(userID).substring(0,20);
+        
         Person login = c.getKasir(userID);
 
         if (login != null) {
-            if (olahPassword.equals(c.getSelectedPassword(userID))) {
+            if (olahInputPassword.equals(olahDBPassword)) {
                 JOptionPane.showMessageDialog(rootPane, "Login Berhasil!");
                 UserManager.getInstance().setUser(login);
                 String jabatan = c.getSelectedJabatan(userID).toLowerCase();
