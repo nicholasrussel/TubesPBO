@@ -138,7 +138,7 @@ public class FormPenjualanBarangUtama implements ActionListener {
             area.setBounds(0, lebar, 680, 20);
 
         } else if (e.getSource() == BCancel) {
-//            mainKasir.setVisible(false);
+
 
         }   else {
             
