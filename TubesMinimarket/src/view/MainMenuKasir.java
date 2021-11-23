@@ -39,13 +39,18 @@ public class MainMenuKasir extends JFrame {
         c = getContentPane();
         c.setLayout(null);
 
+
+        title = new JLabel("Selamat Datang di Menu Kasir" + " " +orang.getName());
+        title.setFont(new Font("Arial", Font.PLAIN, 20));
+        title.setBounds(250, 30, 600, 30);
+
         title = new JLabel(orang.getName());
         title.setFont(new Font("Arial", Font.PLAIN, 30));
         title.setSize(300, 30);
         title.setLocation(300, 30);
         c.add(title);
         
-        muncul = new JLabel(orang.getName());
+        muncul = new JLabel();
         muncul.setFont(new Font("Arial", Font.PLAIN, 15));
         muncul.setSize(300, 30);
         muncul.setLocation(300, 100);
@@ -99,12 +104,5 @@ public class MainMenuKasir extends JFrame {
         c.add(logout);
         setVisible(true);
     }
-
-    public static void main(String[] args) {
-        new MainMenuKasir();
-    }
-    // method actionPerformed()
-    // to get the action performed
-    // by the user and act accordingly
 
 }

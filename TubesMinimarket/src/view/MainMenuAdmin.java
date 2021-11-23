@@ -38,17 +38,17 @@ public class MainMenuAdmin extends JFrame{
         c = getContentPane();
         c.setLayout(null);
                 
-        title = new JLabel("Selamat Datang di Menu Admin");
+        title = new JLabel("Selamat Datang di Menu Admin" + "\n" + "Admin" + admin.getName());
         title.setFont(new Font("Arial", Font.PLAIN, 20));
         title.setSize(400, 30);
         title.setLocation(300, 30);
         c.add(title);
         
-        muncul = new JLabel(admin.getName());
-        muncul.setFont(new Font("Arial", Font.PLAIN, 15));
-        muncul.setSize(300, 30);
-        muncul.setLocation(300, 100);
-        c.add(muncul);
+//        muncul = new JLabel(admin.getName());
+//        muncul.setFont(new Font("Arial", Font.PLAIN, 15));
+//        muncul.setSize(300, 30);
+//        muncul.setLocation(300, 100);
+//        c.add(muncul);
 
         registerKasir = new JButton("Register Kasir");
         registerKasir.setFont(new Font("Arial", Font.PLAIN, 15));
