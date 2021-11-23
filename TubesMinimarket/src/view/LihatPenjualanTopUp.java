@@ -5,7 +5,7 @@
  */
 package view;
 
-import Controller.ControllerTopUp;
+import controller.ControllerTopUp;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.ActionEvent;

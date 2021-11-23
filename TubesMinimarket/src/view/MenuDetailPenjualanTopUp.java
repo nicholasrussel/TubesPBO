@@ -14,7 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import model.DetailPenjualanTopUp;
-import Controller.ControllerTopUp;
+import controller.ControllerTopUp;
 import java.sql.Date;
 import java.time.LocalDate;
 import javax.swing.JComboBox;
