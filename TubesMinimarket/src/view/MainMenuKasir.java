@@ -39,7 +39,7 @@ public class MainMenuKasir extends JFrame {
         c = getContentPane();
         c.setLayout(null);
 
-        title = new JLabel(orang.getName());
+        title = new JLabel("Selamat Datang");
         title.setFont(new Font("Arial", Font.PLAIN, 30));
         title.setSize(300, 30);
         title.setLocation(300, 30);
