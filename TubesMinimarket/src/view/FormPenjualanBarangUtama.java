@@ -18,6 +18,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import controller.Controller;
+import java.awt.Font;
 import model.DetailPenjualan;
 import model.PenjualanBarang;
 
@@ -28,19 +29,21 @@ import model.PenjualanBarang;
 public class FormPenjualanBarangUtama implements ActionListener {
 
     JFrame frame;
-    JLabel lbIdBarang, lbNamaBarang, lbHargaBarang, lbKuantitas, lbTotal, lbDiskonBarang,lbNomorFaktur;
+    JLabel lbIdBarang, lbNamaBarang, lbHargaBarang, lbKuantitas, lbTotalAhkir,lbTotalAhkirText,lbTotal, lbDiskonBarang,lbNomorFaktur;
     JButton BaddBarang, BCancel, BConfirm;
 
     JTextArea area;
-    JTextField TfIdBarang, TfNamaBarang, TfHargaBarang, TfKuantitas, TfDiskonBarang, TfTotal,TfNomorFaktur;
+    public JTextField TfNomorFaktur,TfIdBarang, TfNamaBarang, TfHargaBarang, TfKuantitas, TfDiskonBarang, TfTotal;
     ArrayList <DetailPenjualan> detailJual = new ArrayList<>();
     ArrayList <PenjualanBarang> penjualan = new ArrayList<>();
     Controller conn = new Controller();
-    
+    public ConfirmPenjualan confirm;
     public int lebar = 20;
     public Barang barang;
     public DetailPenjualan detailJualBarang = new DetailPenjualan ();
     public PenjualanBarang jualBarang = new PenjualanBarang();
+    public double total;
+    public String nomorFaktur;
     public FormPenjualanBarangUtama() {
         frame = new JFrame();
 
@@ -98,6 +101,9 @@ public class FormPenjualanBarangUtama implements ActionListener {
         TfKuantitas.setBounds(690, 250, 180, 20);
         frame.add(TfKuantitas);
         
+        area = new JTextArea("");
+        area.setBounds(0, lebar, 680, 20);
+        
         lbNomorFaktur = new JLabel("Nomor Faktur : ");
         lbNomorFaktur.setBounds(690, 275, 180, 20);
         frame.add(lbNomorFaktur);
@@ -105,10 +111,15 @@ public class FormPenjualanBarangUtama implements ActionListener {
         TfNomorFaktur = new JTextField();
         TfNomorFaktur.setBounds(690, 300, 180, 20);
         frame.add(TfNomorFaktur);
-
-
-        area = new JTextArea("");
-        area.setBounds(0, lebar, 680, 20);
+        
+        lbTotalAhkir = new JLabel("Total Belanjaan Anda : ");
+        lbTotalAhkir.setBounds(690,330, 180, 20);
+        frame.add(lbTotalAhkir);
+        
+        
+         lbTotalAhkirText = new JLabel();
+        lbTotalAhkirText.setBounds(690,355, 180, 20);
+        
 
         frame.setSize(900, 500);
         frame.setLayout(null);//using no layout managers  
@@ -117,31 +128,60 @@ public class FormPenjualanBarangUtama implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new FormPenjualanBarangUtama();
+       new FormPenjualanBarangUtama();
+        
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        boolean sukses;
         if (e.getSource() == BaddBarang) {
             barang = new Barang();
+            
             barang = conn.getBarang(TfIdBarang.getText());
             detailJualBarang.setKodeBarang(TfIdBarang.getText());
             detailJualBarang.setKuantitas(Integer.parseInt(TfKuantitas.getText()));
             detailJualBarang.setTanggalJual("2021-11-10");
             detailJualBarang.setNomorFaktur(TfNomorFaktur.getText());
             detailJual.add(detailJualBarang);
+            total = total + (barang.getHargaBarang() * Integer.parseInt(TfKuantitas.getText()));
+            lbTotalAhkirText.setText(total+"");
+            frame.add(lbTotalAhkirText);
             area.setText("  " + TfIdBarang.getText() + "   " + barang.getNamaBarang() + "    " + barang.getPersenDiskon() + "  " + barang.getHargaBarang() + "     " + TfKuantitas.getText() + "       " + (barang.getHargaBarang() * Integer.parseInt(TfKuantitas.getText()) - ((barang.getHargaBarang() * Integer.parseInt(TfKuantitas.getText())) * barang.getPersenDiskon())));
             frame.add(area);
             area = new JTextArea();
             lebar += 22;
             area.setBounds(0, lebar, 680, 20);
-
-        } else if (e.getSource() == BCancel) {
-//            mainKasir.setVisible(false);
-
-        }   else {
             
+        } else if (e.getSource() == BCancel) {
+
+
+        }   else if (e.getSource() == BConfirm){
+                
+                confirm = new ConfirmPenjualan();
+                confirm.frame.setVisible(true);
+                
+                jualBarang.setNomorFaktur(TfNomorFaktur.getText());
+                jualBarang.setTotalPenjualan(total);
+                
+                String pembayaran;
+                if(confirm.cbPembayaran.getSelectedIndex() == 0){
+                    pembayaran= "Cash";
+                }   else if (confirm.cbPembayaran.getSelectedIndex() == 1){
+                        pembayaran = "BCA";
+                }   else if (confirm.cbPembayaran.getSelectedIndex() == 2){
+                        pembayaran = "OVO";
+                }   else if (confirm.cbPembayaran.getSelectedIndex() == 3){
+                        pembayaran = "Go - Pay";
+                }   else {
+                        pembayaran  = "Shopee - Pay";
+                }
+                jualBarang.setJenisPembayaran(pembayaran);
+                sukses = conn.setPenjualanDB(jualBarang);
+                frame.setVisible(false);
+                sukses = conn.updateStock(detailJual);
         }
+        
     }
+   
 }
