@@ -5,9 +5,6 @@
  */
 package main;
 
-import controller.Controller;
-import java.util.ArrayList;
-import model.*;
 /**
  *
  * @author Nicholas Russel
@@ -15,12 +12,7 @@ import model.*;
 public class Main {
     
     public static void main(String[] args) {
-       new view.Login();
-//new view.BayarGaji();
-//        new view.MainMenuAdmin();
-//new view.UpdateDataKasir();
-//new view.LihatKehadiran();
-//       new Main();
+   new view.Login();
        
     }
 }
