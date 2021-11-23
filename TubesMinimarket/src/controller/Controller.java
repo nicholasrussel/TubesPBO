@@ -326,4 +326,28 @@ public class Controller {
             return (false);
         }
     }
+    
+    public Barang getBarang(String idBarang){
+        conn.connect();
+        String query = "SELECT * FROM barang WHERE Kode_Barang='" + idBarang + "'";
+        Barang barang = new Barang();
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                barang.setKodeBarang(rs.getString("Kode_Barang"));
+                barang.setNamaBarang(rs.getString("Nama_Barang"));
+                barang.setStokBarang(rs.getString("Stok"));
+                barang.setHargaBarang(rs.getInt("Harga_Barang"));
+                barang.setKarduluasaBarang(rs.getString("Kadaluarsa"));
+                barang.setPersenDiskon(rs.getFloat("Persen_Diskon"));
+                barang.setKategori(rs.getString("Kategori"));  
+                
+                
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (barang);
+    }
 }
