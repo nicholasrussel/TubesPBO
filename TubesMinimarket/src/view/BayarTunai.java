@@ -12,14 +12,18 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import javax.swing.*;
 import model.DetailPenjualanTopUp;
+import model.Person;
+import model.UserManager;
 
 /**
  *
  * @author ASUS
  */
 public class BayarTunai {
+    private Person orang;
     
     public BayarTunai(String cekIdTopUp,String cekNomorFakturTopUp,double harga,String cekNomorTeleponPelanggan,String cekJenisPembayaran){
+        orang = UserManager.getInstance().getUser();
         JFrame f = new JFrame();
         f.setTitle("Detail Penjualan Top Up ");
         f.setSize(800, 800);
@@ -108,7 +112,7 @@ public class BayarTunai {
                                             JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                                         f2.setVisible(false);
                                         boolean statusDetail = c.insertDataDetailPenjualanTopUp(cekIdTopUp,cekNomorFakturTopUp,sqlDate,cekNomorTeleponPelanggan);
-                                        boolean statusPenjualan = c.insertDataPenjualanTopUp(cekIdTopUp, cekNomorFakturTopUp, cekJenisPembayaran);
+                                        boolean statusPenjualan = c.insertDataPenjualanTopUp(cekIdTopUp, cekNomorFakturTopUp, cekJenisPembayaran,orang.getId_person());
                                         if (statusDetail && statusPenjualan) {
                                             JOptionPane.showMessageDialog(null, "Bayar berhasil");
                                             if (JOptionPane.showConfirmDialog(updateLagi, "Insert Lagi ?", "Minimarket",

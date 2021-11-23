@@ -201,15 +201,16 @@ public class ControllerTopUp {
         return id;
     }
 
-    public boolean insertDataPenjualanTopUp(String Id_TopUp,String Nomor_FakturTopUp,String cekJenisPembayaran){
+    public boolean insertDataPenjualanTopUp(String Id_TopUp,String Nomor_FakturTopUp,String cekJenisPembayaran,int idPerson){
     controller.Controller.conn.connect();
-        String query = "INSERT INTO penjualantopup (Nomor_FakturTopUp,IdJenisPembayaran,Total_PenjualanTopUp)"
-                + "VALUES (?,?,?)";
+        String query = "INSERT INTO penjualantopup (Nomor_FakturTopUp,IdJenisPembayaran,Total_PenjualanTopUp,id_Person)"
+                + "VALUES (?,?,?,?)";
         try {
             PreparedStatement stmt = controller.Controller.conn.con.prepareStatement(query);
             stmt.setString(1, Nomor_FakturTopUp);
             stmt.setInt(2, IdJenisPembayaran(cekJenisPembayaran));
             stmt.setDouble(3, Harga(Id_TopUp));
+            stmt.setInt(4, idPerson);
             stmt.executeUpdate();
             return (true);
         } catch (SQLException e) {
