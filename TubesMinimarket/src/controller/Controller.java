@@ -330,4 +330,19 @@ public class Controller {
         }
         return (barang);
     }
+    public boolean setPenjualanDB(PenjualanBarang jual){
+        conn.connect();
+        String query ="INSERT INTO penjualanbarang (Nomor_Faktur,Total_Penjualan,Jenis_Pembayaran) VALUES (?, ?, ?)"; 
+        try {
+            PreparedStatement stmt = conn.con.prepareStatement(query);
+            stmt.setString(1, jual.getNomorFaktur());
+            stmt.setDouble(2, jual.getTotalPenjualan());
+            stmt.setString(3, jual.getJenisPembayaran());
+            stmt.executeUpdate();
+            return (true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }
+    }
 }
