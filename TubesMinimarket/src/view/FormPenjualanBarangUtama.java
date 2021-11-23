@@ -37,7 +37,7 @@ public class FormPenjualanBarangUtama implements ActionListener {
     ArrayList <DetailPenjualan> detailJual = new ArrayList<>();
     ArrayList <PenjualanBarang> penjualan = new ArrayList<>();
     Controller conn = new Controller();
-    
+    public ConfirmPenjualan confirm = new ConfirmPenjualan();
     public int lebar = 20;
     public Barang barang;
     public DetailPenjualan detailJualBarang = new DetailPenjualan ();
@@ -100,7 +100,6 @@ public class FormPenjualanBarangUtama implements ActionListener {
         frame.add(TfKuantitas);
         
         lbNomorFaktur = new JLabel("Nomor Faktur : ");
-        lbNomorFaktur.setFont(new Font("Arial", Font.PLAIN, 20));
         lbNomorFaktur.setBounds(690, 275, 180, 20);
         frame.add(lbNomorFaktur);
 
@@ -142,8 +141,9 @@ public class FormPenjualanBarangUtama implements ActionListener {
         } else if (e.getSource() == BCancel) {
 
 
-        }   else {
-            
+        }   else if (e.getSource() == BConfirm){
+                confirm.frame.setVisible(true);
+                frame.setVisible(false);
         }
     }
 }
