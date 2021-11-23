@@ -69,11 +69,13 @@ public class Controller {
         }
         return (kasir);
     }
-    public int hitungGaji(int gaji,int hadir){
-        int total =0;
-        total = gaji*hadir;
+
+    public int hitungGaji(int gaji, int hadir) {
+        int total = 0;
+        total = gaji * hadir;
         return total;
     }
+
     public ArrayList<Kehadiran> getAllKehadiran() {
         ArrayList<Kehadiran> Kehadirans = new ArrayList<>();
         conn.connect();
@@ -99,9 +101,9 @@ public class Controller {
     public int getKehadiranKasir(int ID, String tanggal1, String tanggal2) {
 //        ArrayList<Kehadiran> kehadirans = new ArrayList<>();
         Kehadiran hadir = new Kehadiran();
-        int count=0;
+        int count = 0;
         conn.connect();
-        String query = "SELECT COUNT(Status)AS StatusCount FROM kehadiran WHERE Id_Person = '" + ID+ "'AND Status = '" + 1 + "'AND Tanggal_Masuk between Date'" + tanggal1 + "'AND Date'" + tanggal2 + "'" ;
+        String query = "SELECT COUNT(Status)AS StatusCount FROM kehadiran WHERE Id_Person = '" + ID + "'AND Status = '" + 1 + "'AND Tanggal_Masuk between Date'" + tanggal1 + "'AND Date'" + tanggal2 + "'";
         //"SELECT COUNT(Status)AS StatusCount FROM kehadiran WHERE Id_Person = '" + ID + "' AND Status = '" + 1 + "' AND Tanggal_Masuk between CAST('" + tanggal1 + "' AS DATE) and CAST('" + tanggal2 + "' AS DATE)"
         //AND Tanggal_Masuk between Date'" + tanggal1 + "'AND Date'" + tanggal2 + "'"
         try {
@@ -111,7 +113,7 @@ public class Controller {
 
 //                hadir.setTanggal(rs.getDate("Tanggal_Masuk"));
 //                hadir.setId_person(rs.getInt("Id_Person"));
-                count=rs.getInt("StatusCount");
+                count = rs.getInt("StatusCount");
 //                kehadirans.add(hadir);
 
             }
@@ -196,7 +198,7 @@ public class Controller {
         return (hadir);
     }
 
-    public boolean insertAbsenKehadiran(Date absen, int ID, int status,int statusGaji) {
+    public boolean insertAbsenKehadiran(Date absen, int ID, int status, int statusGaji) {
         conn.connect();
         String query = "INSERT INTO kehadiran (Tanggal_Masuk,Id_Person,Status,Status_Gaji)"
                 + "VALUES (?, ?, ?,?)";
@@ -214,12 +216,12 @@ public class Controller {
             return (false);
         }
     }
-    
-    public ArrayList<Kehadiran> cekSudahGajian(int ID, String tanggal1,String tanggal2) {
+
+    public ArrayList<Kehadiran> cekSudahGajian(int ID, String tanggal1, String tanggal2) {
         ArrayList<Kehadiran> kehadirans = new ArrayList<>();
         Kehadiran hadir = new Kehadiran();
         conn.connect();
-        String query = "SELECT * FROM kehadiran WHERE Id_Person = '" + ID  + "'AND Tanggal_Masuk between Date'" + tanggal1 + "'AND Date'" + tanggal2 + "' AND Status_Gaji='"+0+"'";
+        String query = "SELECT * FROM kehadiran WHERE Id_Person = '" + ID + "'AND Tanggal_Masuk between Date'" + tanggal1 + "'AND Date'" + tanggal2 + "' AND Status_Gaji='" + 0 + "'";
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -236,11 +238,10 @@ public class Controller {
         }
         return (kehadirans);
     }
-    
+
     public boolean updateStatusGaji(int statusGaji, String tanggal1, String tanggal2, int ID) {
         conn.connect();
         String query = "UPDATE kehadiran SET Status_Gaji='" + statusGaji + "'"
-
                 + "WHERE Id_Person='" + ID + "'AND Tanggal_Masuk between Date'" + tanggal1 + "'AND Date'" + tanggal2 + "'";
         try {
             Statement stmt = conn.con.createStatement();
@@ -306,8 +307,8 @@ public class Controller {
             return (false);
         }
     }
-    
-    public Barang getBarang(String idBarang){
+
+    public Barang getBarang(String idBarang) {
         conn.connect();
         String query = "SELECT * FROM barang WHERE Kode_Barang='" + idBarang + "'";
         Barang barang = new Barang();
@@ -321,18 +322,18 @@ public class Controller {
                 barang.setHargaBarang(rs.getInt("Harga_Barang"));
                 barang.setKarduluasaBarang(rs.getString("Kadaluarsa"));
                 barang.setPersenDiskon(rs.getFloat("Persen_Diskon"));
-                barang.setKategori(rs.getString("Kategori"));  
-                
-                
+                barang.setKategori(rs.getString("Kategori"));
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return (barang);
     }
-    public boolean setPenjualanDB(PenjualanBarang jual){
+
+    public boolean setPenjualanDB(PenjualanBarang jual) {
         conn.connect();
-        String query ="INSERT INTO penjualanbarang (Nomor_Faktur,Total_Penjualan,Jenis_Pembayaran) VALUES (?, ?, ?)"; 
+        String query = "INSERT INTO penjualanbarang (Nomor_Faktur,Total_Penjualan,Jenis_Pembayaran) VALUES (?, ?, ?)";
         try {
             PreparedStatement stmt = conn.con.prepareStatement(query);
             stmt.setString(1, jual.getNomorFaktur());
@@ -345,4 +346,26 @@ public class Controller {
             return (false);
         }
     }
+
+    public boolean updateStock(ArrayList<DetailPenjualan> detailJual) {
+        conn.connect();
+        boolean sukses = false;
+        for (int i = 0; i < detailJual.size(); i++) {
+           
+            try {
+                 String query = "UPDATE barang SET Stok = Stok - '" + detailJual.get(i).getKuantitas() + "' "
+                    + "WHERE Kode_Barang='" + detailJual.get(i).getKodeBarang() + "'";
+                Statement stmt = conn.con.createStatement();
+                stmt.executeUpdate(query);
+                sukses = true;
+            } catch (SQLException e) {
+                e.printStackTrace();
+                 sukses = false;
+            }
+            
+        }
+        return sukses;
+
+    }
+
 }
