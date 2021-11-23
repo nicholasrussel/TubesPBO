@@ -47,6 +47,60 @@ public class Controller {
         }
         return (cashier);
     }
+    
+    public Person getUser(int ID) {
+        conn.connect();
+        String query = "SELECT * FROM person WHERE Id_Person='" + ID + "'";
+        Person person = new Person();
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+
+                person.setName(rs.getString("Name"));
+                person.setAlamat(rs.getString("Alamat"));
+                person.setId_person(rs.getInt("Id_Person"));
+                person.setNomorTelepon(rs.getString("Nomor_Telepon"));
+                person.setTtl(rs.getString("TTL"));
+                
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (person);
+    }
+    
+    public Kasir getGajiKasir(int ID) {
+        conn.connect();
+        String query = "SELECT * FROM person WHERE Id_Person='" + ID + "'";
+        Kasir kasir = new Kasir();
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+
+                kasir.setGaji(rs.getInt("Gaji"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (kasir);
+    }
+    
+    public boolean updatePassword(String password, int ID) {
+        conn.connect();
+        String query = "UPDATE person SET Password='" + password + "'"
+
+                + "WHERE Id_Person='" + ID + "'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            stmt.executeUpdate(query);
+            return (true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }
+    }
 
     public Kasir getKasir(int ID) {
         conn.connect();
