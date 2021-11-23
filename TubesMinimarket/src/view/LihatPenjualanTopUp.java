@@ -35,7 +35,8 @@ public class LihatPenjualanTopUp extends JFrame{
     private JLabel title;
     private JButton back;
     ArrayList<Integer> listDetail = new ArrayList<>();
-    public LihatPenjualanTopUp() {
+    
+    public LihatPenjualanTopUp(int pilih) {
         ControllerTopUp controller = new ControllerTopUp();
         ArrayList<PenjualanTopUp> users = controller.getAllPenjualanTopUp();
         
@@ -125,8 +126,19 @@ public class LihatPenjualanTopUp extends JFrame{
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (pilih == 0) {
                     setVisible(false);
                     new MenuDetailPenjualanTopUp();
+                    System.out.println("if 0");
+                } else if(pilih == 1) {
+                    setVisible(false);
+                    new MainMenuAdmin();
+                    System.out.println("if 1");
+                }else{
+                    setVisible(false);
+                    new MainMenuKasir();
+                    System.out.println("if 2");
+                }
             }
         });
         c.add(back);

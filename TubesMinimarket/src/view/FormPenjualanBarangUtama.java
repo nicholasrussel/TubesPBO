@@ -40,7 +40,7 @@ public class FormPenjualanBarangUtama implements ActionListener {
     public ConfirmPenjualan confirm;
     public int lebar = 20;
     public Barang barang;
-    public DetailPenjualan detailJualBarang = new DetailPenjualan ();
+    public DetailPenjualan detailJualBarang;
     public PenjualanBarang jualBarang = new PenjualanBarang();
     public double total;
     public String nomorFaktur;
@@ -127,17 +127,12 @@ public class FormPenjualanBarangUtama implements ActionListener {
 
     }
 
-    public static void main(String[] args) {
-       new FormPenjualanBarangUtama();
-        
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         boolean sukses;
         if (e.getSource() == BaddBarang) {
             barang = new Barang();
-            
+            detailJualBarang = new DetailPenjualan ();
             barang = conn.getBarang(TfIdBarang.getText());
             detailJualBarang.setKodeBarang(TfIdBarang.getText());
             detailJualBarang.setKuantitas(Integer.parseInt(TfKuantitas.getText()));
@@ -165,20 +160,15 @@ public class FormPenjualanBarangUtama implements ActionListener {
                 jualBarang.setNomorFaktur(TfNomorFaktur.getText());
                 jualBarang.setTotalPenjualan(total);
                 
-                String pembayaran;
+                String pembayaran = "";
                 if(confirm.cbPembayaran.getSelectedIndex() == 0){
-                    pembayaran= "Cash";
+                    pembayaran= "Tunai";
                 }   else if (confirm.cbPembayaran.getSelectedIndex() == 1){
-                        pembayaran = "BCA";
-                }   else if (confirm.cbPembayaran.getSelectedIndex() == 2){
-                        pembayaran = "OVO";
-                }   else if (confirm.cbPembayaran.getSelectedIndex() == 3){
-                        pembayaran = "Go - Pay";
-                }   else {
-                        pembayaran  = "Shopee - Pay";
-                }
+                        pembayaran = "ATM";
+                }   
                 jualBarang.setJenisPembayaran(pembayaran);
                 sukses = conn.setPenjualanDB(jualBarang);
+                sukses = conn.setdetailJual(detailJual);
                 frame.setVisible(false);
                 sukses = conn.updateStock(detailJual);
                 new MainMenuKasir();

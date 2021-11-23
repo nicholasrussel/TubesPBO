@@ -21,24 +21,26 @@ import javax.swing.JTextField;
  * @author ASUS
  */
 public class MenuTopUp {
-    private JLabel title,Id_TopUp,Harga_TopUp;
-    private JTextField textId_TopUp,textHarga_TopUp;
-    private JButton confirm,lihatSemuaTransaksi;
+
+    private JLabel title, Id_TopUp, Harga_TopUp;
+    private JTextField textId_TopUp, textHarga_TopUp;
+    private JButton confirm, lihatSemuaTransaksi;
     private JComboBox textJenisPembayaran;
-    public MenuTopUp(){
+
+    public MenuTopUp() {
         JFrame f = new JFrame();
         f.setTitle("Detail Penjualan Top Up ");
         f.setSize(800, 800);
         f.setResizable(false);
-        f.setLayout(null);  
+        f.setLayout(null);
         f.setLocationRelativeTo(null);
-    
+
         title = new JLabel(" Form insert Top Up ");
         title.setFont(new Font("Arial", Font.PLAIN, 20));
         title.setSize(400, 20);
         title.setLocation(300, 30);
         f.add(title);
-        
+
         //insert ID  
         Id_TopUp = new JLabel("Id Top Up : ");
         Id_TopUp.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -50,7 +52,7 @@ public class MenuTopUp {
         textId_TopUp.setSize(200, 20);
         textId_TopUp.setLocation(200, 90);
         f.add(textId_TopUp);
-        
+
         //insert Harga  
         Harga_TopUp = new JLabel("Harga Top Up : ");
         Harga_TopUp.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -62,7 +64,7 @@ public class MenuTopUp {
         textHarga_TopUp.setSize(200, 20);
         textHarga_TopUp.setLocation(200, 150);
         f.add(textHarga_TopUp);
-        
+
         //Tombol Confrim 
         confirm = new JButton("Confirm");
         confirm.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -73,52 +75,49 @@ public class MenuTopUp {
             public void actionPerformed(ActionEvent e) {
                 f.setVisible(false);
                 ControllerTopUp c = new ControllerTopUp();
-                JLabel title,Id_TopUp,jenisTopUp,HargaTopUp,pajakTopUp;
+                JLabel title, Id_TopUp, jenisTopUp, HargaTopUp, pajakTopUp;
                 String cekIdTopUp = textId_TopUp.getText();
                 double cekHargaTopUp = Double.parseDouble(textHarga_TopUp.getText());
                 float cekPajakTopUp = (float) 0.1;
                 String cekJenisTopUp = c.getJenisTopUp(cekIdTopUp);
-                
-                
+
                 JFrame f2 = new JFrame();
                 f2.setTitle("Detail Top Up ");
                 f2.setSize(500, 500);
                 f2.setResizable(false);
-                f2.setLayout(null);  
+                f2.setLayout(null);
                 f2.setLocationRelativeTo(null);
-                
+
                 title = new JLabel(" Detail Top Up ");
                 title.setFont(new Font("Arial", Font.PLAIN, 20));
                 title.setSize(400, 20);
                 title.setLocation(300, 30);
                 f2.add(title);
-                
-                Id_TopUp = new JLabel("ID TopUp : "+cekIdTopUp);
+
+                Id_TopUp = new JLabel("ID TopUp : " + cekIdTopUp);
                 Id_TopUp.setFont(new Font("Arial", Font.PLAIN, 15));
                 Id_TopUp.setSize(300, 30);
                 Id_TopUp.setLocation(100, 60);
                 f2.add(Id_TopUp);
-                
-                pajakTopUp = new JLabel("Pajak TopUp : "+cekPajakTopUp);
+
+                pajakTopUp = new JLabel("Pajak TopUp : " + cekPajakTopUp);
                 pajakTopUp.setFont(new Font("Arial", Font.PLAIN, 15));
                 pajakTopUp.setSize(500, 30);
                 pajakTopUp.setLocation(100, 90);
                 f2.add(pajakTopUp);
-                
-                HargaTopUp = new JLabel("Harga TopUp : "+cekHargaTopUp);
+
+                HargaTopUp = new JLabel("Harga TopUp : " + cekHargaTopUp);
                 HargaTopUp.setFont(new Font("Arial", Font.PLAIN, 15));
                 HargaTopUp.setSize(500, 30);
                 HargaTopUp.setLocation(100, 120);
                 f2.add(HargaTopUp);
-                
-                
-                jenisTopUp = new JLabel("Jenis TopUp : "+cekJenisTopUp);
+
+                jenisTopUp = new JLabel("Jenis TopUp : " + cekJenisTopUp);
                 jenisTopUp.setFont(new Font("Arial", Font.PLAIN, 15));
                 jenisTopUp.setSize(500, 30);
                 jenisTopUp.setLocation(100, 150);
                 f2.add(jenisTopUp);
-                
-                
+
                 //tombol bayar setelah confrim 
                 JButton insert = new JButton("Bayar");
                 insert.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -126,7 +125,7 @@ public class MenuTopUp {
                 insert.setLocation(240, 240);
                 insert.addActionListener(new ActionListener() {
                     @Override
-                   public void actionPerformed(ActionEvent e) {
+                    public void actionPerformed(ActionEvent e) {
 
                         f.setVisible(false);
                         JFrame konfirmasiUpdate = new JFrame("Confirmation");
@@ -134,11 +133,11 @@ public class MenuTopUp {
                         ControllerTopUp c = new ControllerTopUp();
 //                        LocalDate now = LocalDate.now();
 //                        java.sql.Date sqlDate = java.sql.Date.valueOf(now);
-                        
+
                         if (JOptionPane.showConfirmDialog(konfirmasiUpdate, "confirm if you Want to Update", "Minimarket",
                                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                             f2.setVisible(false);
-                            boolean status = c.insertDataTopUp(cekIdTopUp,cekPajakTopUp,cekHargaTopUp,cekJenisTopUp);
+                            boolean status = c.insertDataTopUp(cekIdTopUp, cekPajakTopUp, cekHargaTopUp, cekJenisTopUp);
                             //boolean statusPenjualan = c.insertDataPenjualanTopUp(cekIdTopUp, cekNomorFakturTopUp, cekJenisPembayaran);
                             if (status) {
                                 new pesan.PesanBerhasil().pesanBerhasilUpdate();
@@ -160,7 +159,7 @@ public class MenuTopUp {
                     }
                 });
                 f2.add(insert);
-                
+
                 //Tombol Cancel setelah confrim
                 JButton cancel = new JButton("Cancel");
                 cancel.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -174,15 +173,13 @@ public class MenuTopUp {
                     }
                 });
                 f2.add(cancel);
-                
-                
+
                 f2.setVisible(true);
             }
 
-            
-        });    
+        });
         f.add(confirm);
-        
+
         //tombol lihat semua detailPenjualan TopUp
         JButton lihatSemuaDetail = new JButton("Lihat semua Detail Penjualan TopUp");
         lihatSemuaDetail.setFont(new Font("Arial", Font.PLAIN, 13));
@@ -192,12 +189,25 @@ public class MenuTopUp {
             @Override
             public void actionPerformed(ActionEvent e) {
                 f.setVisible(false);
-                new LihatDetailPenjualanTopUp();
+                new LihatDetailPenjualanTopUp(0);
             }
         });
-                
-                f.setVisible(true);
+
+        JButton exit = new JButton("Cancel");
+        exit.setFont(new Font("Arial", Font.PLAIN, 15));
+        exit.setSize(100, 20);
+        exit.setLocation(100, 330);
+        exit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                f.setVisible(false);
+                new MainMenuAdmin();
+            }
+        });
+        f.add(exit);
+        f.setVisible(true);
     }
+
     public static void main(String[] args) {
         new MenuTopUp();
     }

@@ -25,7 +25,8 @@ public class MainMenuKasir extends JFrame {
     
     private Container c;
     private JLabel title,muncul;
-    private JButton changePass,logout, jualBarang, jualTopUp;
+    private JButton changePass,logout, jualBarang, jualTopUp, lihatTopUp,lihatDataTopUp, 
+            lihatDataPenjualanBarang, lihatDataDetilPenjualanBarang, lihatDataBarang;
     private Person orang;
 
     public MainMenuKasir() {
@@ -92,11 +93,85 @@ public class MainMenuKasir extends JFrame {
         });
         c.add(jualTopUp);
         
+        lihatTopUp = new JButton("Lihat TopUp");
+        lihatTopUp.setFont(new Font("Arial", Font.PLAIN, 15));
+        lihatTopUp.setSize(300, 20);
+        lihatTopUp.setLocation(10, 300);
+        lihatTopUp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                new LihatDetailPenjualanTopUp(2);
+                new LihatPenjualanTopUp(2);
+            }
+        });
+        c.add(lihatTopUp);
+        
+        lihatDataTopUp = new JButton("Lihat Data Top Up");
+        lihatDataTopUp.setFont(new Font("Arial", Font.PLAIN, 15));
+        lihatDataTopUp.setSize(300, 20);
+        lihatDataTopUp.setLocation(10, 100);
+        lihatDataTopUp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new LihatDataTopUp(2);
+            }
+        });
+        c.add(lihatDataTopUp);
+        
+        lihatDataTopUp = new JButton("Lihat data top up");
+        lihatDataTopUp.setFont(new Font("Arial", Font.PLAIN, 15));
+        lihatDataTopUp.setSize(300, 20);
+        lihatDataTopUp.setLocation(10, 400);
+        lihatDataTopUp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new LihatDataTopUp(2);
+            }
+        });
+        c.add(lihatDataTopUp);
+        
+        lihatDataBarang = new JButton("Lihat Data Barang");
+        lihatDataBarang.setFont(new Font("Arial", Font.PLAIN, 15));
+        lihatDataBarang.setSize(300, 20);
+        lihatDataBarang.setLocation(330, 100);
+        lihatDataBarang.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new LihatBarang(2);
+            }
+        });
+        c.add(lihatDataBarang);
+        
+        lihatDataDetilPenjualanBarang = new JButton("Lihat Data Detil Penjualan Barang");
+        lihatDataDetilPenjualanBarang.setFont(new Font("Arial", Font.PLAIN, 15));
+        lihatDataDetilPenjualanBarang.setSize(300, 20);
+        lihatDataDetilPenjualanBarang.setLocation(330, 150);
+        lihatDataDetilPenjualanBarang.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new LihatDetailPenjualanBarang(2);
+            }
+        });
+        c.add(lihatDataDetilPenjualanBarang);
+
+        lihatDataPenjualanBarang = new JButton("Lihat Data Penjualan Barang");
+        lihatDataPenjualanBarang.setFont(new Font("Arial", Font.PLAIN, 15));
+        lihatDataPenjualanBarang.setSize(300, 20);
+        lihatDataPenjualanBarang.setLocation(330, 200);
+        lihatDataPenjualanBarang.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new LihatPenjualanBarang(2);
+            }
+        });
+        c.add(lihatDataPenjualanBarang);
+
         
         logout = new JButton("Log Out");
         logout.setFont(new Font("Arial", Font.PLAIN, 15));
         logout.setSize(300, 20);
-        logout.setLocation(10, 300);
+        logout.setLocation(10, 350);
         logout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

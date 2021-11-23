@@ -10,7 +10,6 @@ import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,9 +20,14 @@ import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
-import model.*;
+import model.PenjualanTopUp;
+import model.TopUp;
 
-public class LihatDetailPenjualanTopUp extends JFrame{
+/**
+ *
+ * @author HP
+ */
+public class LihatDataTopUp extends JFrame{
     private JTable table;
     private DefaultTableModel model;
     private JScrollPane sp;
@@ -31,11 +35,12 @@ public class LihatDetailPenjualanTopUp extends JFrame{
     private JLabel title;
     private JButton back;
     ArrayList<Integer> listDetail = new ArrayList<>();
-    public LihatDetailPenjualanTopUp(int pilih) {
+    
+    public LihatDataTopUp(int pilih) {
         ControllerTopUp controller = new ControllerTopUp();
-        ArrayList<DetailPenjualanTopUp> users = controller.getAllDetailPenjualanTopUp();
+        ArrayList<TopUp> users = controller.getAllTopUp();
         
-        setTitle("Lihat DetailPenjualanTopUp");
+        setTitle("Lihat PenjualanTopUp");
         setBounds(300, 90, 600, 300);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
@@ -44,7 +49,7 @@ public class LihatDetailPenjualanTopUp extends JFrame{
         c = getContentPane();
         c.setLayout(null);
 
-        title = new JLabel("Data DetailPenjualanTopUP");
+        title = new JLabel("Data Penjualan Top UP");
         title.setFont(new Font("Arial", Font.PLAIN, 20));
         title.setSize(400, 30);
         title.setLocation(250, 30);
@@ -67,29 +72,30 @@ public class LihatDetailPenjualanTopUp extends JFrame{
                 }
             }
         };
-        model.addColumn("ID TopUP");
-        model.addColumn("Nomor FakturTopUp");
-        model.addColumn("Tanggal Jual");
-        model.addColumn("Nomor Telepon Pelanggan");
+        model.addColumn("Id_TopUP");
+        model.addColumn("Pajak_TopUp");
+        model.addColumn("Harga_TopUp");
+        model.addColumn("Type_TopUp");
         table = new JTable(model);
         
         //Looping Data to Table
         for (int i=0; i<users.size(); i++) {
-            DetailPenjualanTopUp current = users.get(i);
-            Object[] addKasir = new Object[4];
-            addKasir[0] = current.getId_TopUp();
-            addKasir[1] = current.getNomor_FakturTopUp();
-            addKasir[2] = current.getTanggal_JualTopUp();
-            addKasir[3] = current.getNomor_teleponPelanggan();
+            TopUp current = users.get(i);
+            Object[] addTopUp = new Object[4];
+            addTopUp[0] = current.getId_TopUp();
+            addTopUp[1] = current.getPajak_TopUp();
+             addTopUp[2] = current.getHarga_TopUp();
+             addTopUp[3] = current.getType_TopUp();
             model = (DefaultTableModel)table.getModel();
-            model.addRow(addKasir);
+            model.addRow(addTopUp);
         }
 
         //Set Column Size
-        table.getColumnModel().getColumn(0).setPreferredWidth(2);
+        table.getColumnModel().getColumn(0).setPreferredWidth(40);
         table.getColumnModel().getColumn(1).setPreferredWidth(60);
         table.getColumnModel().getColumn(2).setPreferredWidth(60);
-        table.getColumnModel().getColumn(3).setPreferredWidth(150);
+        table.getColumnModel().getColumn(3).setPreferredWidth(60);
+        
         
         
         table.getModel().addTableModelListener(new TableModelListener() {
@@ -122,18 +128,12 @@ public class LihatDetailPenjualanTopUp extends JFrame{
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                    if (pilih == 0) {
-                    setVisible(false);
-                    new MenuDetailPenjualanTopUp();
-                        System.out.println("if 0");
-                } else if(pilih == 1) {
+                if (pilih == 1) {
                     setVisible(false);
                     new MainMenuAdmin();
-                    System.out.println("if 1");
-                }else{
+                } else {
                     setVisible(false);
                     new MainMenuKasir();
-                    System.out.println("if 2");
                 }
             }
         });

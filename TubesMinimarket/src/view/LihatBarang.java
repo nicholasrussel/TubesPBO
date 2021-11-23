@@ -5,12 +5,12 @@
  */
 package view;
 
+import static com.sun.glass.ui.Cursor.setVisible;
 import controller.ControllerTopUp;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,9 +21,15 @@ import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
-import model.*;
+import model.Barang;
+import model.PenjualanTopUp;
 
-public class LihatDetailPenjualanTopUp extends JFrame{
+/**
+ *
+ * @author HP
+ */
+public class LihatBarang extends JFrame {
+
     private JTable table;
     private DefaultTableModel model;
     private JScrollPane sp;
@@ -31,11 +37,12 @@ public class LihatDetailPenjualanTopUp extends JFrame{
     private JLabel title;
     private JButton back;
     ArrayList<Integer> listDetail = new ArrayList<>();
-    public LihatDetailPenjualanTopUp(int pilih) {
-        ControllerTopUp controller = new ControllerTopUp();
-        ArrayList<DetailPenjualanTopUp> users = controller.getAllDetailPenjualanTopUp();
-        
-        setTitle("Lihat DetailPenjualanTopUp");
+
+    public LihatBarang(int pilih) {
+
+        ArrayList<Barang> users = new controller.Controller().getAllBarang();
+
+        setTitle("Lihat Barang");
         setBounds(300, 90, 600, 300);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
@@ -44,77 +51,84 @@ public class LihatDetailPenjualanTopUp extends JFrame{
         c = getContentPane();
         c.setLayout(null);
 
-        title = new JLabel("Data DetailPenjualanTopUP");
+        title = new JLabel("Data Barang");
         title.setFont(new Font("Arial", Font.PLAIN, 20));
         title.setSize(400, 30);
         title.setLocation(250, 30);
         c.add(title);
-        
+
         setVisible(true);
         model = new DefaultTableModel() {
             @Override
             public Class getColumnClass(int columnIndex) {
-                switch(columnIndex) {
-                    case 0 :
-                    case 5 :
-                    case 6 :
-                    case 7 :
+                switch (columnIndex) {
+                    case 0:
+                    case 5:
+                    case 6:
+                    case 7:
                         return Integer.class;
-                    case 8 :
+                    case 8:
                         return Boolean.class;
-                    default :
+                    default:
                         return String.class;
                 }
             }
         };
-        model.addColumn("ID TopUP");
-        model.addColumn("Nomor FakturTopUp");
-        model.addColumn("Tanggal Jual");
-        model.addColumn("Nomor Telepon Pelanggan");
+        model.addColumn("Kode_Barang");
+        model.addColumn("Nama_Barang");
+        model.addColumn("Stok");
+        model.addColumn("Harga_Barang");
+        model.addColumn("Kadaluarsa");
+        model.addColumn("Persen_Diskon");
+        model.addColumn("Kategori");
         table = new JTable(model);
-        
+
         //Looping Data to Table
-        for (int i=0; i<users.size(); i++) {
-            DetailPenjualanTopUp current = users.get(i);
-            Object[] addKasir = new Object[4];
-            addKasir[0] = current.getId_TopUp();
-            addKasir[1] = current.getNomor_FakturTopUp();
-            addKasir[2] = current.getTanggal_JualTopUp();
-            addKasir[3] = current.getNomor_teleponPelanggan();
-            model = (DefaultTableModel)table.getModel();
-            model.addRow(addKasir);
+        for (int i = 0; i < users.size(); i++) {
+            Barang current = users.get(i);
+            Object[] addBarang = new Object[7];
+            addBarang[0] = current.getKodeBarang();
+            addBarang[1] = current.getNamaBarang();
+            addBarang[2] = current.getStokBarang();
+            addBarang[3] = current.getHargaBarang();
+            addBarang[4] = current.getKarduluasaBarang();
+            addBarang[5] = current.getPersenDiskon();
+            addBarang[6] = current.getKategori();
+            model = (DefaultTableModel) table.getModel();
+            model.addRow(addBarang);
         }
 
         //Set Column Size
-        table.getColumnModel().getColumn(0).setPreferredWidth(2);
+        table.getColumnModel().getColumn(0).setPreferredWidth(40);
         table.getColumnModel().getColumn(1).setPreferredWidth(60);
         table.getColumnModel().getColumn(2).setPreferredWidth(60);
-        table.getColumnModel().getColumn(3).setPreferredWidth(150);
-        
-        
+        table.getColumnModel().getColumn(3).setPreferredWidth(60);
+        table.getColumnModel().getColumn(4).setPreferredWidth(60);
+        table.getColumnModel().getColumn(5).setPreferredWidth(60);
+        table.getColumnModel().getColumn(6).setPreferredWidth(60);
+
         table.getModel().addTableModelListener(new TableModelListener() {
             @Override
             public void tableChanged(TableModelEvent e) {
                 boolean added = false;
-                for(int i=0;i<table.getModel().getRowCount();i++) {
+                for (int i = 0; i < table.getModel().getRowCount(); i++) {
                     if ((Boolean) table.getModel().getValueAt(i, 8)) {
 
-                            //listDetail.add(users.get(table.getSelectedRow()));
-
+                        //listDetail.add(users.get(table.getSelectedRow()));
                         added = true;
                     }
-                    if(added) {
+                    if (added) {
                         break;
                     }
-                }     
+                }
             }
         });
-        
+
         table.setBounds(20, 60, 550, 100);
         sp = new JScrollPane(table);
         sp.setBounds(20, 60, 550, 100);
         c.add(sp);
-        
+
         back = new JButton("Back");
         back.setFont(new Font("Arial", Font.PLAIN, 15));
         back.setSize(100, 20);
@@ -122,18 +136,12 @@ public class LihatDetailPenjualanTopUp extends JFrame{
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                    if (pilih == 0) {
-                    setVisible(false);
-                    new MenuDetailPenjualanTopUp();
-                        System.out.println("if 0");
-                } else if(pilih == 1) {
+                if (pilih == 1) {
                     setVisible(false);
                     new MainMenuAdmin();
-                    System.out.println("if 1");
-                }else{
+                } else {
                     setVisible(false);
                     new MainMenuKasir();
-                    System.out.println("if 2");
                 }
             }
         });

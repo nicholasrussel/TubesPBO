@@ -47,7 +47,7 @@ public class Controller {
         }
         return (cashier);
     }
-    
+
     public Person getUser(int ID) {
         conn.connect();
         String query = "SELECT * FROM person WHERE Id_Person='" + ID + "'";
@@ -62,14 +62,14 @@ public class Controller {
                 person.setId_person(rs.getInt("Id_Person"));
                 person.setNomorTelepon(rs.getString("Nomor_Telepon"));
                 person.setTtl(rs.getString("TTL"));
-                
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return (person);
     }
-    
+
     public Kasir getGajiKasir(int ID) {
         conn.connect();
         String query = "SELECT * FROM person WHERE Id_Person='" + ID + "'";
@@ -86,11 +86,10 @@ public class Controller {
         }
         return (kasir);
     }
-    
+
     public boolean updatePassword(String password, int ID) {
         conn.connect();
         String query = "UPDATE person SET Password='" + password + "'"
-
                 + "WHERE Id_Person='" + ID + "'";
         try {
             Statement stmt = conn.con.createStatement();
@@ -153,23 +152,15 @@ public class Controller {
     }
 
     public int getKehadiranKasir(int ID, String tanggal1, String tanggal2) {
-//        ArrayList<Kehadiran> kehadirans = new ArrayList<>();
         Kehadiran hadir = new Kehadiran();
         int count = 0;
         conn.connect();
         String query = "SELECT COUNT(Status)AS StatusCount FROM kehadiran WHERE Id_Person = '" + ID + "'AND Status = '" + 1 + "'AND Tanggal_Masuk between Date'" + tanggal1 + "'AND Date'" + tanggal2 + "'";
-        //"SELECT COUNT(Status)AS StatusCount FROM kehadiran WHERE Id_Person = '" + ID + "' AND Status = '" + 1 + "' AND Tanggal_Masuk between CAST('" + tanggal1 + "' AS DATE) and CAST('" + tanggal2 + "' AS DATE)"
-        //AND Tanggal_Masuk between Date'" + tanggal1 + "'AND Date'" + tanggal2 + "'"
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-
-//                hadir.setTanggal(rs.getDate("Tanggal_Masuk"));
-//                hadir.setId_person(rs.getInt("Id_Person"));
                 count = rs.getInt("StatusCount");
-//                kehadirans.add(hadir);
-
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -211,17 +202,11 @@ public class Controller {
 
     public String getMD5(String password) {
         try {
-            // Static getInstance method is called with hashing MD5
             MessageDigest md = MessageDigest.getInstance("MD5");
-
-            // digest() method is called to calculate message digest
-            //  of an input digest() return array of byte
             byte[] messageDigest = md.digest(password.getBytes());
 
-            // Convert byte array into signum representation
             BigInteger no = new BigInteger(1, messageDigest);
 
-            // Convert message digest into hex value
             String hashtext = no.toString(16);
             while (hashtext.length() < 32) {
                 hashtext = "0" + hashtext;
@@ -372,7 +357,7 @@ public class Controller {
             while (rs.next()) {
                 barang.setKodeBarang(rs.getString("Kode_Barang"));
                 barang.setNamaBarang(rs.getString("Nama_Barang"));
-                barang.setStokBarang(rs.getString("Stok"));
+                barang.setStokBarang(rs.getInt("Stok"));
                 barang.setHargaBarang(rs.getInt("Harga_Barang"));
                 barang.setKarduluasaBarang(rs.getString("Kadaluarsa"));
                 barang.setPersenDiskon(rs.getFloat("Persen_Diskon"));
@@ -405,21 +390,151 @@ public class Controller {
         conn.connect();
         boolean sukses = false;
         for (int i = 0; i < detailJual.size(); i++) {
-           
+
             try {
-                 String query = "UPDATE barang SET Stok = Stok - '" + detailJual.get(i).getKuantitas() + "' "
-                    + "WHERE Kode_Barang='" + detailJual.get(i).getKodeBarang() + "'";
+                String query = "UPDATE barang SET Stok = Stok - '" + detailJual.get(i).getKuantitas() + "' "
+                        + "WHERE Kode_Barang='" + detailJual.get(i).getKodeBarang() + "'";
                 Statement stmt = conn.con.createStatement();
                 stmt.executeUpdate(query);
                 sukses = true;
             } catch (SQLException e) {
                 e.printStackTrace();
-                 sukses = false;
+                sukses = false;
             }
-            
+
         }
         return sukses;
 
     }
+    
+    public ArrayList<Barang> getAllBarang() {
+        ArrayList<Barang> barangs = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT * FROM barang";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                Barang barang = new Barang();
+                barang.setKodeBarang(rs.getString("Kode_Barang"));
+                barang.setNamaBarang(rs.getString("Nama_Barang"));
+                barang.setStokBarang(rs.getInt("Stok"));
+                barang.setHargaBarang(rs.getInt("Harga_Barang"));
+                barang.setKarduluasaBarang(rs.getString("Kadaluarsa"));
+                barang.setPersenDiskon(rs.getFloat("Persen_Diskon"));
+                barang.setKategori(rs.getString("Kategori"));
+                barangs.add(barang);
 
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (barangs);
+    }
+    
+    public ArrayList<PenjualanBarang> getAllPenjualanBarang() {
+        ArrayList<PenjualanBarang> penjualanBarangs = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT * FROM penjualanbarang";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                PenjualanBarang penjualanBarang = new PenjualanBarang();
+                penjualanBarang.setNomorFaktur(rs.getString("Nomor_Faktur"));
+                penjualanBarang.setTotalPenjualan(rs.getDouble("Total_Penjualan"));
+                penjualanBarang.setJenisPembayaran(rs.getString("Jenis_Pembayaran"));
+                penjualanBarangs.add(penjualanBarang);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (penjualanBarangs);
+    }
+    
+    public ArrayList<DetailPenjualan> getAllDetailBarang() {
+        ArrayList<DetailPenjualan> detailPenjualanBarangs = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT * FROM detil_penjualan";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                DetailPenjualan detilPenjualan = new DetailPenjualan();
+                detilPenjualan.setKodeBarang(rs.getString("Kode_Barang"));
+                detilPenjualan.setNomorFaktur(rs.getString("Nomor_Faktur"));
+                detilPenjualan.setTanggalJual(rs.getString("Tanggal_Jual"));
+                detilPenjualan.setKuantitas(rs.getInt("Quantity"));
+                detailPenjualanBarangs.add(detilPenjualan);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (detailPenjualanBarangs);
+    }
+    
+     public boolean setdetailJual(ArrayList<DetailPenjualan> jual) {
+        conn.connect();
+        boolean sukses = false;
+        
+       
+        for (int i = 0; i < jual.size(); i++) {
+
+            try {
+                String query = "INSERT INTO detil_penjualan (Kode_Barang,Nomor_Faktur,Tanggal_Jual,Quantity) VALUES ('"+jual.get(i).getKodeBarang()+"','"+jual.get(i).getNomorFaktur()+"','"+jual.get(i).getTanggalJual()+"','"+jual.get(i).getKuantitas()+"')";
+                PreparedStatement stmt = conn.con.prepareStatement(query);
+                stmt.executeUpdate(query);
+                
+            } catch (SQLException e) {
+                e.printStackTrace();
+                
+            }
+
+        }
+        return sukses;
+    }
+     
+     
+     public boolean updateBarang(String cekKodeProduk, String cekNama, int harga2, int stok2, float persen) {
+        conn.connect();
+        boolean sukses = false;
+        
+       
+         try {
+                String query = "UPDATE barang SET Nama_Barang='" + cekNama + "', "
+                + "Stok='" + stok2 + "', "
+                + "Harga_Barang='" + harga2 + "',"          
+                + "Persen_Diskon='" + persen + "'"
+                + "WHERE Kode_Barang='" + cekKodeProduk + "'";
+                Statement stmt = conn.con.createStatement();
+                stmt.executeUpdate(query);
+                sukses = true;
+            } catch (SQLException e) {
+                e.printStackTrace();
+                sukses = false;
+            }
+        return sukses;
+    }
+     
+     public boolean insertBarang(Barang barang) {
+        conn.connect();
+        String query = "INSERT INTO barang (Kode_Barang, Nama_Barang, Stok, Harga_Barang, Kadaluarsa, Persen_Diskon, Kategori) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement stmt = conn.con.prepareStatement(query);
+            stmt.setString(1, barang.getKodeBarang());
+            stmt.setString(2, barang.getNamaBarang());
+            stmt.setInt(3, barang.getStokBarang());
+            stmt.setInt(4, barang.getHargaBarang());
+            stmt.setString(5, barang.getKarduluasaBarang());
+            stmt.setFloat(6, barang.getPersenDiskon());
+            stmt.setString(7, barang.getKategori());
+            stmt.executeUpdate();
+            return (true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }
+    }
 }
