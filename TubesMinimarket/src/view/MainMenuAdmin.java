@@ -5,23 +5,15 @@
  */
 package view;
 
-import controller.Controller;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import model.Admin;
-import model.Kasir;
-import model.UserManager;
 
 /**
  *
@@ -29,15 +21,12 @@ import model.UserManager;
  */
 public class MainMenuAdmin extends JFrame{
 
-    private JTable table;
-    private DefaultTableModel model;
-    private JScrollPane sp;
     private Container c;
     private JLabel title;
     private JButton registerKasir,updateKasir,deleteKasir,logout,bayarGaji;
     private Admin admin;
+    
     public MainMenuAdmin() {
-        admin = UserManager.getInstance().getAdmin();
         
         setTitle("Menu Admin");
         setBounds(300, 90, 900, 600);
@@ -47,7 +36,7 @@ public class MainMenuAdmin extends JFrame{
 
         c = getContentPane();
         c.setLayout(null);
-
+                
         title = new JLabel("Selamat Datang di Menu Admin");
         title.setFont(new Font("Arial", Font.PLAIN, 20));
         title.setSize(400, 30);
@@ -118,6 +107,7 @@ public class MainMenuAdmin extends JFrame{
 
                 if (JOptionPane.showConfirmDialog(Frame, "Are you sure want to Log Out?", "Minimarket",
                         JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    new pesan.PesanTerimakasih().pesanTerimaKasihLogOut();
                     new Login();
                 } else {
                     setVisible(true);

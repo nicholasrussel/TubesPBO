@@ -86,8 +86,6 @@ public class LihatKehadiran extends JFrame {
             addKehadiran[1] = current.getId_person();
             addKehadiran[2] = current.selectKehadiran(current.getStatus());
             addKehadiran[3] = current.selectPelunasanGaji(current.getStatusGaji());
-            System.out.println("hadir :"+current.getStatus());
-            System.out.println("gaji :"+current.getStatusGaji());
             model = (DefaultTableModel) table.getModel();
             model.addRow(addKehadiran);
         }

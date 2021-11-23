@@ -22,7 +22,7 @@ import model.*;
  */
 public class Controller {
 
-    static DatabaseHandler conn = new DatabaseHandler();
+    static public DatabaseHandler conn = new DatabaseHandler();
 
     public ArrayList<Kasir> getAllKasirs() {
         ArrayList<Kasir> cashier = new ArrayList<>();
@@ -97,23 +97,15 @@ public class Controller {
     }
 
     public int getKehadiranKasir(int ID, String tanggal1, String tanggal2) {
-//        ArrayList<Kehadiran> kehadirans = new ArrayList<>();
-        Kehadiran hadir = new Kehadiran();
         int count=0;
         conn.connect();
-        String query = "SELECT COUNT(Status)AS StatusCount FROM kehadiran WHERE Id_Person = '" + ID+ "'AND Status = '" + 1 + "'AND Tanggal_Masuk between Date'" + tanggal1 + "'AND Date'" + tanggal2 + "'" ;
-        //"SELECT COUNT(Status)AS StatusCount FROM kehadiran WHERE Id_Person = '" + ID + "' AND Status = '" + 1 + "' AND Tanggal_Masuk between CAST('" + tanggal1 + "' AS DATE) and CAST('" + tanggal2 + "' AS DATE)"
-        //AND Tanggal_Masuk between Date'" + tanggal1 + "'AND Date'" + tanggal2 + "'"
+        String query = "SELECT COUNT(Status)AS StatusCount FROM kehadiran WHERE Id_Person = '" + ID+
+                "'AND Status = '" + 1 + "'AND Tanggal_Masuk between Date'" + tanggal1 + "'AND Date'" + tanggal2 + "'" ;
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-
-//                hadir.setTanggal(rs.getDate("Tanggal_Masuk"));
-//                hadir.setId_person(rs.getInt("Id_Person"));
                 count=rs.getInt("StatusCount");
-//                kehadirans.add(hadir);
-
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -136,7 +128,21 @@ public class Controller {
         }
         return password;
     }
+    public boolean updatePassword(String password, int ID) {
+        conn.connect();
+        String query = "UPDATE person SET Password='" + password + "'"
 
+                + "WHERE Id_Person='" + ID + "'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            stmt.executeUpdate(query);
+            return (true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }
+    }
+    
     public String getSelectedJabatan(int ID) {
         String jabatan = "";
         conn.connect();
@@ -205,7 +211,7 @@ public class Controller {
             stmt.setDate(1, absen);
             stmt.setInt(2, ID);
             stmt.setInt(3, status);
-            stmt.setInt(4, status);
+            stmt.setInt(4, statusGaji);
             Kehadiran h = cekSudahAbsen(ID, absen);
             stmt.executeUpdate();
             return (true);
@@ -293,10 +299,24 @@ public class Controller {
     }
 
     // DELETE
-    public boolean deleteUser(int ID) {
+    public boolean deleteBarang(int kodeBarang) {
         conn.connect();
 
-        String query = "DELETE FROM person WHERE Id_Person='" + ID + "'";
+        String query = "DELETE FROM `barang` WHERE `Kode_Barang`=`'" + kodeBarang + "'`";
+        try {
+            Statement stmt = conn.con.createStatement();
+            stmt.executeUpdate(query);
+            return (true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }
+    }
+    
+    public boolean deleteUser(int idPerson) {
+        conn.connect();
+
+        String query = "DELETE FROM `person` WHERE `Id_Person`=`'" + idPerson + "'`";
         try {
             Statement stmt = conn.con.createStatement();
             stmt.executeUpdate(query);
