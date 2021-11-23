@@ -18,6 +18,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import controller.Controller;
+import java.awt.Font;
 import model.DetailPenjualan;
 import model.PenjualanBarang;
 
@@ -99,6 +100,7 @@ public class FormPenjualanBarangUtama implements ActionListener {
         frame.add(TfKuantitas);
         
         lbNomorFaktur = new JLabel("Nomor Faktur : ");
+        lbNomorFaktur.setFont(new Font("Arial", Font.PLAIN, 20));
         lbNomorFaktur.setBounds(690, 275, 180, 20);
         frame.add(lbNomorFaktur);
 
