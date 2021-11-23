@@ -39,9 +39,17 @@ public class MainMenuKasir extends JFrame {
         c = getContentPane();
         c.setLayout(null);
 
+
         title = new JLabel("Selamat Datang di Menu Kasir" + " " +orang.getName());
         title.setFont(new Font("Arial", Font.PLAIN, 20));
         title.setBounds(250, 30, 600, 30);
+
+
+        title = new JLabel(orang.getName());
+        title.setFont(new Font("Arial", Font.PLAIN, 30));
+        title.setSize(300, 30);
+        title.setLocation(300, 30);
+
         c.add(title);
         
         changePass = new JButton("Change Pass");
@@ -56,6 +64,7 @@ public class MainMenuKasir extends JFrame {
             }
         });
         c.add(changePass);
+        
         
         jualBarang = new JButton("Jual barang");
         jualBarang.setFont(new Font("Arial", Font.PLAIN, 15));
