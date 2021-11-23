@@ -9,7 +9,7 @@ package model;
  *
  * @author Nicholas Russel
  */
-public abstract class Person {
+public class Person {
     private String name;
     private String nomorTelepon;
     private String alamat;

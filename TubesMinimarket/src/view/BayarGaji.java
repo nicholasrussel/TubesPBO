@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import model.Kehadiran;
 import java.util.ArrayList;
 import java.util.Properties;
+import model.Person;
 import model.Kasir;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -36,6 +37,8 @@ public class BayarGaji {
     private Properties p, p2;
     private JDatePanelImpl datePanel, datePanel2;
     private JDatePickerImpl datePicker, datePicker2;
+    private String hari,bulan,tahun,hari2,bulan2,tahun2,tanggal1,tanggal2;
+    private int userID,hadir,statusGaji;
 
     public BayarGaji() {
         new LihatKehadiran(0);
@@ -119,24 +122,20 @@ public class BayarGaji {
                 title.setLocation(50, 30);
                 f2.add(title);
 
-                int userID = Integer.parseInt(tid.getText());
-                String hari = String.valueOf(datePicker.getModel().getDay());
-                String bulan = String.valueOf(datePicker.getModel().getMonth() + 1);
-                String tahun = String.valueOf(datePicker.getModel().getYear());
-                String tanggal1 = tahun + ":" + bulan + ":" + hari;
+                userID = Integer.parseInt(tid.getText());
+                hari = String.valueOf(datePicker.getModel().getDay());
+                bulan = String.valueOf(datePicker.getModel().getMonth() + 1);
+                tahun = String.valueOf(datePicker.getModel().getYear());
+                tanggal1 = tahun + ":" + bulan + ":" + hari;
 
-                String hari2 = String.valueOf(datePicker2.getModel().getDay());
-                String bulan2 = String.valueOf(datePicker2.getModel().getMonth() + 1);
-                String tahun2 = String.valueOf(datePicker2.getModel().getYear());
-                String tanggal2 = tahun2 + ":" + bulan2 + ":" + hari2;
+                hari2 = String.valueOf(datePicker2.getModel().getDay());
+                bulan2 = String.valueOf(datePicker2.getModel().getMonth() + 1);
+                tahun2 = String.valueOf(datePicker2.getModel().getYear());
+                tanggal2 = tahun2 + ":" + bulan2 + ":" + hari2;
 
-                Kasir pegawaiYangDibayar = c.getKasir(userID);
-                int hadir = c.getKehadiranKasir(userID, tanggal1, tanggal2);
-                String bun = String.valueOf(datePicker.getModel().getMonth());
-                System.out.println(bun);
-                System.out.println(tanggal1);
-                System.out.println(tanggal2);
-                System.out.println(hadir);
+                Person pegawaiYangDibayar = c.getUser(userID);
+                Kasir cariTahuGaji = c.getGajiKasir(userID);
+                hadir = c.getKehadiranKasir(userID, tanggal1, tanggal2);
 
                 id = new JLabel("Id Person : " + pegawaiYangDibayar.getId_person());
                 id.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -156,7 +155,7 @@ public class BayarGaji {
                 nomorTelp.setLocation(50, 200);
                 f2.add(nomorTelp);
 
-                gaji = new JLabel("Gaji: " + c.hitungGaji(pegawaiYangDibayar.getGaji(), hadir));
+                gaji = new JLabel("Gaji: " + c.hitungGaji(cariTahuGaji.getGaji(), hadir));
                 gaji.setFont(new Font("Arial", Font.PLAIN, 15));
                 gaji.setSize(300, 20);
                 gaji.setLocation(50, 250);
@@ -169,7 +168,7 @@ public class BayarGaji {
                 bayar.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        int statusGaji = 1;
+                        statusGaji = 1;
                         boolean bisaBayar = false;
                         if (JOptionPane.showConfirmDialog(fConfirmation, "confirm if the details correct", "Minimarket",
                                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
@@ -185,20 +184,17 @@ public class BayarGaji {
                             }
                             if (bisaBayar) {
                                 boolean berhasilBayar = c.updateStatusGaji(statusGaji, tanggal1, tanggal2, userID);
-
+                                
                                 JOptionPane.showMessageDialog(null, "Bayar Gaji berhasil");
-                                new MainMenuAdmin();
-
                             } else {
-                                JOptionPane.showMessageDialog(null, "Gaji sudah dibayar");
-                                new MainMenuAdmin();
+                                JOptionPane.showMessageDialog(null, "Gaji sudah dibayar");  
                             }
 
                         } else {
                             f2.setVisible(false);
                             JOptionPane.showMessageDialog(null, "Bayar Gaji batal");
-                            new MainMenuAdmin();
                         }
+                        new MainMenuAdmin();
                     }
                 });
                 f2.add(bayar);

@@ -4,6 +4,7 @@ public class UserManager {
     
     private static UserManager instance;
     private EnumJabatan userType;
+    private Person person;
     private Kasir kasir;
     private Admin admin;
     
@@ -17,23 +18,19 @@ public class UserManager {
     public EnumJabatan getUserType() {
         return userType;
     }
-    
-    public void setUser(Object object) {
-        if(object instanceof Kasir) {
-            this.kasir = (Kasir) object;
+    public void setUser(Person person) {
+        if(person instanceof Kasir) {
+            this.kasir = (Kasir) person;
             userType = EnumJabatan.KASIR;
+        } else if(person instanceof Person) {
+            this.person = (Person) person;
         } else {
-            this.admin = (Admin) object;
+            this.person = (Person) person;
             userType = EnumJabatan.ADMIN;
         }
     }
-    
-    public Kasir getKasir() {
-        return kasir;
-    }
-
-    public Admin getAdmin() {
-        return admin;
+    public Person getUser(){
+        return person;
     }
     
     public void logOut() {
