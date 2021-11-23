@@ -127,10 +127,7 @@ public class FormPenjualanBarangUtama implements ActionListener {
 
     }
 
-    public static void main(String[] args) {
-       new FormPenjualanBarangUtama();
-        
-    }
+  
 
     @Override
     public void actionPerformed(ActionEvent e) {
