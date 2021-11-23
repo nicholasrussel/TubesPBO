@@ -154,7 +154,8 @@ public class FormPenjualanBarangUtama implements ActionListener {
             area.setBounds(0, lebar, 680, 20);
             
         } else if (e.getSource() == BCancel) {
-
+            frame.setVisible(false);
+            new MainMenuKasir();
 
         }   else if (e.getSource() == BConfirm){
                 
@@ -180,6 +181,7 @@ public class FormPenjualanBarangUtama implements ActionListener {
                 sukses = conn.setPenjualanDB(jualBarang);
                 frame.setVisible(false);
                 sukses = conn.updateStock(detailJual);
+                new MainMenuKasir();
         }
         
     }
