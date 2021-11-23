@@ -18,8 +18,8 @@ public class DatabaseHandler {
 
     public Connection con;
     private String driver = "com.mysql.cj.jdbc.Driver";
-    private String url = "jdbc:mysql://localhost/minimarket";
-//    private String url = "jdbc:mysql://localhost/db_test?serverTimezone=" + TimeZone.getDefault().getID();
+//    private String url = "jdbc:mysql://localhost/minimarket";
+    private String url = "jdbc:mysql://localhost/minimarket?serverTimezone=" + TimeZone.getDefault().getID();
     private String username = "root";
     private String password = "";
 

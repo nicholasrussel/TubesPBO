@@ -22,7 +22,7 @@ import model.*;
  */
 public class Controller {
 
-    static DatabaseHandler conn = new DatabaseHandler();
+    static public DatabaseHandler conn = new DatabaseHandler();
 
     public ArrayList<Kasir> getAllKasirs() {
         ArrayList<Kasir> cashier = new ArrayList<>();
@@ -299,10 +299,24 @@ public class Controller {
     }
 
     // DELETE
-    public boolean deleteUser(int ID) {
+    public boolean deleteBarang(int kodeBarang) {
         conn.connect();
 
-        String query = "DELETE FROM person WHERE Id_Person='" + ID + "'";
+        String query = "DELETE FROM `barang` WHERE `Kode_Barang`=`'" + kodeBarang + "'`";
+        try {
+            Statement stmt = conn.con.createStatement();
+            stmt.executeUpdate(query);
+            return (true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }
+    }
+    
+    public boolean deleteUser(int idPerson) {
+        conn.connect();
+
+        String query = "DELETE FROM `person` WHERE `Id_Person`=`'" + idPerson + "'`";
         try {
             Statement stmt = conn.con.createStatement();
             stmt.executeUpdate(query);

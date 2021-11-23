@@ -141,7 +141,7 @@ public class MenuTopUp {
                             boolean status = c.insertDataTopUp(cekIdTopUp,cekPajakTopUp,cekHargaTopUp,cekJenisTopUp);
                             //boolean statusPenjualan = c.insertDataPenjualanTopUp(cekIdTopUp, cekNomorFakturTopUp, cekJenisPembayaran);
                             if (status) {
-                                JOptionPane.showMessageDialog(null, "update berhasil");
+                                new pesan.PesanBerhasil().pesanBerhasilUpdate();
                                 if (JOptionPane.showConfirmDialog(updateLagi, "Update lagi?", "Minimarket",
                                         JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                                     f.setVisible(true);
@@ -149,12 +149,12 @@ public class MenuTopUp {
                                     //new MainMenuAdmin();
                                 }
                             } else {
-                                JOptionPane.showMessageDialog(null, "update gagal");
+                                new pesan.PesanGagal().pesanGagalUpdate();
                                 //new MainMenuAdmin();
                             }
                         } else {
                             f2.setVisible(false);
-                            JOptionPane.showMessageDialog(null, "update batal");
+                            new pesan.PesanBatal().pesanBatalUpdate();
                             //new MainMenuAdmin();
                         }
                     }

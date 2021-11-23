@@ -7,7 +7,7 @@ package model;
 
 /**
  *
- * @author PauL
+ * @author HP
  */
 public class PenjualanBarang {
     private String nomorFaktur;
@@ -51,6 +51,5 @@ public class PenjualanBarang {
     public String toString() {
         return "penjualanBarang{" + "nomorFaktur=" + nomorFaktur + ", totalPenjualan=" + totalPenjualan + ", jenisPembayaran=" + jenisPembayaran + '}';
     }
-    
     
 }
