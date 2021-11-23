@@ -112,8 +112,14 @@ public class FormPenjualanBarangUtama implements ActionListener {
         TfNomorFaktur.setBounds(690, 300, 180, 20);
         frame.add(TfNomorFaktur);
         
-        lbTotalAhkir = new JLabel();
-        lbTotalAhkir.
+        lbTotalAhkir = new JLabel("Total Belanjaan Anda : ");
+        lbTotalAhkir.setBounds(690,330, 180, 20);
+        frame.add(lbTotalAhkir);
+        
+        
+         lbTotalAhkirText = new JLabel();
+        lbTotalAhkirText.setBounds(690,355, 180, 20);
+        
 
         frame.setSize(900, 500);
         frame.setLayout(null);//using no layout managers  
@@ -128,7 +134,7 @@ public class FormPenjualanBarangUtama implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+        boolean sukses;
         if (e.getSource() == BaddBarang) {
             barang = new Barang();
             
@@ -139,6 +145,8 @@ public class FormPenjualanBarangUtama implements ActionListener {
             detailJualBarang.setNomorFaktur(TfNomorFaktur.getText());
             detailJual.add(detailJualBarang);
             total = total + (barang.getHargaBarang() * Integer.parseInt(TfKuantitas.getText()));
+            lbTotalAhkirText.setText(total+"");
+            frame.add(lbTotalAhkirText);
             area.setText("  " + TfIdBarang.getText() + "   " + barang.getNamaBarang() + "    " + barang.getPersenDiskon() + "  " + barang.getHargaBarang() + "     " + TfKuantitas.getText() + "       " + (barang.getHargaBarang() * Integer.parseInt(TfKuantitas.getText()) - ((barang.getHargaBarang() * Integer.parseInt(TfKuantitas.getText())) * barang.getPersenDiskon())));
             frame.add(area);
             area = new JTextArea();
@@ -169,9 +177,9 @@ public class FormPenjualanBarangUtama implements ActionListener {
                         pembayaran  = "Shopee - Pay";
                 }
                 jualBarang.setJenisPembayaran(pembayaran);
-                boolean sukses = conn.setPenjualanDB(jualBarang);
+                sukses = conn.setPenjualanDB(jualBarang);
                 frame.setVisible(false);
-                
+                sukses = conn.updateStock(detailJual);
         }
         
     }
