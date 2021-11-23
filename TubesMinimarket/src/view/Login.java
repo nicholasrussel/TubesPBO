@@ -80,7 +80,7 @@ public class Login extends JFrame implements ActionListener {
         String olahInputPassword = c.getMD5(String.valueOf(tpass.getPassword())).substring(0, 20);
         String olahDBPassword= c.getSelectedPassword(userID).substring(0,20);
         
-        Person login = c.getKasir(userID);
+        Person login = c.getUser(userID);
 
         if (login != null) {
             if (olahInputPassword.equals(olahDBPassword)) {
