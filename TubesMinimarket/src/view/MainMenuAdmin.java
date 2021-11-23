@@ -14,7 +14,8 @@ import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
+import model.Person;
+import model.UserManager;
 /**
  *
  * @author Nicholas Russel
@@ -22,12 +23,12 @@ import javax.swing.JOptionPane;
 public class MainMenuAdmin extends JFrame{
 
     private Container c;
-    private JLabel title;
+    private JLabel title,muncul;
     private JButton registerKasir,updateKasir,deleteKasir,logout,bayarGaji;
-    private Admin admin;
+    private Person admin;
     
     public MainMenuAdmin() {
-        
+        admin = UserManager.getInstance().getUser();
         setTitle("Menu Admin");
         setBounds(300, 90, 900, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -42,6 +43,12 @@ public class MainMenuAdmin extends JFrame{
         title.setSize(400, 30);
         title.setLocation(300, 30);
         c.add(title);
+        
+        muncul = new JLabel(admin.getName());
+        muncul.setFont(new Font("Arial", Font.PLAIN, 15));
+        muncul.setSize(300, 30);
+        muncul.setLocation(300, 100);
+        c.add(muncul);
 
         registerKasir = new JButton("Register Kasir");
         registerKasir.setFont(new Font("Arial", Font.PLAIN, 15));

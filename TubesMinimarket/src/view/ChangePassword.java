@@ -30,7 +30,7 @@ public class ChangePassword {
     private Person orang;
 
     public ChangePassword() {
-        orang = UserManager.getInstance().getKasir();
+        orang = UserManager.getInstance().getUser();
         f = new JFrame();
         f.setTitle("Change Password");
         f.setSize(400, 400);

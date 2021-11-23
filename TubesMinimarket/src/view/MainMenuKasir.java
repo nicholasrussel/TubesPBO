@@ -29,7 +29,7 @@ public class MainMenuKasir extends JFrame {
     private Person orang;
 
     public MainMenuKasir() {
-        orang = UserManager.getInstance().getKasir();
+        orang = UserManager.getInstance().getUser();
         setTitle("Menu Kasir");
         setBounds(300, 90, 900, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

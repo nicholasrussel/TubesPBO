@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import model.Kehadiran;
 import java.util.ArrayList;
 import java.util.Properties;
+import model.Person;
 import model.Kasir;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -132,7 +133,8 @@ public class BayarGaji {
                 tahun2 = String.valueOf(datePicker2.getModel().getYear());
                 tanggal2 = tahun2 + ":" + bulan2 + ":" + hari2;
 
-                Kasir pegawaiYangDibayar = c.getKasir(userID);
+                Person pegawaiYangDibayar = c.getUser(userID);
+                Kasir cariTahuGaji = c.getGajiKasir(userID);
                 hadir = c.getKehadiranKasir(userID, tanggal1, tanggal2);
 
                 id = new JLabel("Id Person : " + pegawaiYangDibayar.getId_person());
@@ -153,7 +155,7 @@ public class BayarGaji {
                 nomorTelp.setLocation(50, 200);
                 f2.add(nomorTelp);
 
-                gaji = new JLabel("Gaji: " + c.hitungGaji(pegawaiYangDibayar.getGaji(), hadir));
+                gaji = new JLabel("Gaji: " + c.hitungGaji(cariTahuGaji.getGaji(), hadir));
                 gaji.setFont(new Font("Arial", Font.PLAIN, 15));
                 gaji.setSize(300, 20);
                 gaji.setLocation(50, 250);
