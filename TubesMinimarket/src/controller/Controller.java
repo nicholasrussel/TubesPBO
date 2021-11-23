@@ -48,7 +48,28 @@ public class Controller {
         return (cashier);
     }
 
-    public Kasir getKasir(int ID) {
+    public Person getUser(int ID) {
+        conn.connect();
+        String query = "SELECT * FROM person WHERE Id_Person='" + ID + "'";
+        Person person = new Person();
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+
+                person.setName(rs.getString("Name"));
+                person.setAlamat(rs.getString("Alamat"));
+                person.setId_person(rs.getInt("Id_Person"));
+                person.setNomorTelepon(rs.getString("Nomor_Telepon"));
+                person.setTtl(rs.getString("TTL"));
+                
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (person);
+    }
+    public Kasir getGajiKasir(int ID) {
         conn.connect();
         String query = "SELECT * FROM person WHERE Id_Person='" + ID + "'";
         Kasir kasir = new Kasir();
@@ -57,11 +78,6 @@ public class Controller {
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
 
-                kasir.setName(rs.getString("Name"));
-                kasir.setAlamat(rs.getString("Alamat"));
-                kasir.setId_person(rs.getInt("Id_Person"));
-                kasir.setNomorTelepon(rs.getString("Nomor_Telepon"));
-                kasir.setTtl(rs.getString("TTL"));
                 kasir.setGaji(rs.getInt("Gaji"));
             }
         } catch (SQLException e) {
