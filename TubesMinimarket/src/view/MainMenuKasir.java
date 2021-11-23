@@ -25,7 +25,7 @@ public class MainMenuKasir extends JFrame {
     
     private Container c;
     private JLabel title,muncul;
-    private JButton changePass,logout;
+    private JButton changePass,logout, jualBarang, jualTopUp;
     private Person orang;
 
     public MainMenuKasir() {
@@ -42,15 +42,7 @@ public class MainMenuKasir extends JFrame {
         title = new JLabel("Selamat Datang di Menu Kasir" + " " +orang.getName());
         title.setFont(new Font("Arial", Font.PLAIN, 20));
         title.setBounds(250, 30, 600, 30);
-//        title.setSize(300, 30);
-//        title.setLocation(300, 30);
         c.add(title);
-        
-        muncul = new JLabel();
-        muncul.setFont(new Font("Arial", Font.PLAIN, 15));
-        muncul.setSize(300, 30);
-        muncul.setLocation(300, 100);
-        c.add(muncul);
         
         changePass = new JButton("Change Pass");
         changePass.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -65,10 +57,37 @@ public class MainMenuKasir extends JFrame {
         });
         c.add(changePass);
         
+        jualBarang = new JButton("Jual barang");
+        jualBarang.setFont(new Font("Arial", Font.PLAIN, 15));
+        jualBarang.setSize(300, 20);
+        jualBarang.setLocation(10, 200);
+        jualBarang.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                new FormPenjualanBarangUtama();
+            }
+        });
+        c.add(jualBarang);
+        
+        jualTopUp = new JButton("Jual TopUp");
+        jualTopUp.setFont(new Font("Arial", Font.PLAIN, 15));
+        jualTopUp.setSize(300, 20);
+        jualTopUp.setLocation(10, 250);
+        jualTopUp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                new MenuDetailPenjualanTopUp();
+            }
+        });
+        c.add(jualTopUp);
+        
+        
         logout = new JButton("Log Out");
         logout.setFont(new Font("Arial", Font.PLAIN, 15));
         logout.setSize(300, 20);
-        logout.setLocation(10, 250);
+        logout.setLocation(10, 300);
         logout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -87,12 +106,5 @@ public class MainMenuKasir extends JFrame {
         c.add(logout);
         setVisible(true);
     }
-
-    public static void main(String[] args) {
-        new MainMenuKasir();
-    }
-    // method actionPerformed()
-    // to get the action performed
-    // by the user and act accordingly
 
 }

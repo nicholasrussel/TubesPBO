@@ -266,11 +266,24 @@ public class MenuDetailPenjualanTopUp {
                 new LihatPenjualanTopUp();
             }
         });
+        
+        JButton exit = new JButton("Cancel");
+                exit.setFont(new Font("Arial", Font.PLAIN, 15));
+                exit.setSize(100, 20);
+                exit.setLocation(100, 330);
+                exit.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        f.setVisible(false);
+                        new MainMenuKasir();
+                    }
+                });
+                f.add(exit);
+        
         f.add(lihatSemuaPenjualan);
         f.setVisible(true);
         
-    }
-    public static void main(String[] args) {
-        new MenuDetailPenjualanTopUp();
+        
+        
     }
 }
