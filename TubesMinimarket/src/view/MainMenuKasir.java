@@ -25,7 +25,7 @@ public class MainMenuKasir extends JFrame {
     
     private Container c;
     private JLabel title,muncul;
-    private JButton changePass,logout;
+    private JButton changePass,logout,jual;
     private Person orang;
 
     public MainMenuKasir() {
@@ -63,6 +63,19 @@ public class MainMenuKasir extends JFrame {
             }
         });
         c.add(changePass);
+        
+        jual = new JButton("Jual");
+        jual.setFont(new Font("Arial", Font.PLAIN, 15));
+        jual.setSize(300, 20);
+        jual.setLocation(10, 200);
+        jual.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                new ChangePassword();
+            }
+        });
+        c.add(jual);
         
         logout = new JButton("Log Out");
         logout.setFont(new Font("Arial", Font.PLAIN, 15));
