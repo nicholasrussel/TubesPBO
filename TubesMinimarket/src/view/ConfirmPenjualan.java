@@ -29,11 +29,7 @@ public class ConfirmPenjualan implements ActionListener{
     public FormPenjualanBarangUtama form1;
     public ConfirmPenjualan (){
         frame = new JFrame ();
-        
-        
-        
-        
-        
+    
         lbPembayaran = new JLabel("Pilih Metode Pembayaran");
         lbPembayaran.setBounds(60, 95, 150, 20);
         frame.add(lbPembayaran);
@@ -52,10 +48,7 @@ public class ConfirmPenjualan implements ActionListener{
         cancel.setBounds(60, 185, 150, 25);
         cancel.addActionListener(this);
         frame.add(cancel);
-        
-       
-        
-        
+    
         frame.setSize(300, 300);
         frame.setLayout(null);
         frame.setVisible(true);
@@ -70,11 +63,11 @@ public class ConfirmPenjualan implements ActionListener{
         
         if(e.getSource() == confirm){
             frame.setVisible(false);
+            new MainMenuKasir();         
             
-           
-            
-            
-            
+        }else{
+            frame.setVisible(false);
+            new FormPenjualanBarangUtama();
         }
     }
 }

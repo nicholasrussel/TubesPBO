@@ -185,14 +185,14 @@ public class BayarGaji {
                             if (bisaBayar) {
                                 boolean berhasilBayar = c.updateStatusGaji(statusGaji, tanggal1, tanggal2, userID);
                                 
-                                JOptionPane.showMessageDialog(null, "Bayar Gaji berhasil");
+                                new pesan.PesanBerhasil().pesanBerhasilBayarGaji();
                             } else {
-                                JOptionPane.showMessageDialog(null, "Gaji sudah dibayar");  
+                                new pesan.PesanWarning().pesanSudahBayarGaji();
                             }
 
                         } else {
                             f2.setVisible(false);
-                            JOptionPane.showMessageDialog(null, "Bayar Gaji batal");
+                            new pesan.PesanBatal().pesanBatalBayarGaji();
                         }
                         new MainMenuAdmin();
                     }

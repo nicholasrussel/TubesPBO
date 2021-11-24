@@ -21,7 +21,7 @@ public class BayarTunai {
     
     public BayarTunai(String cekIdTopUp,String cekNomorFakturTopUp,double harga,String cekNomorTeleponPelanggan,String cekJenisPembayaran){
         JFrame f = new JFrame();
-        f.setTitle("Detail Penjualan Top Up ");
+        f.setTitle("Bayar Tunai ");
         f.setSize(800, 800);
         f.setResizable(false);
         f.setLayout(null);  
@@ -61,7 +61,7 @@ public class BayarTunai {
                             f.setVisible(false);
 
                             JFrame f2 = new JFrame();
-                            f2.setTitle("Detail Top Up ");
+                            f2.setTitle("Detail pembayaran ");
                             f2.setSize(800, 800);
                             f2.setResizable(false);
                             f2.setLayout(null);  
@@ -99,19 +99,19 @@ public class BayarTunai {
                                 public void actionPerformed(ActionEvent e) {
                                     f2.setVisible(false);
                                     
-                                    JFrame konfirmasiUpdate = new JFrame("Confirmation");
-                                    JFrame updateLagi = new JFrame("Another Update?");
+                                    JFrame konfirmasiUpdate = new JFrame("Konfirmasi");
+                                    JFrame updateLagi = new JFrame("Pembelian lagi?");
                                     LocalDate now = LocalDate.now();
                                     java.sql.Date sqlDate = java.sql.Date.valueOf(now);
 
-                                    if (JOptionPane.showConfirmDialog(konfirmasiUpdate, "confirm if you Want to Update", "Minimarket",
+                                    if (JOptionPane.showConfirmDialog(konfirmasiUpdate, "Konfirmasi jika anda ingin melakukan pembelian lagi", "Minimarket",
                                             JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                                         f2.setVisible(false);
                                         boolean statusDetail = c.insertDataDetailPenjualanTopUp(cekIdTopUp,cekNomorFakturTopUp,sqlDate,cekNomorTeleponPelanggan);
                                         boolean statusPenjualan = c.insertDataPenjualanTopUp(cekIdTopUp, cekNomorFakturTopUp, cekJenisPembayaran);
                                         if (statusDetail && statusPenjualan) {
-                                            JOptionPane.showMessageDialog(null, "Bayar berhasil");
-                                            if (JOptionPane.showConfirmDialog(updateLagi, "Insert Lagi ?", "Minimarket",
+                                            new pesan.PesanBerhasil().pesanBerhasilPembayaran();
+                                            if (JOptionPane.showConfirmDialog(updateLagi, "Beli lagi?", "Minimarket",
                                                     JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                                                 new MenuDetailPenjualanTopUp();
                                             } else {
@@ -119,12 +119,12 @@ public class BayarTunai {
                                                 new MenuDetailPenjualanTopUp();
                                             }
                                         } else {
-                                            JOptionPane.showMessageDialog(null, "Bayar gagal");
+                                            new pesan.PesanGagal().pesanGagalPembayaran();
                                             //new MainMenuAdmin();
                                         }
                                     } else {
                                         f2.setVisible(false);
-                                        JOptionPane.showMessageDialog(null, "Bayar batal");
+                                        new pesan.PesanBatal().pesanBatalBayar();
                                         new MenuDetailPenjualanTopUp();
                                     }
                                 }
@@ -146,7 +146,7 @@ public class BayarTunai {
                             f2.add(cancel);
                             f2.setVisible(true);
                         }else{
-                            JOptionPane.showMessageDialog(null, "Uang anda tidak cukup!!!!");
+                            new pesan.PesanGagal().pesanGagalUangTidakCukup();
                         }
                     }
                 }

@@ -40,13 +40,17 @@ public class FormPenjualanBarangUtama implements ActionListener {
     public ConfirmPenjualan confirm;
     public int lebar = 20;
     public Barang barang;
-    public DetailPenjualan detailJualBarang = new DetailPenjualan ();
+    public DetailPenjualan detailJualBarang;
     public PenjualanBarang jualBarang = new PenjualanBarang();
     public double total;
     public String nomorFaktur;
+    
     public FormPenjualanBarangUtama() {
         frame = new JFrame();
-
+        frame.setSize(900, 500);
+        frame.setLayout(null);
+        frame.setLocationRelativeTo(null);
+        
         lbIdBarang = new JLabel("ID Barang");
         lbIdBarang.setBounds(5, 5, 100, 15);
         frame.add(lbIdBarang);
@@ -121,15 +125,9 @@ public class FormPenjualanBarangUtama implements ActionListener {
         lbTotalAhkirText.setBounds(690,355, 180, 20);
         
 
-        frame.setSize(900, 500);
-        frame.setLayout(null);//using no layout managers  
+        //using no layout managers  
         frame.setVisible(true);
 
-    }
-
-    public static void main(String[] args) {
-       new FormPenjualanBarangUtama();
-        
     }
 
     @Override
@@ -137,7 +135,7 @@ public class FormPenjualanBarangUtama implements ActionListener {
         boolean sukses;
         if (e.getSource() == BaddBarang) {
             barang = new Barang();
-            
+            detailJualBarang = new DetailPenjualan ();
             barang = conn.getBarang(TfIdBarang.getText());
             detailJualBarang.setKodeBarang(TfIdBarang.getText());
             detailJualBarang.setKuantitas(Integer.parseInt(TfKuantitas.getText()));
@@ -161,27 +159,23 @@ public class FormPenjualanBarangUtama implements ActionListener {
                 
                 confirm = new ConfirmPenjualan();
                 confirm.frame.setVisible(true);
+                confirm.frame.setLocationRelativeTo(null);
                 
                 jualBarang.setNomorFaktur(TfNomorFaktur.getText());
                 jualBarang.setTotalPenjualan(total);
                 
-                String pembayaran;
+                String pembayaran = "";
                 if(confirm.cbPembayaran.getSelectedIndex() == 0){
-                    pembayaran= "Cash";
+                    pembayaran= "Tunai";
                 }   else if (confirm.cbPembayaran.getSelectedIndex() == 1){
-                        pembayaran = "BCA";
-                }   else if (confirm.cbPembayaran.getSelectedIndex() == 2){
-                        pembayaran = "OVO";
-                }   else if (confirm.cbPembayaran.getSelectedIndex() == 3){
-                        pembayaran = "Go - Pay";
-                }   else {
-                        pembayaran  = "Shopee - Pay";
-                }
+                        pembayaran = "ATM";
+                }   
                 jualBarang.setJenisPembayaran(pembayaran);
                 sukses = conn.setPenjualanDB(jualBarang);
+                sukses = conn.setdetailJual(detailJual);
                 frame.setVisible(false);
                 sukses = conn.updateStock(detailJual);
-                new MainMenuKasir();
+                
         }
         
     }

@@ -31,11 +31,11 @@ public class LihatDetailPenjualanTopUp extends JFrame{
     private JLabel title;
     private JButton back;
     ArrayList<Integer> listDetail = new ArrayList<>();
-    public LihatDetailPenjualanTopUp() {
+    public LihatDetailPenjualanTopUp(int pilih) {
         ControllerTopUp controller = new ControllerTopUp();
         ArrayList<DetailPenjualanTopUp> users = controller.getAllDetailPenjualanTopUp();
         
-        setTitle("Lihat DetailPenjualanTopUp");
+        setTitle("Lihat Detail Penjualan TopUp");
         setBounds(300, 90, 600, 300);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
@@ -44,10 +44,10 @@ public class LihatDetailPenjualanTopUp extends JFrame{
         c = getContentPane();
         c.setLayout(null);
 
-        title = new JLabel("Data DetailPenjualanTopUP");
+        title = new JLabel("Data DetailPenjualan TopUP");
         title.setFont(new Font("Arial", Font.PLAIN, 20));
         title.setSize(400, 30);
-        title.setLocation(250, 30);
+        title.setLocation(170, 30);
         c.add(title);
         
         setVisible(true);
@@ -122,8 +122,16 @@ public class LihatDetailPenjualanTopUp extends JFrame{
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                    if (pilih == 0) {
                     setVisible(false);
                     new MenuDetailPenjualanTopUp();
+                } else if(pilih == 1) {
+                    setVisible(false);
+                    new MainMenuAdmin();
+                }else{
+                    setVisible(false);
+                    new MainMenuKasir();
+                }
             }
         });
         c.add(back);

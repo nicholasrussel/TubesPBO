@@ -30,16 +30,16 @@ public class UpdateTopUp {
     
     public UpdateTopUp(){
         JFrame f = new JFrame();
-        f.setTitle("Detail Penjualan Top Up ");
-        f.setSize(800, 800);
+        f.setTitle("Update Top Up ");
+        f.setSize(400, 300);
         f.setResizable(false);
         f.setLayout(null);  
         f.setLocationRelativeTo(null);
     
-        title = new JLabel(" Pilih Update Top Up berdasarkan Id ");
+        title = new JLabel(" Update Top up ");
         title.setFont(new Font("Arial", Font.PLAIN, 20));
-        title.setSize(400, 20);
-        title.setLocation(300, 30);
+        title.setSize(200, 20);
+        title.setLocation(100, 30);
         f.add(title);
         
          ControllerTopUp c = new ControllerTopUp();
@@ -58,7 +58,7 @@ public class UpdateTopUp {
         //Tombol Confrim 
         confirm = new JButton("Confirm");
         confirm.setFont(new Font("Arial", Font.PLAIN, 15));
-        confirm.setSize(200, 30);
+        confirm.setSize(100, 30);
         confirm.setLocation(100, 150);
         confirm.addActionListener(new ActionListener() {
             @Override
@@ -66,16 +66,16 @@ public class UpdateTopUp {
                 f.setVisible(false);
                 
                 JFrame f2 = new JFrame();
-                f2.setTitle("Detail Top Up ");
-                f2.setSize(800, 800);
+                f2.setTitle("Update top up");
+                f2.setSize(400, 400);
                 f2.setResizable(false);
                 f2.setLayout(null);  
                 f2.setLocationRelativeTo(null);
                 
-                title = new JLabel(" Top Up ");
+                title = new JLabel(" Update top up ");
                 title.setFont(new Font("Arial", Font.PLAIN, 20));
-                title.setSize(400, 20);
-                title.setLocation(300, 30);
+                title.setSize(200, 20);
+                title.setLocation(100, 30);
                 f2.add(title);
                 
                 float pajakTopUp = 0;
@@ -118,11 +118,11 @@ public class UpdateTopUp {
                 
                  
                 //tombol update setelah confrim 
-                JButton insert = new JButton("udpate");
-                insert.setFont(new Font("Arial", Font.PLAIN, 15));
-                insert.setSize(100, 20);
-                insert.setLocation(240, 270);
-                insert.addActionListener(new ActionListener() {
+                JButton update = new JButton("update");
+                update.setFont(new Font("Arial", Font.PLAIN, 15));
+                update.setSize(100, 20);
+                update.setLocation(240, 270);
+                update.addActionListener(new ActionListener() {
                     @Override
                    public void actionPerformed(ActionEvent e) {
                        double cekHargaTopUp = Double.parseDouble(textHargaTopUpSetelahUpdate.getText());
@@ -157,7 +157,7 @@ public class UpdateTopUp {
                         }
                    }
                 });
-                f2.add(insert);
+                f2.add(update);
                 
                 //Tombol Cancel setelah confrim
                 JButton cancel = new JButton("Cancel");
@@ -177,9 +177,18 @@ public class UpdateTopUp {
         });
         f.add(confirm);
         
+        JButton exit = new JButton("Cancel");
+        exit.setFont(new Font("Arial", Font.PLAIN, 15));
+        exit.setSize(100, 30);
+        exit.setLocation(200, 150);
+        exit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                f.setVisible(false);
+            }
+        });
+        f.add(exit);
+        
         f.setVisible(true);
-    }
-    public static void main(String[] args) {
-        new UpdateTopUp();
     }
 }

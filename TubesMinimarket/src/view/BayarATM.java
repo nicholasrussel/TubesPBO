@@ -25,7 +25,7 @@ import model.DetailPenjualanTopUp;
 public class BayarATM {
     public BayarATM(String cekIdTopUp,String cekNomorFakturTopUp,double harga,String cekNomorTeleponPelanggan,String cekJenisPembayaran){
         JFrame f = new JFrame();
-        f.setTitle("Detail Penjualan Top Up ");
+        f.setTitle("Bayar ATM ");
         f.setSize(800, 800);
         f.setResizable(false);
         f.setLayout(null);  
@@ -70,8 +70,6 @@ public class BayarATM {
                     public void actionPerformed(ActionEvent e) {
                         //variable
                             ControllerTopUp c = new ControllerTopUp();
-                            //double uangPembeli = Double.parseDouble(textUangPembeli.getText());
-                            //double kembalian = c.getKembalian(harga,uangPembeli);
                             String cekNoRekening = textNomorRekening.getText();
                             String cekPassRekening = textPassRekening.getText();
                             
@@ -112,19 +110,19 @@ public class BayarATM {
                                 public void actionPerformed(ActionEvent e) {
                                     f2.setVisible(false);
                                     
-                                    JFrame konfirmasiUpdate = new JFrame("Confirmation");
-                                    JFrame updateLagi = new JFrame("Another Update?");
+                                    JFrame konfirmasi = new JFrame("Konfirmasi");
+                                    JFrame bayarLagi = new JFrame("Pembelian lagi?");
                                     LocalDate now = LocalDate.now();
                                     java.sql.Date sqlDate = java.sql.Date.valueOf(now);
 
-                                    if (JOptionPane.showConfirmDialog(konfirmasiUpdate, "confirm if you Want to Update", "Minimarket",
+                                    if (JOptionPane.showConfirmDialog(konfirmasi, "Konfirmasi jika Anda ingin melakukan pembelian lagi", "Minimarket",
                                             JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                                         f2.setVisible(false);
                                         boolean statusDetail = c.insertDataDetailPenjualanTopUp(cekIdTopUp,cekNomorFakturTopUp,sqlDate,cekNomorTeleponPelanggan);
                                         boolean statusPenjualan = c.insertDataPenjualanTopUp(cekIdTopUp, cekNomorFakturTopUp, cekJenisPembayaran);
                                         if (statusDetail && statusPenjualan) {
-                                            JOptionPane.showMessageDialog(null, "Bayar berhasil");
-                                            if (JOptionPane.showConfirmDialog(updateLagi, "Insert Lagi ?", "Minimarket",
+                                            new pesan.PesanBerhasil().pesanBerhasilPembayaran();
+                                            if (JOptionPane.showConfirmDialog(bayarLagi, "Bayar Lagi ?", "Minimarket",
                                                     JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                                                 new MenuDetailPenjualanTopUp();
                                             } else {
@@ -132,12 +130,12 @@ public class BayarATM {
                                                 new MenuDetailPenjualanTopUp();
                                             }
                                         } else {
-                                            JOptionPane.showMessageDialog(null, "Bayar gagal");
+                                            new pesan.PesanGagal().pesanGagalPembayaran();
                                             new MenuDetailPenjualanTopUp();
                                         }
                                     } else {
                                         f2.setVisible(false);
-                                        JOptionPane.showMessageDialog(null, "Bayar batal");
+                                        new pesan.PesanBatal().pesanBatalBayar();
                                         new MenuDetailPenjualanTopUp();
                                     }
                                 }
@@ -159,7 +157,7 @@ public class BayarATM {
                             f2.add(cancel);
                             f2.setVisible(true);
                         }else{
-                            JOptionPane.showMessageDialog(null, "Rekening/password anda salah!!!!");
+                            new pesan.PesanGagal().pesanGagalBayarATM();
                         }
                     }
                 }

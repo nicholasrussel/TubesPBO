@@ -295,7 +295,7 @@ public class Register {
                             f.setVisible(false);
 
                             if (cekpass.equals(cekPassword)) {
-                                warning.setText("Registration complete");
+                                warning.setText("Registrasi selesai");
                                 Controller c = new Controller();
                                 String hashedPass = c.getMD5(String.valueOf(pass.getPassword()));
                                 String subHashedPass = hashedPass.substring(0, 30);
@@ -310,11 +310,11 @@ public class Register {
                                 newPerson.setGaji(cekGaji);
                                 boolean status = c.insertNewUser(newPerson);
                                 if (status) {
-                                    JOptionPane.showMessageDialog(null, "isi data berhasil");
+                                    new pesan.PesanBerhasil().pesanBerhasilDatabase();
                                     f2.setVisible(false);
                                     new MainMenuAdmin();
                                 } else {
-                                    JOptionPane.showMessageDialog(null, "isi data gagal");
+                                    new pesan.PesanGagal().pesanGagalDatabase();
                                     f2.setVisible(false);
                                     new MainMenuAdmin();
                                 }

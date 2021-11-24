@@ -12,7 +12,7 @@ package model;
 public class Barang {
     private String kodeBarang;
     private String namaBarang;
-    private String stokBarang;
+    private int stokBarang;
     private int hargaBarang;
     private String karduluasaBarang;
     private float persenDiskon;
@@ -21,7 +21,7 @@ public class Barang {
     public Barang() {
     }
 
-    public Barang(String kodeBarang, String namaBarang, String stokBarang, int hargaBarang, String karduluasaBarang, float persenDiskon, String kategori) {
+    public Barang(String kodeBarang, String namaBarang, int stokBarang, int hargaBarang, String karduluasaBarang, float persenDiskon, String kategori) {
         this.kodeBarang = kodeBarang;
         this.namaBarang = namaBarang;
         this.stokBarang = stokBarang;
@@ -49,11 +49,11 @@ public class Barang {
         this.namaBarang = namaBarang;
     }
 
-    public String getStokBarang() {
+    public int getStokBarang() {
         return stokBarang;
     }
 
-    public void setStokBarang(String stokBarang) {
+    public void setStokBarang(int stokBarang) {
         this.stokBarang = stokBarang;
     }
 

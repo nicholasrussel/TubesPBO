@@ -20,14 +20,14 @@ import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
-import model.DetailPenjualanTopUp;
 import model.PenjualanTopUp;
+import model.TopUp;
 
 /**
  *
- * @author ASUS
+ * @author HP
  */
-public class LihatPenjualanTopUp extends JFrame{
+public class LihatDataTopUp extends JFrame{
     private JTable table;
     private DefaultTableModel model;
     private JScrollPane sp;
@@ -36,11 +36,11 @@ public class LihatPenjualanTopUp extends JFrame{
     private JButton back;
     ArrayList<Integer> listDetail = new ArrayList<>();
     
-    public LihatPenjualanTopUp(int pilih) {
+    public LihatDataTopUp(int pilih) {
         ControllerTopUp controller = new ControllerTopUp();
-        ArrayList<PenjualanTopUp> users = controller.getAllPenjualanTopUp();
+        ArrayList<TopUp> users = controller.getAllTopUp();
         
-        setTitle("Lihat PenjualanTopUp");
+        setTitle("Lihat TopUp");
         setBounds(300, 90, 600, 300);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
@@ -49,10 +49,10 @@ public class LihatPenjualanTopUp extends JFrame{
         c = getContentPane();
         c.setLayout(null);
 
-        title = new JLabel("Data Penjualan Top UP");
+        title = new JLabel("Data Top UP");
         title.setFont(new Font("Arial", Font.PLAIN, 20));
         title.setSize(400, 30);
-        title.setLocation(170, 30);
+        title.setLocation(220, 30);
         c.add(title);
         
         setVisible(true);
@@ -72,27 +72,29 @@ public class LihatPenjualanTopUp extends JFrame{
                 }
             }
         };
-//        model.addColumn("ID TopUP");
-        model.addColumn("Nomor FakturTopUp");
-        model.addColumn("Jenis Pembayaran ");
-        model.addColumn("TotalPenjualanTopUp");
+        model.addColumn("Id_TopUP");
+        model.addColumn("Pajak_TopUp");
+        model.addColumn("Harga_TopUp");
+        model.addColumn("Type_TopUp");
         table = new JTable(model);
         
         //Looping Data to Table
         for (int i=0; i<users.size(); i++) {
-            PenjualanTopUp current = users.get(i);
-            Object[] addPenjualanTopUp = new Object[3];
-            addPenjualanTopUp[0] = current.getNomor_FakturTopUp();
-            addPenjualanTopUp[1] = current.getidJenisPembayaran();
-             addPenjualanTopUp[2] = current.getTotal_PenjualanTopUp();
+            TopUp current = users.get(i);
+            Object[] addTopUp = new Object[4];
+            addTopUp[0] = current.getId_TopUp();
+            addTopUp[1] = current.getPajak_TopUp();
+             addTopUp[2] = current.getHarga_TopUp();
+             addTopUp[3] = current.getType_TopUp();
             model = (DefaultTableModel)table.getModel();
-            model.addRow(addPenjualanTopUp);
+            model.addRow(addTopUp);
         }
 
         //Set Column Size
         table.getColumnModel().getColumn(0).setPreferredWidth(40);
         table.getColumnModel().getColumn(1).setPreferredWidth(60);
         table.getColumnModel().getColumn(2).setPreferredWidth(60);
+        table.getColumnModel().getColumn(3).setPreferredWidth(60);
         
         
         
@@ -126,18 +128,12 @@ public class LihatPenjualanTopUp extends JFrame{
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (pilih == 0) {
-                    setVisible(false);
-                    new MenuDetailPenjualanTopUp();
-                    System.out.println("if 0");
-                } else if(pilih == 1) {
+                if (pilih == 1) {
                     setVisible(false);
                     new MainMenuAdmin();
-                    System.out.println("if 1");
-                }else{
+                } else {
                     setVisible(false);
                     new MainMenuKasir();
-                    System.out.println("if 2");
                 }
             }
         });

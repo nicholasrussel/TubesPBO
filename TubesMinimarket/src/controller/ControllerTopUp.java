@@ -19,8 +19,7 @@ import model.*;
  */
 public class ControllerTopUp {
     
-
-    public ArrayList<DetailPenjualanTopUp> getAllDetailPenjualanTopUp(){
+    public ArrayList<DetailPenjualanTopUp> getAllDetailPenjualanTopUp() {
         ArrayList<DetailPenjualanTopUp> detailPenjualanTopUp = new ArrayList<>();
         controller.Controller.conn.connect();
         String query = "SELECT * FROM detil_penjualantopup";
@@ -28,19 +27,19 @@ public class ControllerTopUp {
             Statement stmt = controller.Controller.conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                DetailPenjualanTopUp  detailPenjualanTU = new DetailPenjualanTopUp();
+                DetailPenjualanTopUp detailPenjualanTU = new DetailPenjualanTopUp();
                 detailPenjualanTU.setId_TopUp(rs.getString("Id_TopUp"));
                 detailPenjualanTU.setNomor_FakturTopUp(rs.getString("Nomor_FakturTopUp"));
                 detailPenjualanTU.setTanggal_JualTopUp(rs.getDate("Tanggal_JualTopUp"));
                 detailPenjualanTU.setNomor_teleponPelanggan(rs.getString("nomor_TeleponPelanggan"));
                 detailPenjualanTopUp.add(detailPenjualanTU);
-            } 
-        }catch (SQLException e) {
+            }            
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return (detailPenjualanTopUp);
     }
-
+    
     public DetailPenjualanTopUp getDetailPenjualanTopUp(String Id_TopUp) {
         controller.Controller.conn.connect();
         String query = "SELECT * FROM detil_penjualantopup WHERE Id_TopUp='" + Id_TopUp + "'";
@@ -49,7 +48,7 @@ public class ControllerTopUp {
             Statement stmt = controller.Controller.conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-
+                
                 detailPenjualanTU.setId_TopUp(rs.getString("Id_TopUp"));
                 detailPenjualanTU.setNomor_FakturTopUp(rs.getString("Nomor_FakturTopUp"));
                 detailPenjualanTU.setTanggal_JualTopUp(rs.getDate("Tanggal_JualTopUp"));
@@ -72,16 +71,17 @@ public class ControllerTopUp {
                 PenjualanTopUp penjualanTU = new PenjualanTopUp();
                 penjualanTU.setNomor_FakturTopUp(rs.getString("Nomor_FakturTopUp"));
                 penjualanTU.setidJenisPembayaran((rs.getInt("IdJenisPembayaran")));
-                 penjualanTU.setTotal_PenjualanTopUp(rs.getDouble("Total_PenjualanTopUp"));
+                penjualanTU.setTotal_PenjualanTopUp(rs.getDouble("Total_PenjualanTopUp"));
                 penjualanTopUp.add(penjualanTU);
-
+                
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return (penjualanTopUp);
     }
-    public ArrayList<JenisPembayaran> getAllNamaJenisPembayaran(){
+
+    public ArrayList<JenisPembayaran> getAllNamaJenisPembayaran() {
         ArrayList<JenisPembayaran> jenisPembayaran = new ArrayList();
         controller.Controller.conn.connect();
         String query = "SELECT * FROM jenispembayaran";
@@ -95,15 +95,15 @@ public class ControllerTopUp {
 //                String jenisPembayaran = rs.getString();
 //                penjualanTU.setJenis_Pembayaran.valueOf((rs.getString("Jenis_Pembayaran")));
                 jenisPembayaran.add(jenisP);
-
+                
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return (jenisPembayaran);
     }
-
-    public  ArrayList<TopUp> getIdTopUpHargaTopUp(){
+    
+    public ArrayList<TopUp> getIdTopUpHargaTopUp() {
         ArrayList<TopUp> topUp = new ArrayList<>();
         controller.Controller.conn.connect();
         String query = "SELECT * FROM topup";
@@ -120,30 +120,31 @@ public class ControllerTopUp {
 //                String jenisPembayaran = rs.getString();
 //                penjualanTU.setJenis_Pembayaran.valueOf((rs.getString("Jenis_Pembayaran")));
                 topUp.add(tu);
-
+                
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return (topUp);
     }
-    public String getJenisTopUp(String cekIdTopUp){
+
+    public String getJenisTopUp(String cekIdTopUp) {
         String cekJenisTopUp = null;
         char g = 'G';
         char p = 'P';
         char o = 'O';
         
-            if(cekIdTopUp.charAt(0) == g){
-                cekJenisTopUp = "GOPAY";
-            }else if(cekIdTopUp.charAt(0) == p){
-                cekJenisTopUp = "Pulsa";
-            }else if(cekIdTopUp.charAt(0) == o){
-                cekJenisTopUp = "OVO";
-            }
+        if (cekIdTopUp.charAt(0) == g) {
+            cekJenisTopUp = "GOPAY";
+        } else if (cekIdTopUp.charAt(0) == p) {
+            cekJenisTopUp = "Pulsa";
+        } else if (cekIdTopUp.charAt(0) == o) {
+            cekJenisTopUp = "OVO";
+        }
         return cekJenisTopUp;
     }
     
-    public boolean insertDataDetailPenjualanTopUp(String id_TopUp,String nomor_FakturTopUp,Date tanggal_JualTopUp,String nomor_TeleponPelanggan){
+    public boolean insertDataDetailPenjualanTopUp(String id_TopUp, String nomor_FakturTopUp, Date tanggal_JualTopUp, String nomor_TeleponPelanggan) {
         controller.Controller.conn.connect();
         String query = "INSERT INTO detil_penjualantopup (Id_TopUp,Nomor_FakturTopUp,Tanggal_JualTopUp,nomor_TeleponPelanggan)"
                 + "VALUES (?,?,?,?)";
@@ -161,48 +162,50 @@ public class ControllerTopUp {
             return (false);
         }
     }
-    public static double  Harga(String cek_IdTopUp){
+
+    public static double Harga(String cek_IdTopUp) {
         ControllerTopUp c = new ControllerTopUp();
         ArrayList<TopUp> topUp = c.getIdTopUpHargaTopUp();
-            String []idTu = new String[topUp.size()];
-            Double []hargaTu = new Double[topUp.size()];
-            for (int i = 0; i < topUp.size(); i++) {
-                idTu[i] = topUp.get(i).getId_TopUp();
-                hargaTu[i] = topUp.get(i).getHarga_TopUp();
-            }
-            double penjualanTopUp = 0;
-            for (int i = 0; i < idTu.length; i++) {
-                if(cek_IdTopUp.equals(idTu[i])){
-                    penjualanTopUp = hargaTu[i]+(0.1*hargaTu[i]);
-                    
-                } 
-            }
-            return penjualanTopUp;
+        String[] idTu = new String[topUp.size()];
+        Double[] hargaTu = new Double[topUp.size()];
+        for (int i = 0; i < topUp.size(); i++) {
+            idTu[i] = topUp.get(i).getId_TopUp();
+            hargaTu[i] = topUp.get(i).getHarga_TopUp();
+        }
+        double penjualanTopUp = 0;
+        for (int i = 0; i < idTu.length; i++) {
+            if (cek_IdTopUp.equals(idTu[i])) {
+                penjualanTopUp = hargaTu[i] + (0.1 * hargaTu[i]);
+                
+            }            
+        }
+        return penjualanTopUp;
     }
-    public static double  getKembalian(double harga,double uangPembeli){
+
+    public static double getKembalian(double harga, double uangPembeli) {
         double kembalian = 0;
-        kembalian = uangPembeli-harga;
-            return kembalian;
+        kembalian = uangPembeli - harga;
+        return kembalian;
     }
     
-    public int IdJenisPembayaran(String cekJenisPembayaran){
-        ArrayList<JenisPembayaran>jenisPembayaran  = getAllNamaJenisPembayaran();
-        String [] jenis = new String[jenisPembayaran.size()];
+    public int IdJenisPembayaran(String cekJenisPembayaran) {
+        ArrayList<JenisPembayaran> jenisPembayaran = getAllNamaJenisPembayaran();
+        String[] jenis = new String[jenisPembayaran.size()];
         
         for (int i = 0; i < jenis.length; i++) {
             jenis[i] = jenisPembayaran.get(i).getNamaPembayaran();
         }
         int id = 0;
         for (int i = 0; i < jenis.length; i++) {
-            if(cekJenisPembayaran.equals(jenis[i])){
+            if (cekJenisPembayaran.equals(jenis[i])) {
                 id = jenisPembayaran.get(i).getIdPembayaran();
             }
         }
         return id;
     }
-
-    public boolean insertDataPenjualanTopUp(String Id_TopUp,String Nomor_FakturTopUp,String cekJenisPembayaran){
-    controller.Controller.conn.connect();
+    
+    public boolean insertDataPenjualanTopUp(String Id_TopUp, String Nomor_FakturTopUp, String cekJenisPembayaran) {
+        controller.Controller.conn.connect();
         String query = "INSERT INTO penjualantopup (Nomor_FakturTopUp,IdJenisPembayaran,Total_PenjualanTopUp)"
                 + "VALUES (?,?,?)";
         try {
@@ -218,8 +221,9 @@ public class ControllerTopUp {
         }
         
     }
-    public boolean insertDataTopUp(String Id_TopUp,float pajak_TopUp,double harga_TopUp,String type_TopUp){
-    controller.Controller.conn.connect();
+
+    public boolean insertDataTopUp(String Id_TopUp, float pajak_TopUp, double harga_TopUp, String type_TopUp) {
+        controller.Controller.conn.connect();
         String query = "INSERT INTO topup (Id_TopUp,Pajak_TopUp,Harga_TopUp,Type_TopUp)"
                 + "VALUES (?,?,?,?)";
         try {
@@ -234,13 +238,13 @@ public class ControllerTopUp {
             e.printStackTrace();
             return (false);
         }
-    } 
+    }    
     
-    public boolean updateDataTopUp(String Id_TopUp,double harga_TopUp){
-    controller.Controller.conn.connect();
-        String query = "UPDATE  topup SET Harga_TopUp='"+harga_TopUp+"'"
-                + "WHERE Id_TopUp='"+Id_TopUp+"'";
-                ;
+    public boolean updateDataTopUp(String Id_TopUp, double harga_TopUp) {
+        controller.Controller.conn.connect();
+        String query = "UPDATE  topup SET Harga_TopUp='" + harga_TopUp + "'"
+                + "WHERE Id_TopUp='" + Id_TopUp + "'";
+        ;
         try {
             Statement stmt = controller.Controller.conn.con.createStatement();
             stmt.executeUpdate(query);
@@ -251,9 +255,31 @@ public class ControllerTopUp {
         }
     }
     
-    public boolean deleteDataTopUp(String Id_TopUp,float pajak_TopUp,double harga_TopUp,String type_TopUp){
-    controller.Controller.conn.connect();
-        String query = "DELETE  FROM topup where Id_TopUp='"+Id_TopUp+"'";
+    public ArrayList<TopUp> getAllTopUp() {
+        ArrayList<TopUp> penjualanTopUp = new ArrayList<>();
+        controller.Controller.conn.connect();
+        String query = "SELECT * FROM topup";
+        try {
+            Statement stmt = controller.Controller.conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                TopUp penjualanTU = new TopUp();
+                penjualanTU.setId_TopUp(rs.getString("Id_TopUp"));
+                penjualanTU.setPajak_TopUp(rs.getFloat("Pajak_TopUp"));
+                penjualanTU.setHarga_TopUp(rs.getDouble("Harga_TopUp"));
+                penjualanTU.setType_TopUp(rs.getString("Type_TopUp"));
+                penjualanTopUp.add(penjualanTU);
+                
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (penjualanTopUp);
+    }
+    
+    public boolean deleteDataTopUp(String Id_TopUp) {
+        controller.Controller.conn.connect();
+        String query = "DELETE  FROM topup where Id_TopUp='" + Id_TopUp + "'";
         try {
             Statement stmt = controller.Controller.conn.con.createStatement();
             stmt.executeUpdate(query);
@@ -357,5 +383,3 @@ public class ControllerTopUp {
 //        }
 //    }
 }
-
-
