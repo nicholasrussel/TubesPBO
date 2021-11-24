@@ -26,7 +26,7 @@ public class MainMenuKasir extends JFrame {
     private Container c;
     private JLabel title,muncul;
     private JButton changePass,logout, jualBarang, jualTopUp, lihatTopUp,lihatDataTopUp, 
-            lihatDataPenjualanBarang, lihatDataDetilPenjualanBarang, lihatDataBarang;
+            lihatDataPenjualanBarang, lihatDataDetilPenjualanBarang, lihatDataBarang, lihatDetailPenjualanTopUp;
     private Person orang;
 
     public MainMenuKasir() {
@@ -44,19 +44,12 @@ public class MainMenuKasir extends JFrame {
         title = new JLabel("Selamat Datang di Menu Kasir" + " " +orang.getName());
         title.setFont(new Font("Arial", Font.PLAIN, 20));
         title.setBounds(250, 30, 600, 30);
-
-
-        title = new JLabel(orang.getName());
-        title.setFont(new Font("Arial", Font.PLAIN, 30));
-        title.setSize(300, 30);
-        title.setLocation(300, 30);
-
         c.add(title);
         
         changePass = new JButton("Change Pass");
         changePass.setFont(new Font("Arial", Font.PLAIN, 15));
         changePass.setSize(300, 20);
-        changePass.setLocation(10, 150);
+        changePass.setLocation(10, 100);
         changePass.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -66,63 +59,10 @@ public class MainMenuKasir extends JFrame {
         });
         c.add(changePass);
         
-        
-        jualBarang = new JButton("Jual barang");
-        jualBarang.setFont(new Font("Arial", Font.PLAIN, 15));
-        jualBarang.setSize(300, 20);
-        jualBarang.setLocation(10, 200);
-        jualBarang.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new FormPenjualanBarangUtama();
-            }
-        });
-        c.add(jualBarang);
-        
-        jualTopUp = new JButton("Jual TopUp");
-        jualTopUp.setFont(new Font("Arial", Font.PLAIN, 15));
-        jualTopUp.setSize(300, 20);
-        jualTopUp.setLocation(10, 250);
-        jualTopUp.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new MenuDetailPenjualanTopUp();
-            }
-        });
-        c.add(jualTopUp);
-        
-        lihatTopUp = new JButton("Lihat TopUp");
-        lihatTopUp.setFont(new Font("Arial", Font.PLAIN, 15));
-        lihatTopUp.setSize(300, 20);
-        lihatTopUp.setLocation(10, 300);
-        lihatTopUp.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                new LihatDetailPenjualanTopUp(2);
-                new LihatPenjualanTopUp(2);
-            }
-        });
-        c.add(lihatTopUp);
-        
         lihatDataTopUp = new JButton("Lihat Data Top Up");
         lihatDataTopUp.setFont(new Font("Arial", Font.PLAIN, 15));
         lihatDataTopUp.setSize(300, 20);
-        lihatDataTopUp.setLocation(10, 100);
-        lihatDataTopUp.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new LihatDataTopUp(2);
-            }
-        });
-        c.add(lihatDataTopUp);
-        
-        lihatDataTopUp = new JButton("Lihat data top up");
-        lihatDataTopUp.setFont(new Font("Arial", Font.PLAIN, 15));
-        lihatDataTopUp.setSize(300, 20);
-        lihatDataTopUp.setLocation(10, 400);
+        lihatDataTopUp.setLocation(10, 150);
         lihatDataTopUp.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -155,10 +95,67 @@ public class MainMenuKasir extends JFrame {
         });
         c.add(lihatDataDetilPenjualanBarang);
 
+        
+        jualBarang = new JButton("Jual barang");
+        jualBarang.setFont(new Font("Arial", Font.PLAIN, 15));
+        jualBarang.setSize(300, 20);
+        jualBarang.setLocation(330, 200);
+        jualBarang.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                new FormPenjualanBarangUtama();
+            }
+        });
+        c.add(jualBarang);
+        
+        jualTopUp = new JButton("Jual TopUp");
+        jualTopUp.setFont(new Font("Arial", Font.PLAIN, 15));
+        jualTopUp.setSize(300, 20);
+        jualTopUp.setLocation(330, 250);
+        jualTopUp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                new MenuDetailPenjualanTopUp();
+            }
+        });
+        c.add(jualTopUp);
+        
+        
+        
+        lihatTopUp = new JButton("Lihat TopUp");
+        lihatTopUp.setFont(new Font("Arial", Font.PLAIN, 15));
+        lihatTopUp.setSize(300, 20);
+        lihatTopUp.setLocation(330, 300);
+        lihatTopUp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                new LihatPenjualanTopUp(2);
+            }
+        });
+        c.add(lihatTopUp);
+        
+       
+        
+        lihatDetailPenjualanTopUp = new JButton("Lihat detail penjualan top up");
+        lihatDetailPenjualanTopUp.setFont(new Font("Arial", Font.PLAIN, 15));
+        lihatDetailPenjualanTopUp.setSize(300, 20);
+        lihatDetailPenjualanTopUp.setLocation(10, 250);
+        lihatDetailPenjualanTopUp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new LihatDetailPenjualanTopUp(2);
+            }
+        });
+        c.add(lihatDetailPenjualanTopUp);
+        
+        
         lihatDataPenjualanBarang = new JButton("Lihat Data Penjualan Barang");
         lihatDataPenjualanBarang.setFont(new Font("Arial", Font.PLAIN, 15));
         lihatDataPenjualanBarang.setSize(300, 20);
-        lihatDataPenjualanBarang.setLocation(330, 200);
+        lihatDataPenjualanBarang.setLocation(10, 200);
         lihatDataPenjualanBarang.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -171,7 +168,7 @@ public class MainMenuKasir extends JFrame {
         logout = new JButton("Log Out");
         logout.setFont(new Font("Arial", Font.PLAIN, 15));
         logout.setSize(300, 20);
-        logout.setLocation(10, 350);
+        logout.setLocation(10, 300);
         logout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -181,6 +178,7 @@ public class MainMenuKasir extends JFrame {
                 if (JOptionPane.showConfirmDialog(Frame, "Are you sure want to Log Out?", "Minimarket",
                         JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     orang=null;
+                    new pesan.PesanTerimakasih().pesanTerimaKasihLogOut();
                     new Login();
                 } else {
                     setVisible(true);

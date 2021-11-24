@@ -100,7 +100,7 @@ public class Login extends JFrame implements ActionListener {
                         new pesan.PesanBerhasil().pesanBerhasilAbsen();
 
                     } else {
-                        new pesan.PesanGagal().pesanSudahAbsen();
+                        new pesan.PesanWarning().pesanSudahAbsen();
                     }
 
                     new MainMenuKasir();

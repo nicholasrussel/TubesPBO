@@ -346,6 +346,20 @@ public class Controller {
             return (false);
         }
     }
+    
+    public boolean deleteBarang(String kodeBarang) {
+        conn.connect();
+
+        String query = "DELETE FROM barang WHERE Kode_Barang='" + kodeBarang + "'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            stmt.executeUpdate(query);
+            return (true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }
+    }
 
     public Barang getBarang(String idBarang) {
         conn.connect();

@@ -12,7 +12,18 @@ import javax.swing.JOptionPane;
  * @author HP
  */
 public class PesanBatal {
+    
     public void pesanBatalUpdate(){
-        JOptionPane.showMessageDialog(null, "update batal");
+        JOptionPane.showMessageDialog(null, "update batal", "Pesan Batal", JOptionPane.ERROR);
+    }
+    public void pesanBatalBayar(){
+        JOptionPane.showMessageDialog(null, "Bayar batal", "Pesan Batal", JOptionPane.ERROR);    
+    }
+    public void pesanBatalBayarGaji(){
+        JOptionPane.showMessageDialog(null, "Bayar Gaji batal", "Pesan Batal", JOptionPane.ERROR);
+    }
+    
+    public  void pesanBatalHapusKasir(){
+        JOptionPane.showMessageDialog(null, "Delete batal", "Pesan Batal", JOptionPane.ERROR);
     }
 }

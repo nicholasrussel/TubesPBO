@@ -36,7 +36,7 @@ public class InputBarang {
     public InputBarang() {
         f = new JFrame();
         f.setTitle("Input Data Barang");
-        f.setSize(550, 600);
+        f.setSize(450, 600);
         f.setResizable(false);
         f.setLayout(null);
         f.setLocationRelativeTo(null);
@@ -44,7 +44,7 @@ public class InputBarang {
         title = new JLabel("Input Data Barang Form");
         title.setFont(new Font("Arial", Font.PLAIN, 20));
         title.setSize(500, 30);
-        title.setLocation(50, 30);
+        title.setLocation(70, 30);
         f.add(title);
 
         kodeProduk = new JLabel("Kode Produk");

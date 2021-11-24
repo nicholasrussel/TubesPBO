@@ -30,7 +30,7 @@ public class UpdateBarang {
     public UpdateBarang() {
         f = new JFrame();
         f.setTitle("Update Barang");
-        f.setSize(500, 500);
+        f.setSize(450, 500);
         f.setResizable(false);
         f.setLayout(null);
         f.setLocationRelativeTo(null);
@@ -38,7 +38,7 @@ public class UpdateBarang {
         title = new JLabel("Update Barang Form");
         title.setFont(new Font("Arial", Font.PLAIN, 20));
         title.setSize(200, 30);
-        title.setLocation(50, 30);
+        title.setLocation(80, 30);
         f.add(title);
 
         kodeProduk = new JLabel("Kode Produk");
@@ -245,7 +245,6 @@ public class UpdateBarang {
             @Override
             public void actionPerformed(ActionEvent e) {
                 f.setVisible(false);
-                new MainMenuAdmin();
             }
         });
         f.add(cancel);

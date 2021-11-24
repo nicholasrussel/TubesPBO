@@ -32,15 +32,23 @@ public class PesanGagal {
         JOptionPane.showMessageDialog(null, "Maaf, update gagal!", "Pesan Gagal", JOptionPane.ERROR_MESSAGE);
     }
     
-    public void pesanSudahAbsen(){
-        JOptionPane.showMessageDialog(null, "Maaf, anda sudah absen!", "Pesan Gagal", JOptionPane.WARNING_MESSAGE);
-    }
-    
     public void pesanGagalLoginPassword(){
         JOptionPane.showMessageDialog(null, "Maaf, password Salah!", "Pesan Gagal", JOptionPane.ERROR_MESSAGE);
     }
     
     public void pesanGagalLoginUsernamePassword(){
         JOptionPane.showMessageDialog(null, "Maaf, Username / Password salah!", "Pesan Gagal", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    public void pesanGagalBayarATM(){
+        JOptionPane.showMessageDialog(null, "Nomor Rekening/Password Anda salah!", "Pesan Gagal", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    public void pesanGagalUangTidakCukup(){
+        JOptionPane.showMessageDialog(null, "Uang anda tidak cukup!", "Pesan Gagal", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    public void pesanGagalHapusKasir(){
+        JOptionPane.showMessageDialog(null, "Delete gagal", "Pesan Gagal", JOptionPane.ERROR_MESSAGE);
     }
 }

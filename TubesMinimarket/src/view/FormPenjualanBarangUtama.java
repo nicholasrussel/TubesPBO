@@ -44,9 +44,13 @@ public class FormPenjualanBarangUtama implements ActionListener {
     public PenjualanBarang jualBarang = new PenjualanBarang();
     public double total;
     public String nomorFaktur;
+    
     public FormPenjualanBarangUtama() {
         frame = new JFrame();
-
+        frame.setSize(900, 500);
+        frame.setLayout(null);
+        frame.setLocationRelativeTo(null);
+        
         lbIdBarang = new JLabel("ID Barang");
         lbIdBarang.setBounds(5, 5, 100, 15);
         frame.add(lbIdBarang);
@@ -121,8 +125,7 @@ public class FormPenjualanBarangUtama implements ActionListener {
         lbTotalAhkirText.setBounds(690,355, 180, 20);
         
 
-        frame.setSize(900, 500);
-        frame.setLayout(null);//using no layout managers  
+        //using no layout managers  
         frame.setVisible(true);
 
     }
@@ -156,6 +159,7 @@ public class FormPenjualanBarangUtama implements ActionListener {
                 
                 confirm = new ConfirmPenjualan();
                 confirm.frame.setVisible(true);
+                confirm.frame.setLocationRelativeTo(null);
                 
                 jualBarang.setNomorFaktur(TfNomorFaktur.getText());
                 jualBarang.setTotalPenjualan(total);
@@ -171,7 +175,7 @@ public class FormPenjualanBarangUtama implements ActionListener {
                 sukses = conn.setdetailJual(detailJual);
                 frame.setVisible(false);
                 sukses = conn.updateStock(detailJual);
-                new MainMenuKasir();
+                
         }
         
     }

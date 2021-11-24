@@ -277,7 +277,7 @@ public class ControllerTopUp {
         return (penjualanTopUp);
     }
     
-    public boolean deleteDataTopUp(String Id_TopUp, float pajak_TopUp, double harga_TopUp, String type_TopUp) {
+    public boolean deleteDataTopUp(String Id_TopUp) {
         controller.Controller.conn.connect();
         String query = "DELETE  FROM topup where Id_TopUp='" + Id_TopUp + "'";
         try {

@@ -26,7 +26,7 @@ public class MainMenuAdmin extends JFrame{
     private JLabel title,muncul;
     private JButton registerKasir,updateKasir,deleteKasir,logout,bayarGaji, lihatTopUp, tambahTopUp, 
             lihatDataTopUp,lihatDataBarang, lihatDataDetilPenjualanBarang, lihatDataPenjualanBarang,
-            updateBarang, insert;
+            updateBarang, insert, deleteTopUp, deleteBarang, update;
             
     private Person admin;
     
@@ -41,17 +41,11 @@ public class MainMenuAdmin extends JFrame{
         c = getContentPane();
         c.setLayout(null);
                 
-        title = new JLabel("Selamat Datang di Menu Admin" + "\n" + "Admin" + admin.getName());
+        title = new JLabel("Selamat Datang di Menu Admin" +  admin.getName());
         title.setFont(new Font("Arial", Font.PLAIN, 20));
         title.setSize(400, 30);
         title.setLocation(300, 30);
         c.add(title);
-        
-//        muncul = new JLabel(admin.getName());
-//        muncul.setFont(new Font("Arial", Font.PLAIN, 15));
-//        muncul.setSize(300, 30);
-//        muncul.setLocation(300, 100);
-//        c.add(muncul);
 
         registerKasir = new JButton("Register Kasir");
         registerKasir.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -193,7 +187,7 @@ public class MainMenuAdmin extends JFrame{
         insert = new JButton("Insert Barang");
         insert.setFont(new Font("Arial", Font.PLAIN, 15));
         insert.setSize(300, 20);
-        insert.setLocation(330, 450);
+        insert.setLocation(330, 350);
         insert.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -201,6 +195,42 @@ public class MainMenuAdmin extends JFrame{
             }
         });
         c.add(insert);
+        
+        update = new JButton("Update TopUp");
+        update.setFont(new Font("Arial", Font.PLAIN, 15));
+        update.setSize(300, 20);
+        update.setLocation(330, 450);
+        update.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new UpdateTopUp();
+            }
+        });
+        c.add(update);
+        
+        deleteBarang = new JButton("Delete Barang");
+        deleteBarang.setFont(new Font("Arial", Font.PLAIN, 15));
+        deleteBarang.setSize(300, 20);
+        deleteBarang.setLocation(330, 300);
+        deleteBarang.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new DeleteBarang();
+            }
+        });
+        c.add(deleteBarang);
+        
+        deleteTopUp = new JButton("Delete TopUp");
+        deleteTopUp.setFont(new Font("Arial", Font.PLAIN, 15));
+        deleteTopUp.setSize(300, 20);
+        deleteTopUp.setLocation(330, 400);
+        deleteTopUp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new DeleteTopUp();
+            }
+        });
+        c.add(deleteTopUp);
         
         logout = new JButton("Log Out");
         logout.setFont(new Font("Arial", Font.PLAIN, 15));

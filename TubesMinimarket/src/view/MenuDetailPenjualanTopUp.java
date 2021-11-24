@@ -24,7 +24,7 @@ import model.TopUp;
 
 public class MenuDetailPenjualanTopUp {
 
-    private JLabel title, Id_TopUp, Nomor_FakturTopUp, Tanggal_JualTopUp, nomor_TeleponPelanggan;
+    private JLabel title, Id_TopUp, Nomor_FakturTopUp, Tanggal_JualTopUp, nomor_TeleponPelanggan, jenisPembayaran, jenisTopUp;
     private JTextField textNomor_FakturTopUp, textTanggal_JualTopUp, textNomor_TeleponPelanggan;
     private JButton confirm, lihatSemuaTransaksi;
     private JComboBox textId_TopUp, textJenisPembayaran;
@@ -33,7 +33,7 @@ public class MenuDetailPenjualanTopUp {
 
         JFrame f = new JFrame();
         f.setTitle("Detail Penjualan Top Up ");
-        f.setSize(800, 800);
+        f.setSize(800, 500);
         f.setResizable(false);
         f.setLayout(null);
         f.setLocationRelativeTo(null);
@@ -41,7 +41,7 @@ public class MenuDetailPenjualanTopUp {
         title = new JLabel(" Form Detail Penjualan Top Up ");
         title.setFont(new Font("Arial", Font.PLAIN, 20));
         title.setSize(400, 20);
-        title.setLocation(200, 30);
+        title.setLocation(300, 30);
         f.add(title);
 
         ControllerTopUp c = new ControllerTopUp();
@@ -50,33 +50,40 @@ public class MenuDetailPenjualanTopUp {
         for (int i = 0; i < topUp.size(); i++) {
             jenis[i] = topUp.get(i).getId_TopUp();
         }
+        
+        jenisTopUp = new JLabel("Jenis Top Up");
+        jenisTopUp.setFont(new Font("Arial", Font.PLAIN, 15));
+        jenisTopUp.setSize(200, 30);
+        jenisTopUp.setLocation(100, 60);
+        f.add(jenisTopUp);
+
         textId_TopUp = new JComboBox(jenis);
         f.add(textId_TopUp);
-        textId_TopUp.setSize(200, 30);
-        textId_TopUp.setLocation(100, 60);
+        textId_TopUp.setSize(250, 30);
+        textId_TopUp.setLocation(100, 90);
 
         Nomor_FakturTopUp = new JLabel("Nomor Faktur TopUp");
         Nomor_FakturTopUp.setFont(new Font("Arial", Font.PLAIN, 15));
         Nomor_FakturTopUp.setSize(200, 30);
-        Nomor_FakturTopUp.setLocation(100, 90);
+        Nomor_FakturTopUp.setLocation(100, 120);
         f.add(Nomor_FakturTopUp);
 
         textNomor_FakturTopUp = new JTextField();
         textNomor_FakturTopUp.setFont(new Font("Arial", Font.PLAIN, 15));
-        textNomor_FakturTopUp.setSize(200, 30);
-        textNomor_FakturTopUp.setLocation(100, 120);
+        textNomor_FakturTopUp.setSize(250, 30);
+        textNomor_FakturTopUp.setLocation(100, 150);
         f.add(textNomor_FakturTopUp);
 
         nomor_TeleponPelanggan = new JLabel("Nomor Telepon Pelanggan");
         nomor_TeleponPelanggan.setFont(new Font("Arial", Font.PLAIN, 15));
         nomor_TeleponPelanggan.setSize(200, 30);
-        nomor_TeleponPelanggan.setLocation(100, 150);
+        nomor_TeleponPelanggan.setLocation(100, 180);
         f.add(nomor_TeleponPelanggan);
 
         textNomor_TeleponPelanggan = new JTextField();
         textNomor_TeleponPelanggan.setFont(new Font("Arial", Font.PLAIN, 15));
-        textNomor_TeleponPelanggan.setSize(200, 30);
-        textNomor_TeleponPelanggan.setLocation(100, 180);
+        textNomor_TeleponPelanggan.setSize(250, 30);
+        textNomor_TeleponPelanggan.setLocation(100, 210);
         f.add(textNomor_TeleponPelanggan);
 
 //        ControllerTopUp c = new ControllerTopUp();
@@ -85,17 +92,23 @@ public class MenuDetailPenjualanTopUp {
         for (int i = 0; i < kategori.size(); i++) {
             jenisP[i] = kategori.get(i).getNamaPembayaran();
         }
-
+        
+        jenisPembayaran = new JLabel("Jenis pembayaran");
+        jenisPembayaran.setFont(new Font("Arial", Font.PLAIN, 15));
+        jenisPembayaran.setSize(200,20);
+        jenisPembayaran.setLocation(100,240);
+        f.add(jenisPembayaran);
+        
         textJenisPembayaran = new JComboBox(jenisP);
         f.add(textJenisPembayaran);
-        textJenisPembayaran.setSize(200, 20);
-        textJenisPembayaran.setLocation(100, 210);
+        textJenisPembayaran.setSize(250, 30);
+        textJenisPembayaran.setLocation(100, 270);
 
         //Tombol Confrim 
         confirm = new JButton("Confirm");
         confirm.setFont(new Font("Arial", Font.PLAIN, 15));
-        confirm.setSize(200, 30);
-        confirm.setLocation(100, 270);
+        confirm.setSize(100, 30);
+        confirm.setLocation(100, 400);
         confirm.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -184,36 +197,6 @@ public class MenuDetailPenjualanTopUp {
                         } else if (cekJenisPembayaran.equals("ATM")) {
                             new BayarATM(cekIdTopUp, cekNomorFakturTopUp, harga, cekNomorTeleponPelanggan, cekJenisPembayaran);
                         }
-
-//                        JFrame konfirmasiUpdate = new JFrame("Confirmation");
-//                        JFrame updateLagi = new JFrame("Another Update?");
-//                        ControllerTopUp c = new ControllerTopUp();
-//                        LocalDate now = LocalDate.now();
-//                        java.sql.Date sqlDate = java.sql.Date.valueOf(now);
-//                        
-//                        if (JOptionPane.showConfirmDialog(konfirmasiUpdate, "confirm if you Want to Update", "Minimarket",
-//                                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-//                            f2.setVisible(false);
-//                            boolean statusDetail = c.insertDataDetailPenjualanTopUp(cekIdTopUp,cekNomorFakturTopUp,sqlDate,cekNomorTeleponPelanggan);
-//                            boolean statusPenjualan = c.insertDataPenjualanTopUp(cekIdTopUp, cekNomorFakturTopUp, cekJenisPembayaran);
-//                            if (statusDetail && statusPenjualan) {
-//                                JOptionPane.showMessageDialog(null, "update berhasil");
-//                                if (JOptionPane.showConfirmDialog(updateLagi, "Insert Lagi ?", "Minimarket",
-//                                        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-//                                    f.setVisible(true);
-//                                } else {
-//                                    //new MainMenuAdmin();
-//                                    f.setVisible(true);
-//                                }
-//                            } else {
-//                                JOptionPane.showMessageDialog(null, "update gagal");
-//                                //new MainMenuAdmin();
-//                            }
-//                        } else {
-//                            f2.setVisible(false);
-//                            JOptionPane.showMessageDialog(null, "update batal");
-//                            //new MainMenuAdmin();
-//                        }
                     }
                 });
                 f2.add(insert);
@@ -241,7 +224,7 @@ public class MenuDetailPenjualanTopUp {
         JButton lihatSemuaDetail = new JButton("Lihat semua Detail Penjualan TopUp");
         lihatSemuaDetail.setFont(new Font("Arial", Font.PLAIN, 13));
         lihatSemuaDetail.setSize(250, 30);
-        lihatSemuaDetail.setLocation(300, 270);
+        lihatSemuaDetail.setLocation(100, 330);
         lihatSemuaDetail.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -256,7 +239,7 @@ public class MenuDetailPenjualanTopUp {
         JButton lihatSemuaPenjualan = new JButton("Lihat semua Penjualan TopUp");
         lihatSemuaPenjualan.setFont(new Font("Arial", Font.PLAIN, 13));
         lihatSemuaPenjualan.setSize(250, 30);
-        lihatSemuaPenjualan.setLocation(300, 300);
+        lihatSemuaPenjualan.setLocation(400, 330);
         lihatSemuaPenjualan.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -267,8 +250,8 @@ public class MenuDetailPenjualanTopUp {
 
         JButton exit = new JButton("Cancel");
         exit.setFont(new Font("Arial", Font.PLAIN, 15));
-        exit.setSize(100, 20);
-        exit.setLocation(100, 330);
+        exit.setSize(100, 30);
+        exit.setLocation(240, 400);
         exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

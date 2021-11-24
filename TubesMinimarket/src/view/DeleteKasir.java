@@ -59,20 +59,20 @@ public class DeleteKasir {
             @Override
             public void actionPerformed(ActionEvent e) {
                 f.setVisible(false);
-                JFrame Frame = new JFrame("Confirmation");
+                JFrame Frame = new JFrame("Konfirmasi");
                 Controller c = new Controller();
-                if (JOptionPane.showConfirmDialog(Frame, "confirm if you Want to Delete", "Minimarket",
+                if (JOptionPane.showConfirmDialog(Frame, "Konfirmasi jika anda ingin menghapus kasir", "Minimarket",
                         JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     boolean status = c.deleteUser(Integer.parseInt(tid.getText()));
                     if (status) {
-                        JOptionPane.showMessageDialog(null, "Delete berhasil");
+                        new pesan.PesanBerhasil().pesanBerhasilHapus();
                         new MainMenuAdmin();
                     } else {
-                        JOptionPane.showMessageDialog(null, "Delete gagal");
+                        new pesan.PesanGagal().pesanGagalHapusKasir();
                         new MainMenuAdmin();
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Delete batal");
+                    new pesan.PesanBatal().pesanBatalHapusKasir();
                     new MainMenuAdmin();
                 }
             }

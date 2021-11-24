@@ -29,8 +29,8 @@ public class MenuTopUp {
 
     public MenuTopUp() {
         JFrame f = new JFrame();
-        f.setTitle("Detail Penjualan Top Up ");
-        f.setSize(800, 800);
+        f.setTitle("Insert Top Up ");
+        f.setSize(500, 450);
         f.setResizable(false);
         f.setLayout(null);
         f.setLocationRelativeTo(null);
@@ -38,37 +38,37 @@ public class MenuTopUp {
         title = new JLabel(" Form insert Top Up ");
         title.setFont(new Font("Arial", Font.PLAIN, 20));
         title.setSize(400, 20);
-        title.setLocation(300, 30);
+        title.setLocation(150, 20);
         f.add(title);
 
         //insert ID  
         Id_TopUp = new JLabel("Id Top Up : ");
         Id_TopUp.setFont(new Font("Arial", Font.PLAIN, 20));
         Id_TopUp.setSize(200, 20);
-        Id_TopUp.setLocation(200, 60);
+        Id_TopUp.setLocation(100, 90);
         f.add(Id_TopUp);
         textId_TopUp = new JTextField();
         textId_TopUp.setFont(new Font("Arial", Font.PLAIN, 20));
         textId_TopUp.setSize(200, 20);
-        textId_TopUp.setLocation(200, 90);
+        textId_TopUp.setLocation(100, 120);
         f.add(textId_TopUp);
 
         //insert Harga  
         Harga_TopUp = new JLabel("Harga Top Up : ");
         Harga_TopUp.setFont(new Font("Arial", Font.PLAIN, 20));
         Harga_TopUp.setSize(200, 20);
-        Harga_TopUp.setLocation(200, 120);
+        Harga_TopUp.setLocation(100, 150);
         f.add(Harga_TopUp);
         textHarga_TopUp = new JTextField();
         textHarga_TopUp.setFont(new Font("Arial", Font.PLAIN, 20));
         textHarga_TopUp.setSize(200, 20);
-        textHarga_TopUp.setLocation(200, 150);
+        textHarga_TopUp.setLocation(100, 180);
         f.add(textHarga_TopUp);
 
         //Tombol Confrim 
         confirm = new JButton("Confirm");
         confirm.setFont(new Font("Arial", Font.PLAIN, 15));
-        confirm.setSize(200, 30);
+        confirm.setSize(100, 20);
         confirm.setLocation(100, 270);
         confirm.addActionListener(new ActionListener() {
             @Override
@@ -128,20 +128,18 @@ public class MenuTopUp {
                     public void actionPerformed(ActionEvent e) {
 
                         f.setVisible(false);
-                        JFrame konfirmasiUpdate = new JFrame("Confirmation");
-                        JFrame updateLagi = new JFrame("Another Update?");
+                        JFrame konfirmasiUpdate = new JFrame("Konfirmasi");
+                        JFrame updateLagi = new JFrame("Tambah lagi?");
                         ControllerTopUp c = new ControllerTopUp();
-//                        LocalDate now = LocalDate.now();
-//                        java.sql.Date sqlDate = java.sql.Date.valueOf(now);
 
-                        if (JOptionPane.showConfirmDialog(konfirmasiUpdate, "confirm if you Want to Update", "Minimarket",
+                        if (JOptionPane.showConfirmDialog(konfirmasiUpdate, "Konfirmasi jika Anda ingin menambah lagi", "Minimarket",
                                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                             f2.setVisible(false);
                             boolean status = c.insertDataTopUp(cekIdTopUp, cekPajakTopUp, cekHargaTopUp, cekJenisTopUp);
                             //boolean statusPenjualan = c.insertDataPenjualanTopUp(cekIdTopUp, cekNomorFakturTopUp, cekJenisPembayaran);
                             if (status) {
                                 new pesan.PesanBerhasil().pesanBerhasilUpdate();
-                                if (JOptionPane.showConfirmDialog(updateLagi, "Update lagi?", "Minimarket",
+                                if (JOptionPane.showConfirmDialog(updateLagi, "Tambah lagi?", "Minimarket",
                                         JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                                     f.setVisible(true);
                                 } else {
@@ -201,14 +199,10 @@ public class MenuTopUp {
             @Override
             public void actionPerformed(ActionEvent e) {
                 f.setVisible(false);
-                new MainMenuAdmin();
             }
         });
         f.add(exit);
         f.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new MenuTopUp();
-    }
 }

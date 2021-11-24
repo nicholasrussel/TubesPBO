@@ -52,7 +52,7 @@ public class LihatPenjualanBarang extends JFrame {
         title = new JLabel("Data Penjualan Barang");
         title.setFont(new Font("Arial", Font.PLAIN, 20));
         title.setSize(400, 30);
-        title.setLocation(250, 30);
+        title.setLocation(170, 30);
         c.add(title);
 
         setVisible(true);

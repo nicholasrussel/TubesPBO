@@ -34,4 +34,14 @@ public class PesanBerhasil {
     public void pesanBerhasilLogin(){
         JOptionPane.showMessageDialog(null, "Selamat, login Berhasil!", "Pesan berhasil", JOptionPane.INFORMATION_MESSAGE);
     }
-}
+    
+    public void pesanBerhasilBayarGaji(){
+        JOptionPane.showMessageDialog(null, "Bayar Gaji berhasil", "Pesan berhasil", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    public void pesanBerhasilHapus(){
+        JOptionPane.showMessageDialog(null, "Hapus berhasil", "Pesan berhasil", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+}   
+

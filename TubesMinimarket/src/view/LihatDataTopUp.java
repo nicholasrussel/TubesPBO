@@ -40,7 +40,7 @@ public class LihatDataTopUp extends JFrame{
         ControllerTopUp controller = new ControllerTopUp();
         ArrayList<TopUp> users = controller.getAllTopUp();
         
-        setTitle("Lihat PenjualanTopUp");
+        setTitle("Lihat TopUp");
         setBounds(300, 90, 600, 300);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
@@ -49,10 +49,10 @@ public class LihatDataTopUp extends JFrame{
         c = getContentPane();
         c.setLayout(null);
 
-        title = new JLabel("Data Penjualan Top UP");
+        title = new JLabel("Data Top UP");
         title.setFont(new Font("Arial", Font.PLAIN, 20));
         title.setSize(400, 30);
-        title.setLocation(250, 30);
+        title.setLocation(220, 30);
         c.add(title);
         
         setVisible(true);
