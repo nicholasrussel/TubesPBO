@@ -36,14 +36,14 @@ public class InputBarang {
     public InputBarang() {
         f = new JFrame();
         f.setTitle("Input Data Barang");
-        f.setSize(800, 800);
+        f.setSize(550, 600);
         f.setResizable(false);
         f.setLayout(null);
         f.setLocationRelativeTo(null);
 
         title = new JLabel("Input Data Barang Form");
         title.setFont(new Font("Arial", Font.PLAIN, 20));
-        title.setSize(200, 30);
+        title.setSize(500, 30);
         title.setLocation(50, 30);
         f.add(title);
 
@@ -110,7 +110,7 @@ public class InputBarang {
         tanggalKadaluarsa = new JLabel("Tanggal Kadaluarsa");
         tanggalKadaluarsa.setFont(new Font("Arial", Font.PLAIN, 15));
         tanggalKadaluarsa.setSize(300, 20);
-        tanggalKadaluarsa.setLocation(100, 350);
+        tanggalKadaluarsa.setLocation(20, 350);
         f.add(tanggalKadaluarsa);
 
         UtilDateModel model = new UtilDateModel();
@@ -120,34 +120,34 @@ public class InputBarang {
         p.put("text.year", "Year");
         JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
         JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new controller.DateFormatter());
-        datePicker.setBounds(150, 350, 200, 50);
+        datePicker.setBounds(180, 350, 200, 50);
         f.add(datePicker);
         
         kategori = new JLabel("Kategori");
         kategori.setFont(new Font("Arial", Font.PLAIN, 15));
         kategori.setSize(300, 20);
-        kategori.setLocation(100, 400);
+        kategori.setLocation(20, 400);
         f.add(kategori);
-
-        nonKonsumsi = new JRadioButton("Non Konsumsi");
-        nonKonsumsi.setFont(new Font("Arial", Font.PLAIN, 15));
-        nonKonsumsi.setSelected(true);
-        nonKonsumsi.setSize(75, 20);
-        nonKonsumsi.setLocation(250, 400);
-        f.add(nonKonsumsi);
 
         konsumsi = new JRadioButton("Konsumsi");
         konsumsi.setFont(new Font("Arial", Font.PLAIN, 15));
         konsumsi.setSelected(false);
-        konsumsi.setSize(80, 20);
-        konsumsi.setLocation(200, 400);
+        konsumsi.setSize(100, 20);
+        konsumsi.setLocation(150, 400);
         f.add(konsumsi);
-
+        
+        nonKonsumsi = new JRadioButton("Non Konsumsi");
+        nonKonsumsi.setFont(new Font("Arial", Font.PLAIN, 15));
+        nonKonsumsi.setSelected(true);
+        nonKonsumsi.setSize(150, 20);
+        nonKonsumsi.setLocation(250, 400);
+        f.add(nonKonsumsi);
+        
         gengp = new ButtonGroup();
         gengp.add(konsumsi);
         gengp.add(nonKonsumsi);
         
-        sub = new JButton("Update");
+        sub = new JButton("Insert");
         sub.setFont(new Font("Arial", Font.PLAIN, 15));
         sub.setSize(100, 20);
         sub.setLocation(20, 500);
@@ -162,7 +162,7 @@ public class InputBarang {
                 String hari = String.valueOf(datePicker.getModel().getDay());
                 String bulan = String.valueOf(datePicker.getModel().getMonth());
                 String tahun = String.valueOf(datePicker.getModel().getYear());
-                String TTL = hari + "-" + bulan + "-" + tahun;
+                String tanggalKadaluarsa2 = hari + "-" + bulan + "-" + tahun;
                 String cekKategori = "";
                 if (konsumsi.isSelected()) {
                     cekKategori = konsumsi.getText();
@@ -170,7 +170,7 @@ public class InputBarang {
                     cekKategori = nonKonsumsi.getText();
                 }
                 if (cekKodeProduk.trim().isEmpty() || stringHarga.trim().isEmpty() || cekNama.trim().isEmpty() || cekStok.trim().isEmpty()
-                        || cekPersenDiskon.trim().isEmpty()) {
+                        || cekPersenDiskon.trim().isEmpty() || tanggalKadaluarsa2.trim().isEmpty() || cekKategori.trim().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Isi data harus lengkap!");
                 } else {
                     int harga2 = Integer.parseInt(stringHarga);
@@ -179,7 +179,7 @@ public class InputBarang {
                     f.setVisible(false);
                     f2 = new JFrame();
                     f2.setTitle("Check Again");
-                    f2.setSize(400, 400);
+                    f2.setSize(400, 600);
                     f2.setResizable(false);
                     f2.setLocationRelativeTo(null);
                     f2.setLayout(null);
@@ -208,28 +208,28 @@ public class InputBarang {
                     stok.setLocation(50, 150);
                     f2.add(stok);
 
-                    harga = new JLabel("Alamat : " + harga2);
+                    harga = new JLabel("Harga : " + harga2);
                     harga.setFont(new Font("Arial", Font.PLAIN, 15));
                     harga.setSize(300, 20);
                     harga.setLocation(50, 200);
                     f2.add(harga);
 
-                    persenDiskon = new JLabel("Gaji : " + persen);
+                    persenDiskon = new JLabel("Persen diskon : " + persen);
                     persenDiskon.setFont(new Font("Arial", Font.PLAIN, 15));
                     persenDiskon.setSize(300, 20);
                     persenDiskon.setLocation(50, 250);
                     f2.add(persenDiskon);
                     
-                    tanggalKadaluarsa = new JLabel("TTL : " + TTL);
-                    tanggalKadaluarsa.setFont(new Font("Arial", Font.PLAIN, 20));
-                    tanggalKadaluarsa.setSize(300, 20);
-                    tanggalKadaluarsa.setLocation(100, 250);
+                    tanggalKadaluarsa = new JLabel("Tanggal kadaluarsa : " + tanggalKadaluarsa2);
+                    tanggalKadaluarsa.setFont(new Font("Arial", Font.PLAIN, 15));
+                    tanggalKadaluarsa.setSize(300, 50);
+                    tanggalKadaluarsa.setLocation(50, 300);
                     f2.add(tanggalKadaluarsa);
                     
                     kategori = new JLabel("Kategori : " + cekKategori);
-                    kategori.setFont(new Font("Arial", Font.PLAIN, 20));
-                    kategori.setSize(300, 20);
-                    kategori.setLocation(100, 350);
+                    kategori.setFont(new Font("Arial", Font.PLAIN, 15));
+                    kategori.setSize(300, 50);
+                    kategori.setLocation(50, 350);
                     f2.add(kategori);
                     
                     String kategoriFinal = cekKategori;
@@ -237,7 +237,7 @@ public class InputBarang {
                     insert = new JButton("Insert");
                     insert.setFont(new Font("Arial", Font.PLAIN, 15));
                     insert.setSize(100, 20);
-                    insert.setLocation(50, 300);
+                    insert.setLocation(50, 400);
                     insert.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -255,7 +255,7 @@ public class InputBarang {
                                 barang.setNamaBarang(cekNama);
                                 barang.setHargaBarang(harga2);
                                 barang.setKodeBarang(cekKodeProduk);
-                                barang.setKarduluasaBarang(TTL);
+                                barang.setKarduluasaBarang(tanggalKadaluarsa2);
                                 barang.setPersenDiskon(persen);
                                 barang.setKategori(kategoriFinal);
                                 barang.setStokBarang(stok2);
@@ -284,7 +284,7 @@ public class InputBarang {
                     cancel = new JButton("Cancel");
                     cancel.setFont(new Font("Arial", Font.PLAIN, 15));
                     cancel.setSize(100, 20);
-                    cancel.setLocation(160, 550);
+                    cancel.setLocation(160, 400);
                     cancel.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -304,7 +304,7 @@ public class InputBarang {
         reset = new JButton("Reset");
         reset.setFont(new Font("Arial", Font.PLAIN, 15));
         reset.setSize(100, 20);
-        reset.setLocation(130, 600);
+        reset.setLocation(130, 500);
         reset.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -320,7 +320,7 @@ public class InputBarang {
         cancel = new JButton("Cancel");
         cancel.setFont(new Font("Arial", Font.PLAIN, 15));
         cancel.setSize(100, 20);
-        cancel.setLocation(240, 650);
+        cancel.setLocation(240, 500);
         cancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
